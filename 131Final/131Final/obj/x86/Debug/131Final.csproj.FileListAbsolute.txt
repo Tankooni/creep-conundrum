@@ -1,6 +1,0 @@
-c:\documents and settings\io\my documents\visual studio 2010\Projects\131Final\131Final\131Final\bin\x86\Debug\131Final.exe
-c:\documents and settings\io\my documents\visual studio 2010\Projects\131Final\131Final\131Final\bin\x86\Debug\131Final.pdb
-c:\documents and settings\io\my documents\visual studio 2010\Projects\131Final\131Final\131Final\obj\x86\Debug\ResolveAssemblyReference.cache
-c:\documents and settings\io\my documents\visual studio 2010\Projects\131Final\131Final\131Final\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-c:\documents and settings\io\my documents\visual studio 2010\Projects\131Final\131Final\131Final\obj\x86\Debug\131Final.exe
-c:\documents and settings\io\my documents\visual studio 2010\Projects\131Final\131Final\131Final\obj\x86\Debug\131Final.pdb
