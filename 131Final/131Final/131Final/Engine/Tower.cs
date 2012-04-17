@@ -25,6 +25,7 @@ namespace Engine
         public int ChainCount;//Ammount it chains to
         public int MoneyGained;
         public int RateOfFire;//In MilliSeconds
+        public int Range;
     }
     public class Tower
     {
