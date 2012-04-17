@@ -26,6 +26,7 @@ namespace Engine
         public int MoneyGained;
         public int RateOfFire;//In MilliSeconds
         public int Range;
+        public int IQTest;
     }
     public class Tower
     {
