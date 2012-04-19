@@ -2,13 +2,13 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>DefaultFont.spritefont</Source>
-      <Name>DefaultFont</Name>
+      <Source>defaultFont.spritefont</Source>
+      <Name>defaultFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\bin\x86\Debug\Content\DefaultFont.xnb</Output>
-      <Time>2012-04-18T18:57:55.3125-04:00</Time>
+      <Output>H:\AG131\creep\131Final\131Final\131Final\bin\x86\Debug\Content\defaultFont.xnb</Output>
+      <Time>2012-04-19T13:44:22-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -16,10 +16,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131FinalContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131FinalContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>H:\AG131\creep\131Final\131Final\131FinalContent\</RootDirectory>
+      <LoggerRootDirectory>H:\AG131\creep\131Final\131Final\131Final\</LoggerRootDirectory>
+      <IntermediateDirectory>H:\AG131\creep\131Final\131Final\131FinalContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>H:\AG131\creep\131Final\131Final\131Final\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -48,7 +48,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-02-29T21:05:38.4375-05:00</Value>
+        <Value>2011-12-20T02:36:26.59375-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

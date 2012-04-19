@@ -11,3 +11,10 @@ C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131F
 C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.exe
 C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.pdb
 C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\bin\x86\Debug\Content\DefaultFont.xnb
+H:\AG131\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.exe
+H:\AG131\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.pdb
+H:\AG131\creep\131Final\131Final\131Final\obj\x86\Debug\ResolveAssemblyReference.cache
+H:\AG131\creep\131Final\131Final\131Final\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+H:\AG131\creep\131Final\131Final\131Final\bin\x86\Debug\Content\defaultFont.xnb
+H:\AG131\creep\131Final\131Final\131Final\bin\x86\Debug\131Final.exe
+H:\AG131\creep\131Final\131Final\131Final\bin\x86\Debug\131Final.pdb
