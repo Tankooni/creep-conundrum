@@ -1,6 +1,6 @@
 using System;
 
-namespace _131Final
+namespace VeryRealTournament
 {
 #if WINDOWS || XBOX
     static class Program
