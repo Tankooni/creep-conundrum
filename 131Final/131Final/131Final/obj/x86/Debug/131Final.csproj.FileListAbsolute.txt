@@ -4,3 +4,10 @@ c:\documents and settings\io\my documents\visual studio 2010\Projects\131Final\1
 c:\documents and settings\io\my documents\visual studio 2010\Projects\131Final\131Final\131Final\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 c:\documents and settings\io\my documents\visual studio 2010\Projects\131Final\131Final\131Final\obj\x86\Debug\131Final.exe
 c:\documents and settings\io\my documents\visual studio 2010\Projects\131Final\131Final\131Final\obj\x86\Debug\131Final.pdb
+C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\bin\x86\Debug\131Final.exe
+C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\bin\x86\Debug\131Final.pdb
+C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.exe
+C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.pdb
+C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131Final\131Final\131Final\bin\x86\Debug\Content\DefaultFont.xnb

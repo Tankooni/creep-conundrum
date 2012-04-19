@@ -22,6 +22,7 @@ namespace Engine
     {
         public const int HEIGHT = 15;
         List<Path> mapPaths = new List<Path>();
+        List<Tower> myTowers = new List<Tower>();
         List<CreepWave> myCreepWaves = new List<CreepWave>();
         //The following will actually not be defined in here!
         //0 = tower pos
@@ -29,17 +30,18 @@ namespace Engine
         //2 = noTowers
         //3 = noCrossing or towers
         //5 = nexus
+        //6 = towerAlready
         byte[,] myMap ={
-        {0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,1,1,1,1,1,1,0,0,0,0,0,0,0,0},
+        {0,1,1,1,1,1,1,0,0,1,0,0,0,0,0},
+        {0,1,0,0,0,0,1,0,0,1,0,0,0,0,0},
+        {0,1,0,0,0,0,1,0,0,1,3,0,0,0,0},
+        {0,1,0,0,0,0,1,0,0,1,3,0,0,0,0},
+        {0,1,1,1,0,0,1,1,1,1,3,0,0,0,0},
+        {0,0,0,1,0,0,0,0,0,0,0,2,2,0,0},
         {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,1,0,1,1,1,1,1,1,1,1,1,1},
         {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+        {1,0,1,1,0,1,1,1,1,1,1,1,1,1,1},
         {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
@@ -63,26 +65,38 @@ namespace Engine
         {
 
         }
-        //Begins to genereate the Paths from the map data
-        void initMapPaths(){
-            int[] myPos = { 0, 0 };
-            while(myMap[myPos[0],myPos[1]] != 5 || (myPos[0] == myPos[1] && myPos[0] == HEIGHT)){
-                if(++myPos[0] >= HEIGHT){ myPos[0] = 0; myPos[1]++; }
+
+        public void addTower(TowerData tData, double buildTime, int X, int Y, SpriteBatch _Batch)
+        {
+            /*Build time isnt implemented*/
+            if (getData(X, Y) == 0)
+            {
+                myTowers.Add(new Tower(this, _Batch, tData, new int[] { X, Y }));
+                myMap[X, Y] = 6;
             }
-            if (SystemVars.DEBUG) Debug.WriteLine("MyPos:"+myPos[0]+","+myPos[1]);
-            spawnNewPath(new List<int[]>(new int[][]{myPos,myPos}));
-            for (int x = 0; x < mapPaths.Count; x++)
-                if (mapPaths[x].PathLength == 0)
-                    mapPaths.RemoveAt(x);
+
         }
 
-
+        /*Creep Stuff*/
         public void addCreepWave(CreepData cData, double spawnTime, int creepCount, SpriteBatch _Batch)
         {
             myCreepWaves.Add(new CreepWave(creepCount, cData, _Batch, this, spawnTime));
         }
-
-
+        public void removeWave(CreepWave myWave)
+        {
+            myCreepWaves.Remove(myWave);
+        }
+        public List<Creep> getCreepsInRange(Vector2 tPos, int Range, GameTime gameTime)
+        {
+            List<Creep> inRange = new List<Creep>();
+            for (int x = 0; x < myCreepWaves.Count; x++)
+            {
+                inRange.AddRange(myCreepWaves[x].creepsInRange(Range, tPos, gameTime));
+                    //.Concat(myCreepWaves[x].creepsInRange(Range, tPos, gameTime));
+                if (SystemVars.DEBUG) Debug.WriteLine(inRange.Count);
+            }
+            return inRange;
+        }
         /// <summary>
         /// Updates all componenets that fall under MAP
         /// </summary>
@@ -91,9 +105,9 @@ namespace Engine
         {
             for (int x = 0; x < myCreepWaves.Count; x++)
                 myCreepWaves[x].Update(gameTime);
+            for (int x = 0; x < myTowers.Count; x++)
+                myTowers[x].Update(gameTime);
         }
-
-
         //Draws the current map usign the split screen adapter and also the paths
         public void Draw(int Screen, SpriteBatch batch, GraphicsDeviceManager graphics, bool Grid, GameTime gameTime){
             //Map Drawing:
@@ -107,6 +121,7 @@ namespace Engine
                     if(myMap[y, x] == 2) color = Color.Brown;
                     if(myMap[y, x] == 3) color = Color.Black;
                     if(myMap[y, x] == 5) color = Color.Blue;
+                    //if(myMap[y, x] == 6) color = Color.Black;
                     GridManager.DrawSquare(batch,
                         SplitScreenAdapter.splitConvert(Screen, new Vector2(myH * x, myH * y), batch),
                         color,
@@ -115,6 +130,7 @@ namespace Engine
                 }
             }
             //Path Drawing:
+            /*
             for (int y = 0; y < mapPaths.Count; y++)
             {
                 for (int x = 0; x < mapPaths[y].PathLength; x++)
@@ -125,11 +141,14 @@ namespace Engine
                         color,
                         Grid);
                 }
-            }
-            //Draw Creep Waves!
+            }*/
+            //DraCreep Waves!
             for (int x = 0; x < myCreepWaves.Count; x++)
                 myCreepWaves[x].Draw(gameTime, Screen);
+            for (int x = 0; x < myTowers.Count; x++)
+                myTowers[x].Draw(gameTime, Screen);
         }
+        /*Path stuff*/
         //Used by the Path class to tree branch
         public void spawnNewPath(List<int[]> currentPathData)
         {
@@ -185,6 +204,20 @@ namespace Engine
                 if (mapPaths[x].ToString().Equals(doesContain.ToString()))
                     toReturn = true;
             return toReturn;
+        }
+        //Begins to genereate the Paths from the map data
+        void initMapPaths()
+        {
+            int[] myPos = { 0, 0 };
+            while (myMap[myPos[0], myPos[1]] != 5 || (myPos[0] == myPos[1] && myPos[0] == HEIGHT))
+            {
+                if (++myPos[0] >= HEIGHT) { myPos[0] = 0; myPos[1]++; }
+            }
+            if (SystemVars.DEBUG) Debug.WriteLine("MyPos:" + myPos[0] + "," + myPos[1]);
+            spawnNewPath(new List<int[]>(new int[][] { myPos, myPos }));
+            for (int x = 0; x < mapPaths.Count; x++)
+                if (mapPaths[x].PathLength == 0)
+                    mapPaths.RemoveAt(x);
         }
     }
 }

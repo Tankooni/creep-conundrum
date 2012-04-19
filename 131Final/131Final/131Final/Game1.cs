@@ -17,6 +17,9 @@ namespace _131Final
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         PlayerMap temp;
+        int wavesSpawned;
+
+        SpriteFont defaultFont;
 
         public Game1()
         {
@@ -25,13 +28,15 @@ namespace _131Final
         }
         protected override void Initialize()
         {
-            Window.Title = "Real Tournament";
+            Window.Title = "Very Real Tournament 2";
             base.Initialize();
             temp = new PlayerMap();
         }
         protected override void LoadContent()
         {
+            this.IsMouseVisible = true;
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            defaultFont = Content.Load<SpriteFont>("DefaultFont");
         }
         protected override void UnloadContent()
         {
@@ -50,10 +55,23 @@ namespace _131Final
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
+                /*How to spawn a creep wave*/
                 CreepData tempD = new CreepData();
-                tempD.Speed = 1.0;
-                temp.addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 3000, 7, spriteBatch);
+                tempD.Speed = new Random().NextDouble()*1.5+0.5;
+                temp.addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 1, spriteBatch);
+                wavesSpawned++;
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+                /*How to spawn a tower*/
+                TowerData tempT = new TowerData();
+                tempT.Damage = 20;
+                tempT.Range = 500;
+                tempT.RateOfFire = 1000;
+                temp.addTower(tempT, 0.0, 5, 4, spriteBatch);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
             temp.Update(gameTime);
 
             base.Update(gameTime);
@@ -70,7 +88,11 @@ namespace _131Final
             temp.Draw(3, spriteBatch, graphics, true, gameTime);
             temp.Draw(4, spriteBatch, graphics, false, gameTime);
             
-            spriteBatch.End();
+            Vector2 tempV = defaultFont.MeasureString(wavesSpawned.ToString());
+            tempV.Y = 0;
+            spriteBatch.DrawString(defaultFont,wavesSpawned.ToString(),new Vector2(300,300) - tempV,Color.Black);
+
+            spriteBatch.End(); 
 
             base.Draw(gameTime);
         }

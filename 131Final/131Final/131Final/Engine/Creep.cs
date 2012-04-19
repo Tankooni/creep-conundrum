@@ -14,22 +14,24 @@ using Base;
 
 namespace Engine
 {
-    class CreepWave : GameObject
+    public class CreepWave : GameObject
     {
         List<Creep> myCreeps = new List<Creep>();
         PlayerMap mapReference;
+        CreepData _cData;
         double creepWaveStartTime;
         public CreepWave(int CreepCount, CreepData cData, SpriteBatch Batch, PlayerMap map, double spawnTime)
         {
             creepWaveStartTime = spawnTime;
             mapReference = map;
+            _cData = cData;
             Creep.getCreepOffset(cData);
             for (int j = 0; j < CreepCount; )
             {
                 int i;
                 for(i = j; (i < j + map.PathCount && i < CreepCount); i++)
                 {
-                    myCreeps.Add(new Creep(Batch, cData, mapReference.getPath(i - j), spawnTime + j * Creep.getCreepOffset(cData)));
+                    myCreeps.Add(new Creep(Batch, cData, mapReference.getPath(i - j), spawnTime + j * Creep.getCreepOffset(cData), j, this));
                 }
                 j = i;
             }
@@ -42,6 +44,23 @@ namespace Engine
                 myCreeps.Add(new Creep(Batch, cData));
             }
             */
+        }
+        public List<Creep> creepsInRange(int Range, Vector2 tPos, GameTime gameTime)
+        {
+            List<Creep> inRange = new List<Creep>();
+            for (int x = 0; x < myCreeps.Count; x++)
+            {
+                if ((myCreeps[x].getPos(gameTime) - tPos).LengthSquared() < (Range * Range) && myCreeps[x].spawnTime < gameTime.TotalGameTime.TotalMilliseconds)
+                    inRange.Add(myCreeps[x]);
+            }
+            return inRange;
+        }
+        public void creepDie(Creep toRemove)
+        {
+            //mapReference.AddMoney(_cData.value);
+            myCreeps.Remove(toRemove);
+            if (myCreeps.Count < 0)
+                mapReference.removeWave(this);
         }
         public override void Update(GameTime gameTime)
         {
@@ -66,18 +85,22 @@ namespace Engine
         public int Defense;
         public int mDefense;
         public double Speed;
+        public int value;
         //Speed = Blocks per second.
-        public BaseSprite mySprite;
+        public Texture2D mySprite;
 
     }
     public class Creep : GameObject
     {
         SpriteBatch _Batch;
         CreepData _cData;
+        CreepWave myWave;
+        int waveIndex;
 
         public double spawnTime;
         public Path _PathOn;
         public Vector2 myPos;
+        public int Health;
 
         /*DONT USE ME!*/
         public Creep()
@@ -89,16 +112,37 @@ namespace Engine
             double offset = 1000/cData.Speed;
             return offset;
         }
-        public Creep(SpriteBatch batch, CreepData cData, Path spawnPath, double SpawnTime)
+        public Creep(SpriteBatch batch, CreepData cData, Path spawnPath, double SpawnTime, int myIndex, CreepWave wave)
         {
+            if (cData.Health <= 0)
+                cData.Health = 100;
             spawnTime = SpawnTime;
             _PathOn = spawnPath;
             _cData = cData;
             _Batch = batch;
+            waveIndex = myIndex;
+            myWave = wave;
+            Health = cData.Health;
         }
         ~Creep()
         {
 
+        }
+        public void damageCreep(int Damage, int mDamage, int trueDamage, double moveEffect)
+        {
+            if(Damage >=0)
+                Health -= (int)(Damage * (1.0 - _cData.Defense / (_cData.Defense + SystemVars.DefenseEffect))) ;
+            if(mDamage >=0)
+                Health -= (int)(mDamage * (1.0 - _cData.mDefense / (_cData.mDefense + SystemVars.mDefenseEffect)));
+            if(trueDamage >=0)
+                Health -= trueDamage;
+            if (SystemVars.DEBUG) Debug.WriteLine("Health:" + Health);
+            if (Health <= 0)
+                killCreep();
+        }
+        void killCreep()
+        {
+            myWave.creepDie(this);
         }
         public override void Update(GameTime gameTime)
         {
@@ -114,6 +158,7 @@ namespace Engine
                 if (mySquare < 1)
                 {
                     //Collided with the NEXUS OF DOOM!
+                    //damageCreep(0,0,Health,0.0);
                     mySquare = 1;
                     myProgress = 1.0;
                 }
@@ -136,9 +181,10 @@ namespace Engine
                 }
                 else
                 {
-                    _cData.mySprite.myPos = myPos;
-                    _cData.mySprite.Draw(gameTime);
+                    //_cData.mySprite.myPos = myPos;
+                    //_cData.mySprite.Draw(gameTime);
                 }
+                GridManager.DrawLine(_Batch, 1f, Color.Red, myPos + new Vector2(1, 0), myPos + new Vector2(2 + 11 * (1.0f * Health / _cData.Health), 0));
             }
         }
     }
