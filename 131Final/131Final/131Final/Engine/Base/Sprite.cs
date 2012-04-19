@@ -33,6 +33,10 @@ namespace Base
             gameSpriteBatch = GSB;
             Load();
         }
+        public BaseSprite(Texture2D myTexture, Vector2 myPos, Color color)
+        {
+
+        }
         /*Personal Methods*/
         public override void Draw(GameTime gameTime)
         {
