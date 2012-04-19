@@ -49,10 +49,13 @@ namespace VeryRealTournament
             /*Fullscreenness of awesome!*/
             if (Keyboard.GetState().IsKeyDown(Keys.F11))
             {
+                //graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
+                //graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
                 graphics.IsFullScreen = !graphics.IsFullScreen;
                 graphics.ApplyChanges();
                 GridManager.InitLineDrawer(spriteBatch.GraphicsDevice, 15);
             }
+            /*teh space case is me ~ Zack*/
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
 
