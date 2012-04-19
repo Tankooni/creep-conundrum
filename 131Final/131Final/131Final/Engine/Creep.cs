@@ -50,8 +50,9 @@ namespace Engine
             List<Creep> inRange = new List<Creep>();
             for (int x = 0; x < myCreeps.Count; x++)
             {
-                if ((myCreeps[x].getPos(gameTime) - tPos).LengthSquared() < (Range * Range) && myCreeps[x].spawnTime < gameTime.TotalGameTime.TotalMilliseconds)
-                    inRange.Add(myCreeps[x]);
+                if (myCreeps[x].spawnTime < gameTime.TotalGameTime.TotalMilliseconds)
+                    if ((myCreeps[x].getPos(gameTime) - tPos).LengthSquared() < (Range * Range))
+                        inRange.Add(myCreeps[x]);
             }
             return inRange;
         }

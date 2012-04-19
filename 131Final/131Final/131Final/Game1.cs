@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Engine;
 
-namespace _131Final
+namespace VeryRealTournament
 {
     public class Game1 : Microsoft.Xna.Framework.Game
     {
@@ -28,7 +28,7 @@ namespace _131Final
         }
         protected override void Initialize()
         {
-            Window.Title = "Very Real Tournament 2";
+            Window.Title = "Creep Conundrum : Strife";
             base.Initialize();
             temp = new PlayerMap();
         }
@@ -55,20 +55,25 @@ namespace _131Final
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
+
                 /*How to spawn a creep wave*/
                 CreepData tempD = new CreepData();
                 tempD.Speed = new Random().NextDouble()*1.5+0.5;
-                temp.addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 1, spriteBatch);
+                //addCreepWave(CreepData, When the Wave Starts, Minions to this wave, SpriteBatch);
+                temp.addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 15, spriteBatch);
                 wavesSpawned++;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
                 /*How to spawn a tower*/
                 TowerData tempT = new TowerData();
-                tempT.Damage = 20;
-                tempT.Range = 500;
-                tempT.RateOfFire = 1000;
-                temp.addTower(tempT, 0.0, 5, 4, spriteBatch);
+                tempT.Damage = 1;
+                tempT.Range = 100;
+                tempT.RateOfFire = 100;
+                for(int x = 0; x< 15; x++)
+                    for(int y = 0; y < 15; y++)
+                        //addTower(TowerData, Build Time(Not implemented yet), Xcoord, yCoord, SpriteBatch);
+                        temp.addTower(tempT, 0.0, x, y, spriteBatch);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
