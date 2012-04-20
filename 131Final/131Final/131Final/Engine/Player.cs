@@ -1,5 +1,8 @@
 ﻿/*
  * 4/19/2012 Player Class started
+ * 4/19/2012 Basic functionality of moving cursor, placing towers, and taking in input data
+ *              Plans are to do key combos for menus, adding more variables for money and health, also drawing this data
+ *              More words
  */
 
 using System;
@@ -14,7 +17,7 @@ namespace Engine
 {
     public struct PlyaerData
     {
-
+        float maxHealth;
     }
     public struct Cursor
     {
@@ -37,7 +40,6 @@ namespace Engine
         int screen;
         Inputs input;
 
-
         public Player(SpriteBatch SB, /*, OverLord OV*/PlayerIndex PI, int SN, PlayerMap PM)
         {
             spriteBtach = SB;
@@ -54,13 +56,23 @@ namespace Engine
         {
             input.Update();
             if (input.Current.x1 != 0 && input.Previous.x1 == 0)
-                cursor.y += (int)Math.Ceiling(input.Current.x1);
+                if ((cursor.y += (int)Math.Ceiling(input.Current.x1)) >= PlayerMap.HEIGHT)
+                    cursor.y = 0;
+                else if (cursor.y < 0)
+                    cursor.y = PlayerMap.HEIGHT-1;
+
             if (input.Current.y1 != 0 && input.Previous.y1 == 0)
-                cursor.x -= (int)Math.Ceiling(input.Current.y1);
+                if ((cursor.x -= (int)Math.Ceiling(input.Current.y1)) >= PlayerMap.HEIGHT)
+                    cursor.x = 0;
+                else if (cursor.x < 0)
+                    cursor.x = PlayerMap.HEIGHT - 1;
 
-
-            Console.WriteLine(input.Current.y1 + " " + input.Previous.y1);
-
+            TowerData tempT = new TowerData();
+                tempT.Damage = 100;
+                tempT.Range = 100;
+                tempT.RateOfFire = 1;
+                if (input.Current.B && !input.Previous.B)
+                    playerMap.addTower(tempT, 0, cursor.x, cursor.y, spriteBtach);
 
             playerMap.Update(gameTime);
         }
