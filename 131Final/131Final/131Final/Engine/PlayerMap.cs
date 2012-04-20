@@ -20,7 +20,13 @@ namespace Engine
 {
     public class PlayerMap : GameObject
     {
-        public const int HEIGHT = 15;
+        public int HEIGHT
+        {
+            get
+            {
+                return myMap.GetLength(0);
+            }
+        }
         List<Path> mapPaths = new List<Path>();
         List<Tower> myTowers = new List<Tower>();
         List<CreepWave> myCreepWaves = new List<CreepWave>();
@@ -32,22 +38,22 @@ namespace Engine
         //5 = nexus
         //6 = towerAlready
         byte[,] myMap ={
-        {0,1,1,1,1,1,1,0,0,1,0,0,0,0,0},
-        {0,1,0,0,0,0,1,0,0,1,0,0,0,0,0},
-        {0,1,0,0,0,0,1,0,0,1,0,0,0,0,0},
-        {0,1,0,0,0,0,1,0,0,1,0,0,0,0,0},
-        {0,1,1,1,0,0,1,1,1,1,0,0,0,0,0},
-        {0,0,0,1,0,0,0,0,0,2,0,1,0,0,0},
-        {0,0,0,1,0,0,0,0,0,2,0,0,0,0,0},
-        {0,0,0,1,1,1,1,1,1,1,1,1,1,1,1},
-        {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        {0,0,0,1,0,0,0,3,1,3,0,0,0,0,0},
-        {0,0,0,1,0,0,0,3,1,3,0,0,0,0,0},
-        {0,0,0,1,0,0,3,3,1,3,3,0,0,0,0},
-        {0,0,0,1,0,3,3,3,1,3,3,3,0,0,0},
-        {0,0,0,5,0,3,3,3,3,3,3,3,0,0,0}};
-
+        {0,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0},
+        {0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+        {0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+        {0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+        {0,1,1,1,0,0,1,1,1,1,0,0,0,0,0,0},
+        {0,0,0,1,0,0,0,0,0,2,0,1,0,0,0,0},
+        {0,0,0,1,0,0,0,0,0,2,0,0,0,0,0,0},
+        {0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0},
+        {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
+        {1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0},
+        {0,0,0,1,0,0,0,3,1,3,0,0,0,0,0,0},
+        {0,0,0,1,0,0,0,3,1,3,0,0,0,0,0,0},
+        {0,0,0,1,0,0,3,3,1,3,3,0,0,0,0,0},
+        {0,0,0,1,0,3,3,3,1,3,3,3,0,0,0,0},
+        {0,0,0,5,0,3,3,3,3,3,3,3,0,0,0,0},
+        {0,0,0,0,0,3,3,3,3,3,3,3,0,0,0,0}};
 
 
         public PlayerMap()
@@ -117,7 +123,7 @@ namespace Engine
                 for (int y = 0; y < HEIGHT; y++)
                 {
                     Color color = Color.Gray;
-                    if(myMap[y, x] == 1) color = Color.SaddleBrown;
+                    if(myMap[y, x] == 1) color = Color.SandyBrown;
                     if(myMap[y, x] == 2) color = Color.Black;
                     if(myMap[y, x] == 3) color = Color.Purple;
                     if(myMap[y, x] == 5) color = Color.Blue;
@@ -125,7 +131,8 @@ namespace Engine
                     GridManager.DrawSquare(batch,
                         SplitScreenAdapter.splitConvert(Screen, new Vector2(myH * x, myH * y), batch),
                         color,
-                        Grid);
+                        Grid,
+                        this);
                     
                 }
             }
@@ -142,7 +149,7 @@ namespace Engine
                         Grid);
                 }
             }*/
-            //DraCreep Waves!
+            //Draw Creep Waves!
             for (int x = 0; x < myCreepWaves.Count; x++)
                 myCreepWaves[x].Draw(gameTime, Screen);
             for (int x = 0; x < myTowers.Count; x++)
@@ -170,16 +177,13 @@ namespace Engine
                 return mapPaths.Count;
             }
         }
+        /// <summary>
+        /// DEPRECATED - DONT FUCKING NEED IT GAWD DAMNIT!
+        /// </summary>
+        /// <param name="toRemove"></param>
         public void removePath(Path toRemove)
         {
-            for (int x = 0; x < mapPaths.Count; x++)
-            {
-                Debug.WriteLine(mapPaths[x].ToString() + " == " + toRemove.ToString());
-                if (mapPaths[x].ToString() == toRemove.ToString())
-                {
-                    mapPaths.RemoveAt(x);
-                }
-            }
+            mapPaths.Remove(toRemove);
         }
         /// <summary>
         /// Returns the correct path indexed to pathNumber
@@ -215,9 +219,13 @@ namespace Engine
             }
             if (SystemVars.DEBUG) Debug.WriteLine("MyPos:" + myPos[0] + "," + myPos[1]);
             spawnNewPath(new List<int[]>(new int[][] { myPos, myPos }));
-            for (int x = 0; x < mapPaths.Count; x++)
-                if (mapPaths[x].PathLength == 0)
-                    mapPaths.RemoveAt(x);
+            mapPaths.RemoveAll(delegate(Path x)
+            {
+                int[] toCheck = x.PathData[x.PathLength - 1];
+                if (toCheck[0] > 0 && toCheck[0] < (HEIGHT - 1) && toCheck[1] > 0 && toCheck[1] < (HEIGHT - 1))
+                    return true;
+                return false;
+            });
         }
     }
 }

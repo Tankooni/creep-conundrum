@@ -12,11 +12,13 @@ namespace Engine
         static Texture2D baseGrid;
         static Texture2D baseTexture;
         static Texture2D blank;
-
-        public static void InitLineDrawer(GraphicsDevice GraphicsDevice, int mapHeight)
+        public static void InitLineDrawer(GraphicsDevice GraphicsDevice)
         {
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
+        }
+        public static void InitSquareDrawer(GraphicsDevice GraphicsDevice, int mapHeight)
+        {
             int width = GraphicsDevice.Viewport.Height / (mapHeight+1) / 2;
             Color[] temp = new Color[width*width];
             baseGrid = new Texture2D(GraphicsDevice, width, width, false, SurfaceFormat.Color);
@@ -64,9 +66,9 @@ namespace Engine
             temp[width * width - 1] = Color.Black;*/
             baseGrid.SetData(temp);
         }
-        public static void DrawSquare(SpriteBatch spriteBatch, Vector2 Point, Color toDraw, bool Grid)
+        public static void DrawSquare(SpriteBatch spriteBatch, Vector2 Point, Color toDraw, bool Grid, PlayerMap mapReference)
         {
-            if (baseTexture == null) InitLineDrawer(spriteBatch.GraphicsDevice, PlayerMap.HEIGHT);
+            if (baseTexture == null) InitSquareDrawer(spriteBatch.GraphicsDevice, mapReference.HEIGHT);
             spriteBatch.Draw(baseTexture, Point, toDraw);
             if (Grid) spriteBatch.Draw(baseGrid, Point, Color.White);
         }
@@ -75,7 +77,7 @@ namespace Engine
         {
             if (blank == null)
             {
-                InitLineDrawer(spriteBatch.GraphicsDevice, PlayerMap.HEIGHT);
+                InitLineDrawer(spriteBatch.GraphicsDevice);
             }
 
             float angle = (float)Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
@@ -117,7 +119,7 @@ namespace Engine
         {
             if (blank == null)
             {
-                InitLineDrawer(spriteBatch.GraphicsDevice, PlayerMap.HEIGHT);
+                //InitLineDrawer(spriteBatch.GraphicsDevice, PlayerMap.HEIGHT);
             }
             DrawLine(spriteBatch, rec.Width, color,
                 new Vector2(rec.X + (rec.Width), rec.Y),

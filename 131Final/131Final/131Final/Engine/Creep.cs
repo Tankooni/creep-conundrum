@@ -17,7 +17,7 @@ namespace Engine
     public class CreepWave : GameObject
     {
         List<Creep> myCreeps = new List<Creep>();
-        PlayerMap mapReference;
+        public PlayerMap mapReference;
         CreepData _cData;
         double creepWaveStartTime;
         public CreepWave(int CreepCount, CreepData cData, SpriteBatch Batch, PlayerMap map, double spawnTime)
@@ -129,14 +129,14 @@ namespace Engine
         {
 
         }
-        public void damageCreep(int Damage, int mDamage, int trueDamage, double moveEffect)
+        public void damageCreep(TowerData tData)
         {
-            if(Damage >=0)
-                Health -= (int)(Damage * (1.0 - _cData.Defense / (_cData.Defense + SystemVars.DefenseEffect))) ;
-            if(mDamage >=0)
-                Health -= (int)(mDamage * (1.0 - _cData.mDefense / (_cData.mDefense + SystemVars.mDefenseEffect)));
-            if(trueDamage >=0)
-                Health -= trueDamage;
+            if (tData.Damage >= 0)
+                Health -= (int)(tData.Damage * (1.0 - _cData.Defense / (_cData.Defense + SystemVars.DefenseEffect))) ;
+            if (tData.mDamage >= 0)
+                Health -= (int)(tData.mDamage * (1.0 - _cData.mDefense / (_cData.mDefense + SystemVars.mDefenseEffect)));
+            if (tData.TrueDamage >= 0)
+                Health -= tData.TrueDamage;
             if (SystemVars.DEBUG) Debug.WriteLine("Health:" + Health);
             if (Health <= 0)
                 killCreep();
@@ -163,7 +163,7 @@ namespace Engine
                     mySquare = 1;
                     myProgress = 1.0;
                 }
-                int myH = _Batch.GraphicsDevice.Viewport.Height / (PlayerMap.HEIGHT + 1);
+                int myH = _Batch.GraphicsDevice.Viewport.Height / (myWave.mapReference.HEIGHT + 1);
                 return new Vector2(
                     (float)(myH * (_PathOn.PathData[mySquare][1] + (_PathOn.PathData[mySquare - 1][1] - _PathOn.PathData[mySquare][1]) * myProgress)),
                     (float)(myH * (_PathOn.PathData[mySquare][0] + (_PathOn.PathData[mySquare - 1][0] - _PathOn.PathData[mySquare][0]) * myProgress)));

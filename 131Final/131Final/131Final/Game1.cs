@@ -55,7 +55,7 @@ namespace VeryRealTournament
                 graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
                 graphics.IsFullScreen = !graphics.IsFullScreen;
                 graphics.ApplyChanges();
-                GridManager.InitLineDrawer(spriteBatch.GraphicsDevice, 15);
+                GridManager.InitLineDrawer(spriteBatch.GraphicsDevice);
             }
             /*teh space case is me ~ Zack*/
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
