@@ -73,8 +73,8 @@ namespace Engine
         {
             if (gameTime.TotalGameTime.TotalMilliseconds > fireTime)
                 fireBullet(gameTime);
-            else
-                myColor = Color.Blue;
+            myColor = Color.Lerp(Color.White, Color.Red,(float)((fireTime - gameTime.TotalGameTime.TotalMilliseconds) / _tData.RateOfFire));
+                
         }
         public void Draw(GameTime gameTime, int Screen)
         {

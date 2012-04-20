@@ -185,7 +185,15 @@ namespace Engine
                     //_cData.mySprite.myPos = myPos;
                     //_cData.mySprite.Draw(gameTime);
                 }
-                GridManager.DrawLine(_Batch, 1f, Color.Red, myPos + new Vector2(1, 0), myPos + new Vector2(2 + 11 * (1.0f * Health / _cData.Health), 0));
+                float interMed = 2.0f * Health / _cData.Health;
+                Color dispColor;
+                dispColor = Color.Lerp(Color.Red, Color.Yellow, interMed % 1.0f);
+                if (interMed >= 1.0f)
+                    dispColor = Color.Lerp(Color.Yellow, Color.FromNonPremultiplied(0, 255, 0, 255), interMed - 1.0f);
+                GridManager.DrawLine(_Batch, 1f,
+                    dispColor,
+                    myPos + new Vector2(1, 0), myPos + new Vector2(2 + 11 * (1.0f * Health / _cData.Health),0)
+                    );
             }
         }
     }
