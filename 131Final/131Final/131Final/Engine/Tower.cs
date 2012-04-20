@@ -23,7 +23,7 @@ namespace Engine
         public int Damage;
         public int mDamage;
         public double Slow;//0 to 1.0 where 1.0 = frozen
-        public int MoneyGained;
+        public int Value;
         public int RateOfFire;//In MilliSeconds Between shots
         public int Range;
         public int TrueDamage;

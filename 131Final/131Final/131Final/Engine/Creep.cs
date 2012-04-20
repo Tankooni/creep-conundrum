@@ -86,7 +86,7 @@ namespace Engine
         public int Defense;
         public int mDefense;
         public double Speed;
-        public int value;
+        public int Value;
         //Speed = Blocks per second.
         public Texture2D mySprite;
 
@@ -139,7 +139,10 @@ namespace Engine
                 Health -= tData.TrueDamage;
             if (SystemVars.DEBUG) Debug.WriteLine("Health:" + Health);
             if (Health <= 0)
+            {
+                myWave.mapReference.addMoney(_cData.Value);
                 killCreep();
+            }
         }
         void killCreep()
         {
@@ -158,8 +161,8 @@ namespace Engine
                 double myProgress = 1 - ((_PathOn.PathLength - (offset / 1000 * _cData.Speed)) - mySquare);
                 if (mySquare < 1)
                 {
-                    //Collided with the NEXUS OF DOOM!
-                    //damageCreep(0,0,Health,0.0);
+                    myWave.mapReference.damageHero(_cData, Health);   
+                    myWave.creepDie(this);
                     mySquare = 1;
                     myProgress = 1.0;
                 }

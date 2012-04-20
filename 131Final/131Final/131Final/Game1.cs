@@ -16,9 +16,8 @@ namespace VeryRealTournament
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        PlayerMap temp;
         int wavesSpawned;
-        Player player;
+        Player[] player = new Player[4];
 
         SpriteFont defaultFont;
 
@@ -31,8 +30,10 @@ namespace VeryRealTournament
         {
             Window.Title = "Creep Conundrum : Strife";
             base.Initialize();
-            temp = new PlayerMap();
-            player = new Player(spriteBatch, PlayerIndex.One, 1, temp);
+            for (int i = 0; i < 4; i++)
+            {
+                player[i] = new Player(spriteBatch, PlayerIndex.One, i+1, defaultFont);
+            }
         }
         protected override void LoadContent()
         {
@@ -63,15 +64,20 @@ namespace VeryRealTournament
 
                 /*How to spawn a creep wave*/
                 CreepData tempD = new CreepData();
-                tempD.Speed = new Random().NextDouble()*1.5+0.5;
-                //addCreepWave(CreepData, When the Wave Starts, Minions to this wave, SpriteBatch);
-                temp.addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 4, spriteBatch);
-                wavesSpawned++;
+                tempD.Speed = new Random().NextDouble() * 1.5 + 0.5;
+                tempD.Damage = 1;
+                tempD.Value = 1000;
+                for (int i = 0; i < 4; i++)
+                    player[i].addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 4, spriteBatch);
+            //    //addCreepWave(CreepData, When the Wave Starts, Minions to this wave, SpriteBatch);
+            //    for (int i = 0; i < 4; i++)
+            //        temp[i].addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 4, spriteBatch);
+            //    wavesSpawned++;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            player.Update(gameTime);
+            for (int i = 0; i < 4; i++)
+                player[i].Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -81,8 +87,8 @@ namespace VeryRealTournament
             spriteBatch.Begin();
 
             SplitScreenAdapter.drawLines(spriteBatch);
-
-            player.Draw(graphics, gameTime);
+            for (int i = 0; i < 4; i++)
+                player[i].Draw(graphics, gameTime);
 
             Vector2 tempV = defaultFont.MeasureString(wavesSpawned.ToString());
             tempV.Y = 0;
