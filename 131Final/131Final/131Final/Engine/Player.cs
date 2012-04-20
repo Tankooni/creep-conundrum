@@ -199,50 +199,50 @@ namespace Engine
                 current.x2 = 0;
 
             //------------------------------------------------------------
-            current.y1 = GP.ThumbSticks.Left.Y;
-            current.x1 = GP.ThumbSticks.Left.X;
-            current.y2 = GP.ThumbSticks.Right.Y;
-            current.x2 = GP.ThumbSticks.Right.X;
+            //current.y1 = GP.ThumbSticks.Left.Y;
+            //current.x1 = GP.ThumbSticks.Left.X;
+            //current.y2 = GP.ThumbSticks.Right.Y;
+            //current.x2 = GP.ThumbSticks.Right.X;
 
-            if (GP.Buttons.A == ButtonState.Pressed)
-                current.A = true;
-            else
-                current.A = false;
+            //if (GP.Buttons.A == ButtonState.Pressed)
+            //    current.A = true;
+            //else
+            //    current.A = false;
 
-            if (GP.Buttons.B == ButtonState.Pressed)
-                current.B = true;
-            else
-                current.B = false;
+            //if (GP.Buttons.B == ButtonState.Pressed)
+            //    current.B = true;
+            //else
+            //    current.B = false;
 
-            if (GP.Buttons.X == ButtonState.Pressed)
-                current.X = true;
-            else
-                current.X = false;
+            //if (GP.Buttons.X == ButtonState.Pressed)
+            //    current.X = true;
+            //else
+            //    current.X = false;
 
-            if (GP.Buttons.Y == ButtonState.Pressed)
-                current.Y = true;
-            else
-                current.Y = false;
+            //if (GP.Buttons.Y == ButtonState.Pressed)
+            //    current.Y = true;
+            //else
+            //    current.Y = false;
 
-            if (GP.DPad.Up == ButtonState.Pressed)
-                current.dUp = true;
-            else
-                current.dUp = false;
+            //if (GP.DPad.Up == ButtonState.Pressed)
+            //    current.dUp = true;
+            //else
+            //    current.dUp = false;
 
-            if (GP.DPad.Down == ButtonState.Pressed)
-                current.dDown = true;
-            else
-                current.dDown = false;
+            //if (GP.DPad.Down == ButtonState.Pressed)
+            //    current.dDown = true;
+            //else
+            //    current.dDown = false;
 
-            if (GP.DPad.Left == ButtonState.Pressed)
-                current.dLeft = true;
-            else
-                current.dLeft = false;
+            //if (GP.DPad.Left == ButtonState.Pressed)
+            //    current.dLeft = true;
+            //else
+            //    current.dLeft = false;
 
-            if (GP.DPad.Right == ButtonState.Pressed)
-                current.dRight = true;
-            else
-                current.dRight = false;
+            //if (GP.DPad.Right == ButtonState.Pressed)
+            //    current.dRight = true;
+            //else
+            //    current.dRight = false;
         }
     }
 }
