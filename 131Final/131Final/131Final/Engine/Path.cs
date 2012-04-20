@@ -28,10 +28,6 @@ namespace Engine
             mapReference = map;
             _Path = pathData;
             spawnPathData(_Path[_Path.Count - 1][0], _Path[_Path.Count - 1][1]);
-            int[] toCheck = _Path[_Path.Count - 1];
-            if (SystemVars.DEBUG) Debug.WriteLine(toCheck.ToString());
-            if (toCheck[0] != 0 && toCheck[0] != 14 && toCheck[1] != 0 && toCheck[1] != 14)
-                _Path.RemoveRange(0, _Path.Count-1);
         }
 
         public static Path NullPath

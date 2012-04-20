@@ -17,7 +17,7 @@ namespace Engine
 {
     public struct PlyaerData
     {
-        float maxHealth;
+        double maxHealth;
     }
     public struct Cursor
     {
@@ -56,16 +56,16 @@ namespace Engine
         {
             input.Update();
             if (input.Current.x1 != 0 && input.Previous.x1 == 0)
-                if ((cursor.y += (int)Math.Ceiling(input.Current.x1)) >= PlayerMap.HEIGHT)
+                if ((cursor.y += (int)Math.Ceiling(input.Current.x1)) >= playerMap.HEIGHT)
                     cursor.y = 0;
                 else if (cursor.y < 0)
-                    cursor.y = PlayerMap.HEIGHT-1;
+                    cursor.y = playerMap.HEIGHT - 1;
 
             if (input.Current.y1 != 0 && input.Previous.y1 == 0)
-                if ((cursor.x -= (int)Math.Ceiling(input.Current.y1)) >= PlayerMap.HEIGHT)
+                if ((cursor.x -= (int)Math.Ceiling(input.Current.y1)) >= playerMap.HEIGHT)
                     cursor.x = 0;
                 else if (cursor.x < 0)
-                    cursor.x = PlayerMap.HEIGHT - 1;
+                    cursor.x = playerMap.HEIGHT - 1;
 
             TowerData tempT = new TowerData();
                 tempT.Damage = 5;
@@ -79,8 +79,8 @@ namespace Engine
 
         public void Draw(GraphicsDeviceManager graphics, GameTime gameTime)
         {
-            playerMap.Draw(screen, spriteBtach, graphics, true, gameTime);
-            int myH = spriteBtach.GraphicsDevice.Viewport.Height / (PlayerMap.HEIGHT + 1);
+            playerMap.Draw(screen, spriteBtach, graphics, false, gameTime);
+            int myH = spriteBtach.GraphicsDevice.Viewport.Height / (playerMap.HEIGHT + 1);
             Vector2 myPos = SplitScreenAdapter.splitConvert(screen, new Vector2(myH*cursor.y, myH*cursor.x), spriteBtach);
             GridManager.DrawRectangle(spriteBtach, new Rectangle((int)myPos.X - 1, (int)myPos.Y - 1, (myH+2)/2, (myH+2)/2), Color.FromNonPremultiplied(0,255,0,100));
 

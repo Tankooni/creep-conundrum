@@ -14,6 +14,9 @@ using Base;
 
 namespace Engine
 {
+    /// <summary>
+    /// Tower data holds all data that a tower will ever use, such as damage, spriteTexture, etc...
+    /// </summary>
     public struct TowerData
     {
         //Base Things
@@ -23,6 +26,7 @@ namespace Engine
         public int MoneyGained;
         public int RateOfFire;//In MilliSeconds Between shots
         public int Range;
+        public int TrueDamage;
 
         //Later:
         public int Poison;
@@ -33,7 +37,9 @@ namespace Engine
         public int ChainCount;//Amount it chains to
         public Texture2D TowerSprite;
     }
-
+    /// <summary>
+    /// The tower class itself
+    /// </summary>
     public class Tower : GameObject
     {
         /*Needs levels, build time, and what not*/
@@ -49,7 +55,7 @@ namespace Engine
             mapReference = map;
             _tData = tData;
             _Batch = Batch;
-            int myH = _Batch.GraphicsDevice.Viewport.Height / (PlayerMap.HEIGHT + 1);
+            int myH = _Batch.GraphicsDevice.Viewport.Height / (mapReference.HEIGHT + 1);
             _myPos = new Vector2(myH * myPos[1]/*y*/, myH * myPos[0]/*x*/);
             fireTime = 0;
         }
@@ -59,7 +65,7 @@ namespace Engine
             if (temp.Count > 0)
             {
                 if (SystemVars.DEBUG) Debug.WriteLine("Creep Found!");
-                temp[0].damageCreep(_tData.Damage, _tData.mDamage, 0, _tData.Slow);
+                temp[0].damageCreep(_tData);
                 fireTime = gameTime.TotalGameTime.TotalMilliseconds + _tData.RateOfFire;
                 myColor = Color.Red;
             }
