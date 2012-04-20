@@ -68,9 +68,9 @@ namespace Engine
                     cursor.x = PlayerMap.HEIGHT - 1;
 
             TowerData tempT = new TowerData();
-                tempT.Damage = 100;
+                tempT.Damage = 5;
                 tempT.Range = 100;
-                tempT.RateOfFire = 1;
+                tempT.RateOfFire = 2000;
                 if (input.Current.B && !input.Previous.B)
                     playerMap.addTower(tempT, 0, cursor.x, cursor.y, spriteBtach);
 

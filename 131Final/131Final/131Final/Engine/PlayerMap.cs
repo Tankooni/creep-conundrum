@@ -117,7 +117,7 @@ namespace Engine
                 for (int y = 0; y < HEIGHT; y++)
                 {
                     Color color = Color.Gray;
-                    if(myMap[y, x] == 1) color = Color.SandyBrown;
+                    if(myMap[y, x] == 1) color = Color.SaddleBrown;
                     if(myMap[y, x] == 2) color = Color.Black;
                     if(myMap[y, x] == 3) color = Color.Purple;
                     if(myMap[y, x] == 5) color = Color.Blue;
