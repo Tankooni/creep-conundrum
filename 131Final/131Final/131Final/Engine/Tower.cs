@@ -28,9 +28,9 @@ namespace Engine
         public int Poison;
         public int PoisonDuration;
         public int PoisonTPS;//Ticks Per Second
-        public int DefenseAdjust;//Plus Or Minus can be detect with IF for Enemy lower or Friedly Raise
+        public int DefenseAdjust;//Plus Or Minus can be detect with IF for Enemy lower or Friendly Raise
         public int mDefenseAdjust;//What he said above me.
-        public int ChainCount;//Ammount it chains to
+        public int ChainCount;//Amount it chains to
         public Texture2D TowerSprite;
     }
 
@@ -50,7 +50,7 @@ namespace Engine
             _tData = tData;
             _Batch = Batch;
             int myH = _Batch.GraphicsDevice.Viewport.Height / (PlayerMap.HEIGHT + 1);
-            _myPos = new Vector2(myH * myPos[1], myH * myPos[0]);
+            _myPos = new Vector2(myH * myPos[1]/*y*/, myH * myPos[0]/*x*/);
             fireTime = 0;
         }
         public void fireBullet(GameTime gameTime)

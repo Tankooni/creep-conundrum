@@ -18,6 +18,7 @@ namespace VeryRealTournament
         SpriteBatch spriteBatch;
         PlayerMap temp;
         int wavesSpawned;
+        Player player;
 
         SpriteFont defaultFont;
 
@@ -31,6 +32,7 @@ namespace VeryRealTournament
             Window.Title = "Creep Conundrum : Strife";
             base.Initialize();
             temp = new PlayerMap();
+            player = new Player(spriteBatch, PlayerIndex.One, 1, temp);
         }
         protected override void LoadContent()
         {
@@ -49,8 +51,8 @@ namespace VeryRealTournament
             /*Fullscreenness of awesome!*/
             if (Keyboard.GetState().IsKeyDown(Keys.F11))
             {
-                //graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
-                //graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
+                graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
+                graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
                 graphics.IsFullScreen = !graphics.IsFullScreen;
                 graphics.ApplyChanges();
                 GridManager.InitLineDrawer(spriteBatch.GraphicsDevice, 15);
@@ -81,17 +83,17 @@ namespace VeryRealTournament
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             temp.Update(gameTime);
-
+            player.Update(gameTime);
             base.Update(gameTime);
         }
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
-
+            player.Draw(graphics, gameTime);
             SplitScreenAdapter.drawLines(spriteBatch);
 
-            temp.Draw(1, spriteBatch, graphics, true, gameTime);
+            //temp.Draw(1, spriteBatch, graphics, true, gameTime);
             temp.Draw(2, spriteBatch, graphics, false, gameTime);
             temp.Draw(3, spriteBatch, graphics, true, gameTime);
             temp.Draw(4, spriteBatch, graphics, false, gameTime);
