@@ -30,7 +30,6 @@ namespace Engine
         List<Path> mapPaths = new List<Path>();
         List<Tower> myTowers = new List<Tower>();
         List<CreepWave> myCreepWaves = new List<CreepWave>();
-        Player playerReference;
         //The following will actually not be defined in here!
         //0 = tower pos
         //1 = path
@@ -57,10 +56,9 @@ namespace Engine
         {0,0,0,0,0,3,3,3,3,3,3,3,0,0,0,0}};
 
 
-        public PlayerMap(Player myPlayer)
+        public PlayerMap()
         {
             initMapPaths();
-            playerReference = myPlayer;
             if (SystemVars.DEBUG)
             {
                 for (int x = 0; x < PathCount; x++)
@@ -74,31 +72,18 @@ namespace Engine
 
         }
 
-        public bool addTower(TowerData tData, double buildTime, int X, int Y, SpriteBatch _Batch)
+        public void addTower(TowerData tData, double buildTime, int X, int Y, SpriteBatch _Batch)
         {
             /*Build time isnt implemented*/
             if (getData(X, Y) == 0)
             {
                 myTowers.Add(new Tower(this, _Batch, tData, new int[] { X, Y }));
                 myMap[X, Y] = 6;
-                return true;
             }
-            return false;
 
         }
 
         /*Creep Stuff*/
-        public void addMoney(int Money)
-        {
-            playerReference.addMoney(Money);
-        }
-        public void damageHero(CreepData cData, int currentHealth)
-        {
-            int toDamage = 0;
-            toDamage += (int)Math.Ceiling(0.5 * currentHealth / cData.Health * (cData.Damage + cData.mDamage));
-            if (SystemVars.DEBUG) Debug.WriteLine("DAMAGE!!!:" + toDamage);
-            playerReference.damagePlayer(toDamage);
-        }
         public void addCreepWave(CreepData cData, double spawnTime, int creepCount, SpriteBatch _Batch)
         {
             myCreepWaves.Add(new CreepWave(creepCount, cData, _Batch, this, spawnTime));
