@@ -15,10 +15,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Engine
 {
-    public struct PlayerData
+    public struct PlyaerData
     {
-        public double maxHealth;
-        public int startMoney;
+        double maxHealth;
     }
     public struct Cursor
     {
@@ -35,49 +34,22 @@ namespace Engine
     /// </summary>
     public class Player
     {
-        PlayerData playerData;
         SpriteBatch spriteBtach;
         PlayerMap playerMap;
         public Cursor cursor;
         int screen;
         Inputs input;
-        double currentHealth;
-        int currentMoney;
-        SpriteFont defaultFont;
 
-        public Player(SpriteBatch SB, /*, OverLord OV*/PlayerIndex PI, int SN, SpriteFont SF)
+        public Player(SpriteBatch SB, /*, OverLord OV*/PlayerIndex PI, int SN, PlayerMap PM)
         {
-            playerData = new PlayerData();
-            playerData.startMoney = 200;
-            playerData.maxHealth = 100;
-
-            currentHealth = playerData.maxHealth;
-            currentMoney = playerData.startMoney;
-
             spriteBtach = SB;
             screen = SN;
-            playerMap = new PlayerMap(this);
+            playerMap = new PlayerMap();
             cursor = new Cursor();
             cursor.x = 0;
             cursor.y = 0;
             input = new Inputs(PI);
-            defaultFont = SF;
-        }
-
-        public void damagePlayer(int damage)
-        {
-            if ((currentHealth -= damage) < 0)
-                currentHealth = 0;
-        }
-
-        public void addMoney(int money)
-        {
-            currentMoney += money;
-        }
-
-        public void addCreepWave(CreepData CD, double spawnTime, int cpw, SpriteBatch SB)
-        {
-            playerMap.addCreepWave(CD, spawnTime, cpw, SB);
+            playerMap = PM;
         }
 
         public void Update(GameTime gameTime)
@@ -96,13 +68,11 @@ namespace Engine
                     cursor.x = playerMap.HEIGHT - 1;
 
             TowerData tempT = new TowerData();
-                tempT.Damage = 100;
+                tempT.Damage = 5;
                 tempT.Range = 100;
                 tempT.RateOfFire = 2000;
-                tempT.Value = 100;
                 if (input.Current.B && !input.Previous.B)
-                    if((currentMoney - tempT.Value) >= 0 && playerMap.addTower(tempT, 0, cursor.x, cursor.y, spriteBtach))
-                        currentMoney -= tempT.Value;
+                    playerMap.addTower(tempT, 0, cursor.x, cursor.y, spriteBtach);
 
             playerMap.Update(gameTime);
         }
@@ -113,10 +83,8 @@ namespace Engine
             int myH = spriteBtach.GraphicsDevice.Viewport.Height / (playerMap.HEIGHT + 1);
             Vector2 myPos = SplitScreenAdapter.splitConvert(screen, new Vector2(myH*cursor.y, myH*cursor.x), spriteBtach);
             GridManager.DrawRectangle(spriteBtach, new Rectangle((int)myPos.X - 1, (int)myPos.Y - 1, (myH+2)/2, (myH+2)/2), Color.FromNonPremultiplied(0,255,0,100));
-            myPos = SplitScreenAdapter.splitConvert(screen, new Vector2(myH * playerMap.HEIGHT, 0), spriteBtach);
-            spriteBtach.DrawString(defaultFont, "$$: " + currentMoney.ToString(), myPos, Color.Black);
 
-            spriteBtach.DrawString(defaultFont, "<3: " + currentHealth.ToString(), new Vector2(myPos.X, myPos.Y + defaultFont.MeasureString(currentMoney.ToString()).Y), Color.Black);
+            
             
         }
     }

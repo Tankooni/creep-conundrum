@@ -20,13 +20,17 @@ namespace Engine
     public struct TowerData
     {
         //Base Things
+        public string group;
+        public string type;
+        public string name;
         public int Damage;
         public int mDamage;
         public double Slow;//0 to 1.0 where 1.0 = frozen
-        public int Value;
+        public int MoneyGained;
         public int RateOfFire;//In MilliSeconds Between shots
         public int Range;
         public int TrueDamage;
+        public int cost;
 
         //Later:
         public int Poison;
