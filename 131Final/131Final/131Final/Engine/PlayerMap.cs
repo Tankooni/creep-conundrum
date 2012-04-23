@@ -98,6 +98,7 @@ namespace Engine
             for (int x = 0; x < myCreepWaves.Count; x++)
             {
                 inRange.AddRange(myCreepWaves[x].creepsInRange(Range, tPos, gameTime));
+                if (inRange.Count > 0) return inRange;
                     //.Concat(myCreepWaves[x].creepsInRange(Range, tPos, gameTime));
                 if (SystemVars.DEBUG) Debug.WriteLine(inRange.Count);
             }
@@ -136,6 +137,8 @@ namespace Engine
                     
                 }
             }
+
+
             //Path Drawing:
             /*
             for (int y = 0; y < mapPaths.Count; y++)
@@ -149,9 +152,12 @@ namespace Engine
                         Grid);
                 }
             }*/
+
+
             //Draw Creep Waves!
             for (int x = 0; x < myCreepWaves.Count; x++)
                 myCreepWaves[x].Draw(gameTime, Screen);
+            //Draw Towers!
             for (int x = 0; x < myTowers.Count; x++)
                 myTowers[x].Draw(gameTime, Screen);
         }
