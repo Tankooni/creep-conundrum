@@ -11,7 +11,5 @@ namespace Engine
         public static double DefenseEffect = 50;
         public static double mDefenseEffect = 100;
         //Yeppers :3
-
-
     }
 }

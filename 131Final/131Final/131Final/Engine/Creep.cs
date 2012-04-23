@@ -52,13 +52,15 @@ namespace Engine
             {
                 if (myCreeps[x].spawnTime < gameTime.TotalGameTime.TotalMilliseconds)
                     if ((myCreeps[x].getPos(gameTime) - tPos).LengthSquared() < (Range * Range))
+                    {
                         inRange.Add(myCreeps[x]);
+                        return inRange;
+                    }
             }
             return inRange;
         }
         public void creepDie(Creep toRemove)
         {
-            //mapReference.AddMoney(_cData.value);
             myCreeps.Remove(toRemove);
             if (myCreeps.Count < 0)
                 mapReference.removeWave(this);
@@ -142,14 +144,11 @@ namespace Engine
                 Health -= tData.TrueDamage;
             if (SystemVars.DEBUG) Debug.WriteLine("Health:" + Health);
             if (Health <= 0)
-                killCreep();
-        }
-        void killCreep()
-        {
-            myWave.creepDie(this);
+                myWave.creepDie(this);
         }
         public override void Update(GameTime gameTime)
         {
+            //Fucking not used at all, SO LOL!
             //Maybe Do It Here! (Calc for its v2 pos) using spawn time, path, and what not.
         }
         public Vector2 getPos(GameTime gameTime)
