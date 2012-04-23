@@ -16,6 +16,7 @@ namespace VeryRealTournament
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        OverLord theOverLord = new OverLord();
         int wavesSpawned;
         Player[] player = new Player[4];
 
@@ -49,51 +50,16 @@ namespace VeryRealTournament
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            /*Fullscreenness of awesome!*/
-            if (Keyboard.GetState().IsKeyDown(Keys.F11))
-            {
-                graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
-                graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
-                graphics.IsFullScreen = !graphics.IsFullScreen;
-                graphics.ApplyChanges();
-                GridManager.InitLineDrawer(spriteBatch.GraphicsDevice);
-            }
-            /*teh space case is me ~ Zack*/
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-
-                /*How to spawn a creep wave*/
-                CreepData tempD = new CreepData();
-                tempD.Speed = new Random().NextDouble() * 1.5 + 0.5;
-                tempD.Damage = 1;
-                tempD.Value = 1000;
-                for (int i = 0; i < 4; i++)
-                    player[i].addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 4, spriteBatch);
-            //    //addCreepWave(CreepData, When the Wave Starts, Minions to this wave, SpriteBatch);
-            //    for (int i = 0; i < 4; i++)
-            //        temp[i].addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 4, spriteBatch);
-            //    wavesSpawned++;
-            }
+            theOverLord.UPDATE(graphics, spriteBatch, gameTime, player, GraphicsDevice);
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            for (int i = 0; i < 4; i++)
-                player[i].Update(gameTime);
-
             base.Update(gameTime);
         }
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
-
-            SplitScreenAdapter.drawLines(spriteBatch);
-            for (int i = 0; i < 4; i++)
-                player[i].Draw(graphics, gameTime);
-
-            Vector2 tempV = defaultFont.MeasureString(wavesSpawned.ToString());
-            tempV.Y = 0;
-            spriteBatch.DrawString(defaultFont,wavesSpawned.ToString(),new Vector2(300,300) - tempV,Color.Black);
-
+            theOverLord.DRAW(gameTime, spriteBatch, graphics, player);
             spriteBatch.End(); 
 
             base.Draw(gameTime);

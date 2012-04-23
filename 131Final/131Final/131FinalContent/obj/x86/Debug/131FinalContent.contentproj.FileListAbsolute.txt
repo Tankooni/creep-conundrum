@@ -3,3 +3,4 @@ C:\Documents and Settings\Io\My Documents\Visual Studio 2010\Projects\creep\131F
 H:\AG131\creep\131Final\131Final\131FinalContent\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Schuyler\Desktop\creep\131Final\131Final\131FinalContent\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131FinalContent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131FinalContent\obj\x86\Debug\ResolveAssemblyReference.cache
