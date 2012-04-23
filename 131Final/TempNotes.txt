@@ -1,7 +1,0 @@
--Tower should pass its TowerData in the damageMinion section
-
--Look into Dictionaries for TowerData and MinionData
-
--Color Mixer (For Minions Health and TowerCoolDowns)
-
--Reminder:Make modularity for player accounts.
