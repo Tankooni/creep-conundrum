@@ -33,7 +33,7 @@ namespace VeryRealTournament
             base.Initialize();
             for (int i = 0; i < 4; i++)
             {
-                player[i] = new Player(spriteBatch, PlayerIndex.One, i+1, defaultFont);
+                player[i] = new Player(spriteBatch, i+1, i+1, defaultFont);
             }
         }
         protected override void LoadContent()
