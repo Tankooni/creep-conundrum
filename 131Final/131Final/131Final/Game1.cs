@@ -17,10 +17,8 @@ namespace VeryRealTournament
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         OverLord theOverLord = new OverLord();
-        int wavesSpawned;
-        Player[] player = new Player[4];
 
-        SpriteFont defaultFont;
+        
 
         public Game1()
         {
@@ -31,16 +29,13 @@ namespace VeryRealTournament
         {
             Window.Title = "Creep Conundrum : Strife";
             base.Initialize();
-            for (int i = 0; i < 4; i++)
-            {
-                player[i] = new Player(spriteBatch, i+1, i+1, defaultFont);
-            }
+            theOverLord.Init(spriteBatch);
         }
         protected override void LoadContent()
         {
             this.IsMouseVisible = true;
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            defaultFont = Content.Load<SpriteFont>("DefaultFont");
+            theOverLord.LoadContent(Content);
         }
         protected override void UnloadContent()
         {
@@ -50,7 +45,7 @@ namespace VeryRealTournament
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            theOverLord.UPDATE(graphics, spriteBatch, gameTime, player, GraphicsDevice);
+            theOverLord.Update(graphics, spriteBatch, gameTime, GraphicsDevice);
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             base.Update(gameTime);
@@ -59,7 +54,7 @@ namespace VeryRealTournament
         {
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
-            theOverLord.DRAW(gameTime, spriteBatch, graphics, player);
+            theOverLord.Draw(gameTime, spriteBatch, graphics);
             spriteBatch.End(); 
 
             base.Draw(gameTime);
