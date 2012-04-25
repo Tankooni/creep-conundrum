@@ -12,6 +12,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace Engine
 {
@@ -64,6 +65,30 @@ namespace Engine
             defaultFont = SF;
         }
 
+        public Player(SpriteBatch SB, /*, OverLord OV*/int PI, int SN, SpriteFont SF)
+        {
+            playerData = new PlayerData();
+            playerData.startMoney = 200;
+            playerData.maxHealth = 100;
+
+            currentHealth = playerData.maxHealth;
+            currentMoney = playerData.startMoney;
+
+            spriteBtach = SB;
+            screen = SN;
+            playerMap = new PlayerMap(this);
+            cursor = new Cursor();
+            cursor.x = 0;
+            cursor.y = 0;
+            input = new Inputs(PI);
+            defaultFont = SF;
+        }
+
+        public void Init()
+        {
+
+        }
+
         public void damagePlayer(int damage)
         {
             if ((currentHealth -= damage) < 0)
@@ -84,16 +109,38 @@ namespace Engine
         {
             input.Update();
             if (input.Current.x1 != 0 && input.Previous.x1 == 0)
-                if ((cursor.y += (int)Math.Ceiling(input.Current.x1)) >= playerMap.HEIGHT)
-                    cursor.y = 0;
-                else if (cursor.y < 0)
-                    cursor.y = playerMap.HEIGHT - 1;
+                if (input.Current.x1 > 0)
+                {
+                    if ((cursor.y += (int)Math.Ceiling(input.Current.x1)) >= playerMap.HEIGHT)
+                        cursor.y = 0;
+                    else if (cursor.y < 0)
+                        cursor.y = playerMap.HEIGHT - 1;
+                }
+                else
+                {
+                    if ((cursor.y += (int)Math.Floor(input.Current.x1)) >= playerMap.HEIGHT)
+                        cursor.y = 0;
+                    else if (cursor.y < 0)
+                        cursor.y = playerMap.HEIGHT - 1;
+                }
 
             if (input.Current.y1 != 0 && input.Previous.y1 == 0)
-                if ((cursor.x -= (int)Math.Ceiling(input.Current.y1)) >= playerMap.HEIGHT)
-                    cursor.x = 0;
-                else if (cursor.x < 0)
-                    cursor.x = playerMap.HEIGHT - 1;
+            {
+                if (input.Current.y1 > 0)
+                {
+                    if ((cursor.x -= (int)Math.Ceiling(input.Current.y1)) >= playerMap.HEIGHT)
+                        cursor.x = 0;
+                    else if (cursor.x < 0)
+                        cursor.x = playerMap.HEIGHT - 1;
+                }
+                else
+                {
+                    if ((cursor.x -= (int)Math.Floor(input.Current.y1)) >= playerMap.HEIGHT)
+                        cursor.x = 0;
+                    else if (cursor.x < 0)
+                        cursor.x = playerMap.HEIGHT - 1;
+                }
+            }
 
             TowerData tempT = new TowerData();
                 tempT.Damage = 100;
@@ -188,105 +235,131 @@ namespace Engine
         {
             _playerInedx = index;
         }
+        public Inputs(int index)
+        {
+            switch(index)
+            {
+                case 1:
+                    _playerInedx = PlayerIndex.One;
+                    break;
+                case 2:
+                    _playerInedx = PlayerIndex.Two;
+                    break;
+                case 3:
+                    _playerInedx = PlayerIndex.Three;
+                    break;
+                case 4:
+                    _playerInedx = PlayerIndex.Four;
+                    break;
+            }
+        }
         
         public void Update()
         {
             previous = current;
             KB = Keyboard.GetState();
+            GP = GamePad.GetState(_playerInedx);
 
-            if (KB.IsKeyDown(Keys.W))
-                current.y1 = 1;
-            else if (KB.IsKeyDown(Keys.S))
-                current.y1 = -1;
+            if (_playerInedx == PlayerIndex.One)
+            {
+                if (KB.IsKeyDown(Keys.W))
+                    current.y1 = 1;
+                else if (KB.IsKeyDown(Keys.S))
+                    current.y1 = -1;
+                else
+                    current.y1 = 0;
+
+                if (KB.IsKeyDown(Keys.D))
+                    current.x1 = 1;
+                else if (KB.IsKeyDown(Keys.A))
+                    current.x1 = -1;
+                else
+                    current.x1 = 0;
+
+                if (KB.IsKeyDown(Keys.Space))
+                    current.A = true;
+                else
+                    current.A = false;
+
+                if (KB.IsKeyDown(Keys.LeftControl))
+                    current.B = true;
+                else
+                    current.B = false;
+
+                if (KB.IsKeyDown(Keys.RightControl))
+                    current.X = true;
+                else
+                    current.X = false;
+
+                if (KB.IsKeyDown(Keys.RightShift))
+                    current.Y = true;
+                else
+                    current.Y = false;
+
+                if (KB.IsKeyDown(Keys.Up))
+                    current.y2 = -1;
+                else if (KB.IsKeyDown(Keys.Down))
+                    current.y2 = -1;
+                else
+                    current.y2 = 0;
+
+                if (KB.IsKeyDown(Keys.Right))
+                    current.x2 = 1;
+                else if (KB.IsKeyDown(Keys.Left))
+                    current.x2 = -1;
+                else
+                    current.x2 = 0;
+            }
             else
-                current.y1 = 0;
+            {
+                //Debug.WriteLineIf(_playerInedx == PlayerIndex.One,"KB: " + current.x1 + " " + current.y1);
+                //------------------------------------------------------------
+                current.y1 = GP.ThumbSticks.Left.Y;
+                current.x1 = GP.ThumbSticks.Left.X;
+                current.y2 = GP.ThumbSticks.Right.Y;
+                current.x2 = GP.ThumbSticks.Right.X;
 
-            if (KB.IsKeyDown(Keys.D))
-                current.x1 = 1;
-            else if (KB.IsKeyDown(Keys.A))
-                current.x1 = -1;
-            else
-                current.x1 = 0;
+                //Debug.WriteLineIf(_playerInedx == PlayerIndex.One, "GP: " + current.x1 + " " + current.y1);
+                if (GP.Buttons.A == ButtonState.Pressed)
+                    current.A = true;
+                else
+                    current.A = false;
 
-            if (KB.IsKeyDown(Keys.Space))
-                current.A = true;
-            else
-                current.A = false;
+                if (GP.Buttons.B == ButtonState.Pressed)
+                    current.B = true;
+                else
+                    current.B = false;
 
-            if (KB.IsKeyDown(Keys.LeftControl))
-                current.B = true;
-            else
-                current.B = false;
+                if (GP.Buttons.X == ButtonState.Pressed)
+                    current.X = true;
+                else
+                    current.X = false;
 
-            if (KB.IsKeyDown(Keys.RightControl))
-                current.X = true;
-            else
-                current.X = false;
+                if (GP.Buttons.Y == ButtonState.Pressed)
+                    current.Y = true;
+                else
+                    current.Y = false;
 
-            if (KB.IsKeyDown(Keys.RightShift))
-                current.Y = true;
-            else
-                current.Y = false;
+                if (GP.DPad.Up == ButtonState.Pressed)
+                    current.dUp = true;
+                else
+                    current.dUp = false;
 
-            if (KB.IsKeyDown(Keys.Up))
-                current.y2 = -1;
-            else if (KB.IsKeyDown(Keys.Down))
-                current.y2 = -1;
-            else
-                current.y2 = 0;
+                if (GP.DPad.Down == ButtonState.Pressed)
+                    current.dDown = true;
+                else
+                    current.dDown = false;
 
-            if (KB.IsKeyDown(Keys.Right))
-                current.x2 = 1;
-            else if (KB.IsKeyDown(Keys.Left))
-                current.x2 = -1;
-            else
-                current.x2 = 0;
+                if (GP.DPad.Left == ButtonState.Pressed)
+                    current.dLeft = true;
+                else
+                    current.dLeft = false;
 
-            //------------------------------------------------------------
-            //current.y1 = GP.ThumbSticks.Left.Y;
-            //current.x1 = GP.ThumbSticks.Left.X;
-            //current.y2 = GP.ThumbSticks.Right.Y;
-            //current.x2 = GP.ThumbSticks.Right.X;
-
-            //if (GP.Buttons.A == ButtonState.Pressed)
-            //    current.A = true;
-            //else
-            //    current.A = false;
-
-            //if (GP.Buttons.B == ButtonState.Pressed)
-            //    current.B = true;
-            //else
-            //    current.B = false;
-
-            //if (GP.Buttons.X == ButtonState.Pressed)
-            //    current.X = true;
-            //else
-            //    current.X = false;
-
-            //if (GP.Buttons.Y == ButtonState.Pressed)
-            //    current.Y = true;
-            //else
-            //    current.Y = false;
-
-            //if (GP.DPad.Up == ButtonState.Pressed)
-            //    current.dUp = true;
-            //else
-            //    current.dUp = false;
-
-            //if (GP.DPad.Down == ButtonState.Pressed)
-            //    current.dDown = true;
-            //else
-            //    current.dDown = false;
-
-            //if (GP.DPad.Left == ButtonState.Pressed)
-            //    current.dLeft = true;
-            //else
-            //    current.dLeft = false;
-
-            //if (GP.DPad.Right == ButtonState.Pressed)
-            //    current.dRight = true;
-            //else
-            //    current.dRight = false;
+                if (GP.DPad.Right == ButtonState.Pressed)
+                    current.dRight = true;
+                else
+                    current.dRight = false;
+            }
         }
     }
 }
