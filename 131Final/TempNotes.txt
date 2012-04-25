@@ -5,3 +5,15 @@
 -Color Mixer (For Minions Health and TowerCoolDowns)
 
 -Reminder:Make modularity for player accounts.
+
+
+
+
+STUFF TO DO
+- Make overlord spawn creepwaves at intervals; 
+	~ Mike
+- Menus for selecting stuff; 
+	~ Zack
+- Allowing players to send minions to other players; 
+	~ ???
+- 
