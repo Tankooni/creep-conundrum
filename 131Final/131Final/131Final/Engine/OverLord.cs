@@ -18,12 +18,22 @@ namespace Engine
 {
     public class OverLord
     {
-        public void LoadContent()
+        Player[] player = new Player[4];
+        SpriteFont defaultFont;
+
+        public void Init(SpriteBatch spriteBatch)
         {
+            for (int i = 0; i < 4; i++)
+                player[i] = new Player(spriteBatch, i + 1, i + 1, defaultFont);
+        }
+
+        public void LoadContent(ContentManager Content)
+        {
+            defaultFont = Content.Load<SpriteFont>("DefaultFont");
             //Load neccessary game content for session here
         }
 
-        public void UPDATE(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, GameTime gameTime, Player[] player, GraphicsDevice gDevice)
+        public void Update(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, GameTime gameTime, GraphicsDevice gDevice)
         {
             //This will be handled by a controller class later on
             /*Fullscreenness of awesome!*/
@@ -56,7 +66,7 @@ namespace Engine
 
         }
 
-        public void DRAW(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics, Player[] player)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
             SplitScreenAdapter.drawLines(spriteBatch);
             for (int i = 0; i < 4; i++)
@@ -66,12 +76,12 @@ namespace Engine
             //tempV.Y = 0;
         }
 
-        public void ENDGAME()
+        public void EndGame()
         {
             //Declare winner and unload content, blah blah
         }
 
-        public void STARTGAME()
+        public void StartGame()
         {
             //Begin the game (start spawning creep, let players start doing stuff)
         }

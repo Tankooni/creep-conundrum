@@ -39,3 +39,10 @@ C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\obj\x8
 C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.exe
 C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.pdb
+F:\AG131\creep\131Final\131Final\131Final\bin\x86\Debug\Content\defaultFont.xnb
+F:\AG131\creep\131Final\131Final\131Final\bin\x86\Debug\131Final.exe
+F:\AG131\creep\131Final\131Final\131Final\bin\x86\Debug\131Final.pdb
+F:\AG131\creep\131Final\131Final\131Final\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\AG131\creep\131Final\131Final\131Final\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+F:\AG131\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.exe
+F:\AG131\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.pdb
