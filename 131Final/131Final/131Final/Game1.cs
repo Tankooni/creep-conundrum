@@ -39,15 +39,13 @@ namespace VeryRealTournament
         }
         protected override void UnloadContent()
         {
-            
+            base.UnloadContent();
         }
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
             theOverLord.Update(graphics, spriteBatch, gameTime, GraphicsDevice);
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
             base.Update(gameTime);
         }
         protected override void Draw(GameTime gameTime)
@@ -55,8 +53,7 @@ namespace VeryRealTournament
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
             theOverLord.Draw(gameTime, spriteBatch, graphics);
-            spriteBatch.End(); 
-
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
