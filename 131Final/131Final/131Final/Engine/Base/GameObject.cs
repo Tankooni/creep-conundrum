@@ -16,7 +16,7 @@ namespace Base
     {
         public virtual void Draw(GameTime gameTime)
         {
-
+            
         }
         public virtual void Update(GameTime gameTime)
         {

@@ -20,6 +20,7 @@ namespace Engine
     {
         Player[] player = new Player[4];
         SpriteFont defaultFont;
+        double nextSpawnTime = 10;
 
         public void Init(SpriteBatch spriteBatch)
         {
@@ -46,24 +47,51 @@ namespace Engine
                 GridManager.InitLineDrawer(spriteBatch.GraphicsDevice);
             }
             /*teh space case is me ~ Zack*/
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
+            /*Imma take yer space case and use it for interval spawnzzz ~Elser */
+            
+            //if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            //{
 
-                /*How to spawn a creep wave*/
-                CreepData tempD = new CreepData();
-                tempD.Speed = new Random().NextDouble() * 1.5 + 0.5;
-                tempD.Damage = 1;
-                tempD.Value = 1000;
-                for (int i = 0; i < 4; i++)
-                    player[i].addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 4, spriteBatch);
-                //    //addCreepWave(CreepData, When the Wave Starts, Minions to this wave, SpriteBatch);
-                //    for (int i = 0; i < 4; i++)
-                //        temp[i].addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 4, spriteBatch);
-                //    wavesSpawned++;
+            //    /*How to spawn a creep wave*/
+            //    CreepData tempD = new CreepData();
+            //    tempD.Speed = new Random().NextDouble() * 1.5 + 0.5;
+            //    tempD.Damage = 1;
+            //    tempD.Value = 1000;
+            //    for (int i = 0; i < 4; i++)
+            //        player[i].addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 4, spriteBatch);
+            //    //    //addCreepWave(CreepData, When the Wave Starts, Minions to this wave, SpriteBatch);
+            //    //    for (int i = 0; i < 4; i++)
+            //    //        temp[i].addCreepWave(tempD, gameTime.TotalGameTime.TotalMilliseconds + 1000, 4, spriteBatch);
+            //    //    wavesSpawned++;
+            //}
+            if ((nextSpawnTime <= gameTime.TotalGameTime.TotalSeconds))
+            {
+                CreepData data = new CreepData();
+                nextSpawnTime = gameTime.TotalGameTime.TotalSeconds + 10;
+                data = getRandomCreepData(data);
+                spawnCreepWave(data, gameTime, spriteBatch);
             }
+
             for (int i = 0; i < 4; i++)
                 player[i].Update(gameTime);
+        }
 
+        //Were we going to have a creepOverlord too? .... I forgot ~Elser */
+        public void spawnCreepWave(CreepData data, GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                player[i].addCreepWave(data, gameTime.TotalGameTime.TotalMilliseconds + 1000, new Random().Next(1, 10), spriteBatch);
+            }
+        }
+
+        public CreepData getRandomCreepData(CreepData data)
+        {
+            data.Speed = new Random().NextDouble() * 1.5 + 0.5;
+            data.Damage = 1;
+            data.Value = 1000;
+            data.Health = new Random().Next(10, 100);
+            return data;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
