@@ -16,4 +16,5 @@ STUFF TO DO
 	~ Zack
 - Allowing players to send minions to other players; 
 	~ ???
-- 
+- Main menu (menu system)
+	~ ???

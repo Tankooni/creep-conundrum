@@ -108,6 +108,7 @@ namespace Engine
         public void Update(GameTime gameTime)
         {
             input.Update();
+            #region Cursor Input
             if (input.Current.x1 != 0 && input.Previous.x1 == 0)
                 if (input.Current.x1 > 0)
                 {
@@ -141,6 +142,8 @@ namespace Engine
                         cursor.x = playerMap.HEIGHT - 1;
                 }
             }
+            #endregion
+
 
             TowerData tempT = new TowerData();
                 tempT.Damage = 100;
