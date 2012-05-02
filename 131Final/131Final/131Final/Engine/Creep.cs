@@ -80,6 +80,9 @@ namespace Engine
     }
     public struct CreepData
     {
+        public string name;
+        public string group;
+        public int cost;
         public int Health;
         public int Damage;
         public int mDamage;
