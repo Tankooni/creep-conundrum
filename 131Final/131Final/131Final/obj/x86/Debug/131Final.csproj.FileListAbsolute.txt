@@ -10,3 +10,15 @@ C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\obj\x86\
 C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.exe
 C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.pdb
 C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\RaceData.txt
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\RaceData.txt
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\defaultFont.xnb
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\CATGROOVE.xnb
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Corncob.xnb
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Faster Does It.xnb
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Groove Grove.xnb
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\131Final.exe
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\131Final.pdb
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.exe
+C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\obj\x86\Debug\131Final.pdb
