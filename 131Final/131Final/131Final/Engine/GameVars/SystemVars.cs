@@ -10,6 +10,7 @@ namespace Engine
         public static bool DEBUG = false;
         public static double DefenseEffect = 50;
         public static double mDefenseEffect = 100;
+        public static int totalWaves = 0;
         //Yeppers :3
 
 

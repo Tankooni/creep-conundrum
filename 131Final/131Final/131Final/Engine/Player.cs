@@ -68,7 +68,7 @@ namespace Engine
         public Player(SpriteBatch SB, /*, OverLord OV*/int PI, int SN, SpriteFont SF)
         {
             playerData = new PlayerData();
-            playerData.startMoney = 200;
+            playerData.startMoney = 50;
             playerData.maxHealth = 100;
 
             currentHealth = playerData.maxHealth;
@@ -146,10 +146,10 @@ namespace Engine
 
 
             TowerData tempT = new TowerData();
-                tempT.Damage = 100;
+                tempT.Damage = 10;
                 tempT.Range = 100;
                 tempT.RateOfFire = 2000;
-                tempT.Value = 100;
+                tempT.Value = 10;
                 if (input.Current.B && !input.Previous.B)
                     if((currentMoney - tempT.Value) >= 0 && playerMap.addTower(tempT, 0, cursor.x, cursor.y, spriteBtach))
                         currentMoney -= tempT.Value;
