@@ -27,14 +27,14 @@ namespace VeryRealTournament
         }
         protected override void Initialize()
         {
-            Window.Title = "ZA BOBOOOOOOOOOOO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+            Window.Title = "No";
             base.Initialize();
-            theOverLord.Init(spriteBatch);
         }
         protected override void LoadContent()
         {
             this.IsMouseVisible = true;
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            theOverLord.Init(spriteBatch);
             theOverLord.LoadContent(Content);
         }
         protected override void UnloadContent()

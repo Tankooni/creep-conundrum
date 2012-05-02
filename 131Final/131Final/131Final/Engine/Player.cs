@@ -23,7 +23,8 @@ namespace Engine
         public int startMoney;
         public List<CreepData> creepList;
         public List<TowerData> towerList;
-        public PlayerMap playerMap;
+        public byte[,] playerMap;
+        public SpriteFont spriteFont;
     }
     public struct Cursor
     {
@@ -40,7 +41,7 @@ namespace Engine
     /// </summary>
     public class Player
     {
-        PlayerData playerData;
+        public PlayerData playerData;
         SpriteBatch spriteBtach;
         PlayerMap playerMap;
         public Cursor cursor;
@@ -48,49 +49,43 @@ namespace Engine
         Inputs input;
         double currentHealth;
         int currentMoney;
-        SpriteFont defaultFont;
 
-        public Player(SpriteBatch SB, /*, OverLord OV*/PlayerIndex PI, int SN, SpriteFont SF)
+        //public Player(SpriteBatch SB, /*, OverLord OV*/PlayerIndex PI, int SN, SpriteFont SF)
+        //{
+        //    playerData = new PlayerData();
+        //    playerData.startMoney = 200;
+        //    playerData.startHealth = 100;
+
+        //    currentHealth = playerData.startHealth;
+        //    currentMoney = playerData.startMoney;
+
+        //    spriteBtach = SB;
+        //    screen = SN;
+        //    playerMap = new PlayerMap(this);
+        //    cursor = new Cursor();
+        //    cursor.x = 0;
+        //    cursor.y = 0;
+        //    input = new Inputs(PI);
+        //    playerData.spriteFont = SF;
+        //}
+
+        public Player(SpriteBatch SB, OverLord OV, int PI)
         {
-            playerData = new PlayerData();
-            playerData.startMoney = 200;
-            playerData.startHealth = 100;
-
-            currentHealth = playerData.startHealth;
-            currentMoney = playerData.startMoney;
-
             spriteBtach = SB;
-            screen = SN;
-            playerMap = new PlayerMap(this);
+            screen = PI;
+
             cursor = new Cursor();
-            cursor.x = 0;
-            cursor.y = 0;
+            cursor.x = cursor.y = 0;
+
             input = new Inputs(PI);
-            defaultFont = SF;
         }
 
-        public Player(SpriteBatch SB, /*, OverLord OV*/int PI, int SN, SpriteFont SF)
+        public void Load(PlayerData PD)
         {
-            playerData = new PlayerData();
-            playerData.startMoney = 50;
-            playerData.startHealth = 100;
-
+            playerData = PD;
             currentHealth = playerData.startHealth;
             currentMoney = playerData.startMoney;
-
-            spriteBtach = SB;
-            screen = SN;
             playerMap = new PlayerMap(this);
-            cursor = new Cursor();
-            cursor.x = 0;
-            cursor.y = 0;
-            input = new Inputs(PI);
-            defaultFont = SF;
-        }
-
-        public void Init()
-        {
-
         }
 
         public void damagePlayer(int damage)
@@ -168,9 +163,9 @@ namespace Engine
             Vector2 myPos = SplitScreenAdapter.splitConvert(screen, new Vector2(myH*cursor.y, myH*cursor.x), spriteBtach);
             GridManager.DrawRectangle(spriteBtach, new Rectangle((int)myPos.X - 1, (int)myPos.Y - 1, (myH+2)/2, (myH+2)/2), Color.FromNonPremultiplied(0,255,0,100));
             myPos = SplitScreenAdapter.splitConvert(screen, new Vector2(myH * playerMap.HEIGHT, 0), spriteBtach);
-            spriteBtach.DrawString(defaultFont, "Race Name: " + playerData.raceName, myPos, Color.Black);
-            spriteBtach.DrawString(defaultFont, "$$: " + currentMoney.ToString(), new Vector2(myPos.X, myPos.Y + defaultFont.MeasureString(currentMoney.ToString()).Y), Color.Black);
-            spriteBtach.DrawString(defaultFont, "<3: " + currentHealth.ToString(), new Vector2(myPos.X, myPos.Y + defaultFont.MeasureString(currentMoney.ToString()).Y*2), Color.Black);
+            spriteBtach.DrawString(playerData.spriteFont, "Race Name: " + playerData.raceName, myPos, Color.Black);
+            spriteBtach.DrawString(playerData.spriteFont, "$$: " + currentMoney.ToString(), new Vector2(myPos.X, myPos.Y + playerData.spriteFont.MeasureString(currentMoney.ToString()).Y), Color.Black);
+            spriteBtach.DrawString(playerData.spriteFont, "<3: " + currentHealth.ToString(), new Vector2(myPos.X, myPos.Y + playerData.spriteFont.MeasureString(currentMoney.ToString()).Y*2), Color.Black);
             
         }
     }

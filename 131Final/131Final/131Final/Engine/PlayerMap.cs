@@ -38,10 +38,11 @@ namespace Engine
         //3 = noCrossing or towers
         //5 = nexus
         //6 = towerAlready
-        byte[,] myMap = DataParser.getMapData("WALEK");
+        byte[,] myMap;
 
         public PlayerMap(Player myPlayer)
         {
+            myMap = myPlayer.playerData.playerMap;
             initMapPaths();
             playerReference = myPlayer;
             if (SystemVars.DEBUG)

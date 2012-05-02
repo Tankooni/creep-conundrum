@@ -26,7 +26,7 @@ namespace Engine
         public void Init(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < 4; i++)
-                player[i] = new Player(spriteBatch, this, i + 1, i + 1, defaultFont);
+                player[i] = new Player(spriteBatch, this, i + 1);
         }
 
         public void LoadContent(ContentManager Content)
@@ -37,18 +37,24 @@ namespace Engine
             pData1.raceName = "WALEK";
             pData1.startHealth = 100;
             pData1.startMoney = 100;
+            pData1.playerMap = DataParser.getMapData(pData1.raceName);
+            pData1.creepList = DataParser.getGroupMinionData(pData1.raceName, "students");
             pData1.towerList = DataParser.getGroupTowerData(pData1.raceName, "students");
+            pData1.spriteFont = defaultFont;
 
             PlayerData pData2 = new PlayerData();
             pData2.raceName = "MOOGLES";
             pData2.startHealth = 200;
-            pData1.startMoney = 50;
+            pData2.startMoney = 50;
+            pData2.playerMap = DataParser.getMapData(pData2.raceName);
+            pData2.creepList = DataParser.getGroupMinionData(pData1.raceName, "Nins");
             pData2.towerList = DataParser.getGroupTowerData(pData2.raceName, "Nins");
-            for (int x = 1; x <= 2; x++)
+            pData2.spriteFont = defaultFont;
+            for (int x = 0; x < 2; x++)
             {
                 player[x].Load(pData1);
             }
-            for (int x = 2; x <= 4; x++)
+            for (int x = 2; x < 4; x++)
             {
                 player[x].Load(pData2);
             }
