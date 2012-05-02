@@ -89,8 +89,10 @@ namespace Engine
         {
             data.Speed = new Random().NextDouble() * 1.5 + 0.5;
             data.Damage = 1;
-            data.Value = 1000;
-            data.Health = new Random().Next(10, 100);
+            data.Value = (SystemVars.totalWaves/10) + 1;
+            data.Health = (SystemVars.totalWaves/1) + 10;
+            SystemVars.totalWaves++;
+            Console.WriteLine("CurrentWave: " + SystemVars.totalWaves);
             return data;
         }
 
