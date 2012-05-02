@@ -31,6 +31,7 @@ namespace Engine
         public void LoadContent(ContentManager Content)
         {
             defaultFont = Content.Load<SpriteFont>("DefaultFont");
+            DataParser.getMapData("MOOGLES");
             //Load neccessary game content for session here
         }
 

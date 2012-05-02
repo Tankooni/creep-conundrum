@@ -123,6 +123,10 @@ namespace Engine
                                                                     Console.WriteLine(line);
                                                                     currentCreep.RateOfFire = int.Parse(line);
                                                                 }
+                                                                else if (line == "texture")
+                                                                {
+                                                                    //load in texture here
+                                                                }
                                                             }
                                                             currentCreep.group = towerGroup;
                                                             groupTowerData.Add(currentCreep);
@@ -252,6 +256,10 @@ namespace Engine
                                                                         line = line.Trim();
                                                                         Console.WriteLine(line);
                                                                         currentCreep.RateOfFire = int.Parse(line);
+                                                                    }
+                                                                    else if (line == "<texture>")
+                                                                    {
+                                                                        //load in texture here
                                                                     }
                                                                 }
                                                                 currentCreep.group = groupNameIN;
@@ -386,6 +394,10 @@ namespace Engine
                                                                                 line = line.Trim();
                                                                                 Console.WriteLine(line);
                                                                                 singleTowerData.RateOfFire = int.Parse(line);
+                                                                            }
+                                                                            else if (line == "<texture>")
+                                                                            {
+                                                                                //load in texture here
                                                                             }
                                                                         }
                                                                         line = stream.ReadLine();
@@ -850,29 +862,38 @@ namespace Engine
                                                 line = line.Trim();
                                                 if (line == "<ARRAY>") //Check to see if we're looking at an ARRAY group
                                                 {
-                                                    Console.WriteLine("In MapData");
+                                                    line = stream.ReadLine();
+                                                    line = line.Trim();
+                                                    int size = line.Length;
+                                                    mapData = new byte[size, size];
                                                     while (line != "</ARRAY>")
                                                     {
-                                                        line = stream.ReadLine();
-                                                        line = line.Trim();
-                                                        if (line == "</ARRAY>")
-                                                        {
-                                                            break;
-                                                        }
-                                                        else
+                                                        int count = 0;
+                                                        for (int y = 0; y < size; y++)
                                                         {
                                                             for (int x = 0; x < line.Length; x++)
                                                             {
-                                                                int temp = int.Parse("" + line[x]);//Grab the line and make it a numbaaaahhhh
-                                                                Console.WriteLine(temp);
+                                                                byte temp = byte.Parse("" + line[x]);//Grab the line and make it a numbaaaahhhh
+                                                                mapData[y, x] = temp;
+                                                                Console.WriteLine(mapData[y, x]);
+                                                                count++;
                                                             }
+                                                            line = stream.ReadLine();
+                                                            line = line.Trim();
                                                         }
                                                     }
+                                                }
+                                                if (line == "<tileTexture>")
+                                                {
+                                                    //load in tile texture
+                                                }
+                                                if (line == "<background>")
+                                                {
+                                                    //load in background
                                                 }
                                             }
                                             stream.Close();
                                             stream.Dispose();
-
                                             return mapData;
                                         }
                                     }
