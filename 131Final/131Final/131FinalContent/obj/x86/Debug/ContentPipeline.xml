@@ -7,13 +7,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-<<<<<<< .mine
-      <Output>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\defaultFont.xnb</Output>
-      <Time>2012-04-23T17:46:16.390625-04:00</Time>
-=======
       <Output>C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\defaultFont.xnb</Output>
-      <Time>2012-04-23T17:57:22.625-04:00</Time>
->>>>>>> .r32
+      <Time>2012-05-02T17:48:07.109375-04:00</Time>
     </Item>
     <Item>
       <Source>Music\CATGROOVE.wav</Source>
@@ -21,8 +16,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\CATGROOVE.xnb</Output>
-      <Time>2012-05-02T15:59:52-04:00</Time>
+      <Output>C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\CATGROOVE.xnb</Output>
+      <Time>2012-05-02T17:48:05.609375-04:00</Time>
     </Item>
     <Item>
       <Source>Music\Corncob.wav</Source>
@@ -30,8 +25,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Corncob.xnb</Output>
-      <Time>2012-05-02T16:25:35.90625-04:00</Time>
+      <Output>C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Corncob.xnb</Output>
+      <Time>2012-05-02T17:48:03.75-04:00</Time>
     </Item>
     <Item>
       <Source>Music\Faster Does It.wav</Source>
@@ -39,8 +34,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Faster Does It.xnb</Output>
-      <Time>2012-05-02T16:25:39.03125-04:00</Time>
+      <Output>C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Faster Does It.xnb</Output>
+      <Time>2012-05-02T17:48:07.046875-04:00</Time>
     </Item>
     <Item>
       <Source>Music\Groove Grove.wav</Source>
@@ -48,8 +43,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Groove Grove.xnb</Output>
-      <Time>2012-05-02T16:25:39.515625-04:00</Time>
+      <Output>C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Groove Grove.xnb</Output>
+      <Time>2012-05-02T17:48:03.296875-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -57,17 +52,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-<<<<<<< .mine
-      <RootDirectory>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131FinalContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131FinalContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\</OutputDirectory>
-=======
       <RootDirectory>C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131FinalContent\</RootDirectory>
       <LoggerRootDirectory>C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\</LoggerRootDirectory>
       <IntermediateDirectory>C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131FinalContent\obj\x86\Debug\</IntermediateDirectory>
       <OutputDirectory>C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\</OutputDirectory>
->>>>>>> .r32
     </Settings>
     <Assemblies>
       <Assembly>
@@ -95,13 +83,8 @@
         <Value>2010-08-23T13:41:18-04:00</Value>
       </Assembly>
       <Assembly>
-<<<<<<< .mine
-        <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-12-20T02:36:26.59375-05:00</Value>
-=======
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
         <Value>2012-02-29T21:17:36.484375-05:00</Value>
->>>>>>> .r32
       </Assembly>
     </Assemblies>
   </Asset>

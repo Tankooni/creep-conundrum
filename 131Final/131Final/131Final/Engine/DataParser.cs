@@ -17,6 +17,12 @@ namespace Engine
 
     public static class DataParser
     {
+        public static void getRaceData(string raceNameIN)
+        {
+            getAllTowerData(raceNameIN);
+            getAllMinionData(raceNameIN);
+            getMapData(raceNameIN);
+        }
 
         public static List<List<TowerData>> getAllTowerData(string raceNameIN)
         {
