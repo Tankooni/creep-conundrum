@@ -20,6 +20,9 @@ namespace Engine
     public struct TowerData
     {
         //Base Things
+        public string name;
+        public string group;
+        public int cost;
         public int Damage;
         public int mDamage;
         public double Slow;//0 to 1.0 where 1.0 = frozen

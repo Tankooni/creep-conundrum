@@ -113,6 +113,7 @@
     <Compile Include="Engine\Base\Sprite.cs" />
     <Compile Include="Engine\Base\SpriteSheet.cs" />
     <Compile Include="Engine\Creep.cs" />
+    <Compile Include="Engine\DataParser.cs" />
     <Compile Include="Engine\GameVars\SystemVars.cs" />
     <Compile Include="Engine\GridManager.cs" />
     <Compile Include="Engine\OverLord.cs" />

@@ -808,11 +808,89 @@ namespace Engine
 
         /* Get Spell Data Here */
 
-        public static PlayerMap getMapData(string raceNameIN)
+        public static byte[,] getMapData(string raceNameIN)
         {
-            PlayerMap myMapData = new PlayerMap();
+            byte[,] mapData = { {0} };
+            //Schuyer was here, and he totaly fondeled this code >:D
+            //He also noticed how it wasnt RaceData.CCD
+            //But he forgives you for that.
+            Console.WriteLine("Map Created");
 
-            return myMapData;
+            using (StreamReader stream = new StreamReader("RaceData.txt"))
+            {
+                string line;
+                line = stream.ReadLine();
+                line = line.Trim();
+                if (line == "<BEGIN>") //If we see this -- we're DEFINETLY in the proper file
+                {
+                    while (line != "<END>") //While we're not at the end of the file
+                    {
+                        line = stream.ReadLine();
+                        line = line.Trim();
+                        if (line == "<Race>") //Check to see if we're looking at a <Race> tag
+                        {
+                            line = stream.ReadLine();
+                            line = line.Trim();
+                            if (line == "<RaceName>") //Check to see if we're looking at a <RaceName> tag
+                            {
+                                line = stream.ReadLine();
+                                line = line.Trim();
+                                if (line == raceNameIN) //Check to see if it's the race we're looking for
+                                {
+                                    //Good now we can grab data!
+                                    while (line != "</Race>") //Check to make sure we're still in the same race tag
+                                    {
+                                        line = stream.ReadLine();
+                                        line = line.Trim();
+                                        if (line == "<MapData>") //We're now grabbing all the towers for the race
+                                        {
+                                            while (line != "</MapData>") //Check to make sure we're still in the same towers tag
+                                            {
+                                                line = stream.ReadLine();
+                                                line = line.Trim();
+                                                if (line == "<ARRAY>") //Check to see if we're looking at an ARRAY group
+                                                {
+                                                    Console.WriteLine("In MapData");
+                                                    while (line != "</ARRAY>")
+                                                    {
+                                                        line = stream.ReadLine();
+                                                        line = line.Trim();
+                                                        if (line == "</ARRAY>")
+                                                        {
+                                                            break;
+                                                        }
+                                                        else
+                                                        {
+                                                            for (int x = 0; x < line.Length; x++)
+                                                            {
+                                                                int temp = int.Parse("" + line[x]);//Grab the line and make it a numbaaaahhhh
+                                                                Console.WriteLine(temp);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            stream.Close();
+                                            stream.Dispose();
+
+                                            return mapData;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    stream.Close();
+                    stream.Dispose();
+                }
+                else
+                {
+                    //We're not in a proper raceData file...
+                    stream.Close();
+                    stream.Dispose();
+                }
+            }
+            return mapData;
         }
     }
 }
