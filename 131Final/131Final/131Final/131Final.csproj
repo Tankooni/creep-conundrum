@@ -120,6 +120,7 @@
     <Compile Include="Engine\Path.cs" />
     <Compile Include="Engine\Player.cs" />
     <Compile Include="Engine\PlayerMap.cs" />
+    <Compile Include="Engine\SoundManager.cs" />
     <Compile Include="Engine\Tower.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
@@ -129,6 +130,9 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="RaceData.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\131FinalContent\131FinalContent.contentproj">

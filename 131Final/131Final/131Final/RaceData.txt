@@ -1,0 +1,231 @@
+<BEGIN>
+<Race>
+	<RaceName>
+	MOOGLES
+	</RaceName>
+	<Towers>
+		<TowerGroup>
+		<GroupName>
+		Nins
+		</GroupName>
+			<TowerData>
+				<Name>
+				Moog
+				</Name>
+
+				<slow>
+				0
+				</slow>
+
+				<cost>
+				10
+				</cost>
+
+				<damage>
+				10
+				</damage>
+
+				<mDamage>
+				0
+				</mDamage>
+
+				<rateOfFire>
+				100
+				</rateOfFire>
+
+				<texture> 
+				<!-- String of file name here --> 
+				</texture>
+
+				<sound>
+				<!-- String of file nam here -->
+				</sound>
+			</TowerData>
+			<TowerData>
+				<Name>
+				Goomba
+				</Name>
+
+				<Slow>
+				0
+				</slow>
+				
+				<cost>
+				10
+				</cose>
+
+				<damage>
+				5
+				</damage>
+
+				<mDamage>
+				10
+				</mDamage>
+
+				<rateOfFire>
+				100
+				</rateOfFire>
+
+				<texture> 
+				<!--String of file name here --> 
+				</texture>
+
+				<sound>
+				<!--String of file name here -->
+				</sound>
+			</TowerData>
+		</TowerGroup>
+		<TowerGroup>
+		<GroupName>
+		Bothas
+		</GroupName>
+			<TowerData>
+				<Name>
+				Rosh
+				</Name>
+
+				<slow>
+				1
+				</slow>
+
+				<cost>
+				20
+				</cost>
+
+				<damage>
+				0
+				</damage>
+
+				<mDamage>
+				0
+				</mDamage>
+
+				<rateOfFire>
+				100
+				</rateOfFire>
+
+				<texture> 
+				<!-- String of file name here --> 
+				</texture>
+
+				<sound>
+				<!-- String of file name here -->
+				</sound>
+			</TowerData>
+			<TowerData>
+				<Name>
+				Scalpal
+				</Name>
+
+				<Slow>
+				0
+				</slow>
+				
+				<cost>
+				10
+				</cose>
+
+				<damage>
+				5
+				</damage>
+
+				<mDamage>
+				10
+				</mDamage>
+
+				<rateOfFire>
+				100
+				</rateOfFire>
+
+				<texture> 
+				<!--String of file name here --> 
+				</texture>
+
+				<sound>
+				<!--String of file name here -->
+				</sound>
+			</TowerData>
+		</TowerGroup>
+	</Towers>
+	<Minions>
+		<MinionGroup>
+		<GroupName>
+		Archnids
+		</GroupName>
+			<MinionData>
+				<Name>
+				crawlies
+				</Name>
+
+				<speed>
+				10
+				</speed>
+
+				<cost>
+				10
+				</cost>
+			
+				<damage>
+				10
+				</damage>
+			
+				<mDamage>
+				10
+				</mDamage>
+
+				<texture> 
+				<!-- String of file name here -->
+				</texture>
+			</MinionData>
+			<MinionData>
+				<Name>
+				creepies
+				</Name>
+				
+				<speed>
+				15
+				</speed>
+
+				<cost>
+				10
+				</cost>
+
+				<damage>
+				5
+				</damage>
+
+				<mDamage>
+				15
+				</mDamage>
+
+				<texture>
+				<!-- String of file name here -->
+				</texture>
+			</MinionData>
+		</MinionGroup>
+	</Minions>
+	
+	<MapData>
+		<ARRAY>
+			0111111001000000
+			0100001001000000
+			0100001001000000
+			0100001001000000
+			0111001111000000
+			0001000002010000
+			0001000002000000
+			0001111111111110
+			0001000000000000
+			1111111111111110
+			0001000313000000
+			0001000313000000
+			1111111111111111
+			0001033313330000
+			0005033333330000
+			0000000000000000
+		</ARRAY>
+		<tileTexture> <!-- String of file name here --> </tileTexture>
+		<background> <!-- String of file name here --> </background>
+	</MapData>
+</Race>
+<END>

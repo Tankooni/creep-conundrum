@@ -1,1 +1,5 @@
 Content\defaultFont.xnb
+Content\Music\CATGROOVE.xnb
+Content\Music\Corncob.xnb
+Content\Music\Faster Does It.xnb
+Content\Music\Groove Grove.xnb

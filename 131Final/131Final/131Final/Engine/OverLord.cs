@@ -21,6 +21,7 @@ namespace Engine
         Player[] player = new Player[4];
         SpriteFont defaultFont;
         double nextSpawnTime = 10;
+        bool first = true;
 
         public void Init(SpriteBatch spriteBatch)
         {
@@ -31,12 +32,19 @@ namespace Engine
         public void LoadContent(ContentManager Content)
         {
             defaultFont = Content.Load<SpriteFont>("DefaultFont");
+            SoundManager.Init(Content);
             DataParser.getMapData("MOOGLES");
             //Load neccessary game content for session here
         }
 
         public void Update(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, GameTime gameTime, GraphicsDevice gDevice)
         {
+            if (first)
+            {
+                SoundManager.PlaySetList(new Musics[] { Musics.CATGROOVE, Musics.Corncob, Musics.FasterDoesIt, Musics.GrooveGrove });
+                first = false;
+            }
+            SoundManager.gameTime = gameTime;
             //This will be handled by a controller class later on
             /*Fullscreenness of awesome!*/
             if (Keyboard.GetState().IsKeyDown(Keys.F11))

@@ -27,7 +27,7 @@ namespace VeryRealTournament
         }
         protected override void Initialize()
         {
-            Window.Title = "Creep Conundrum : Strife";
+            Window.Title = "ZA BOBOOOOOOOOOOO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
             base.Initialize();
             theOverLord.Init(spriteBatch);
         }
