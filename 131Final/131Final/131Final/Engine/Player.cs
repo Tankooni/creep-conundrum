@@ -18,8 +18,12 @@ namespace Engine
 {
     public struct PlayerData
     {
-        public double maxHealth;
+        public string raceName;
+        public double startHealth;
         public int startMoney;
+        public List<CreepData> creepList;
+        public List<TowerData> towerList;
+        public PlayerMap playerMap;
     }
     public struct Cursor
     {
@@ -50,9 +54,9 @@ namespace Engine
         {
             playerData = new PlayerData();
             playerData.startMoney = 200;
-            playerData.maxHealth = 100;
+            playerData.startHealth = 100;
 
-            currentHealth = playerData.maxHealth;
+            currentHealth = playerData.startHealth;
             currentMoney = playerData.startMoney;
 
             spriteBtach = SB;
@@ -69,9 +73,9 @@ namespace Engine
         {
             playerData = new PlayerData();
             playerData.startMoney = 50;
-            playerData.maxHealth = 100;
+            playerData.startHealth = 100;
 
-            currentHealth = playerData.maxHealth;
+            currentHealth = playerData.startHealth;
             currentMoney = playerData.startMoney;
 
             spriteBtach = SB;
@@ -164,13 +168,16 @@ namespace Engine
             Vector2 myPos = SplitScreenAdapter.splitConvert(screen, new Vector2(myH*cursor.y, myH*cursor.x), spriteBtach);
             GridManager.DrawRectangle(spriteBtach, new Rectangle((int)myPos.X - 1, (int)myPos.Y - 1, (myH+2)/2, (myH+2)/2), Color.FromNonPremultiplied(0,255,0,100));
             myPos = SplitScreenAdapter.splitConvert(screen, new Vector2(myH * playerMap.HEIGHT, 0), spriteBtach);
-            spriteBtach.DrawString(defaultFont, "$$: " + currentMoney.ToString(), myPos, Color.Black);
-
-            spriteBtach.DrawString(defaultFont, "<3: " + currentHealth.ToString(), new Vector2(myPos.X, myPos.Y + defaultFont.MeasureString(currentMoney.ToString()).Y), Color.Black);
+            spriteBtach.DrawString(defaultFont, "Race Name: " + playerData.raceName, myPos, Color.Black);
+            spriteBtach.DrawString(defaultFont, "$$: " + currentMoney.ToString(), new Vector2(myPos.X, myPos.Y + defaultFont.MeasureString(currentMoney.ToString()).Y), Color.Black);
+            spriteBtach.DrawString(defaultFont, "<3: " + currentHealth.ToString(), new Vector2(myPos.X, myPos.Y + defaultFont.MeasureString(currentMoney.ToString()).Y*2), Color.Black);
             
         }
     }
 
+    /// <summary>
+    /// Holds all controller data.
+    /// </summary>
     struct InputData
     {
         public float x1;
@@ -189,26 +196,12 @@ namespace Engine
         public bool dDown;
         public bool dLeft;
         public bool dRight;
-
-        //public override string ToString()
-        //{
-        //    return "{ x1:" + x1 + ", y1" + y1 + ", " + x2 + ", " + x1 + ", " + x1 + ", " + x1 + ", " + x1 + ", " +
-        //}
-        //public void Init()
-        //{
-        //    x1 = 0;
-        //    y1 = 0;
-        //    x2 = 0;
-        //    y2 = 0;
-        //    lTrigger = 0;
-        //    rTrigger = 0;
-        //    lShoulder = false;
-        //    rShoulder = false;
-        //    A = false;
-
-        //}
     }
 
+    /// <summary>
+    /// Handles controller and keyboard input.
+    /// Access the data through previous and current.
+    /// </summary>
     class Inputs
     {
         PlayerIndex _playerInedx;

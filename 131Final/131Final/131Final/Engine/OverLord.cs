@@ -31,7 +31,7 @@ namespace Engine
 
         public void LoadContent(ContentManager Content)
         {
-            defaultFont = Content.Load<SpriteFont>("DefaultFont");
+            defaultFont = Content.Load<SpriteFont>("defaultFont");
             SoundManager.Init(Content);
             DataParser.getMapData("MOOGLES");
             //Load neccessary game content for session here
@@ -39,12 +39,12 @@ namespace Engine
 
         public void Update(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, GameTime gameTime, GraphicsDevice gDevice)
         {
+            SoundManager.gameTime = gameTime;
             if (first)
             {
                 SoundManager.PlaySetList(new Musics[] { Musics.CATGROOVE, Musics.Corncob, Musics.FasterDoesIt, Musics.GrooveGrove });
                 first = false;
             }
-            SoundManager.gameTime = gameTime;
             //This will be handled by a controller class later on
             /*Fullscreenness of awesome!*/
             if (Keyboard.GetState().IsKeyDown(Keys.F11))
