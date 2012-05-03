@@ -17,904 +17,273 @@ namespace Engine
 
     public static class DataParser
     {
-        public static void getRaceData(string raceNameIN)
+        public static PlayerData getRaceData(string raceNameIN)
         {
-            getAllTowerData(raceNameIN);
-            getAllMinionData(raceNameIN);
-            getMapData(raceNameIN);
+            PlayerData pData = new PlayerData();
+            pData.raceName = raceNameIN;
+            pData = getBasicData(pData, pData.raceName);
+            pData.playerMap = getMapData(raceNameIN);
+            pData.towerList = getAllTowers(raceNameIN);
+            pData.creepList = getAllMinions(raceNameIN);
+            return pData;
         }
 
-        public static List<List<TowerData>> getAllTowerData(string raceNameIN)
+        private static PlayerData getBasicData(PlayerData pData, string raceNameIN)
         {
-            //^Are you fucking serious?
-            List<List<TowerData>> totalTowerData = new List<List<TowerData>>();
-            Console.WriteLine("List of TowerData created");
-
             using (StreamReader stream = new StreamReader("RaceData.txt"))
             {
                 string line;
                 line = stream.ReadLine();
-                line = line.Trim();
                 if (line == "<BEGIN>") //If we see this -- we're DEFINETLY in the proper file
                 {
                     while (line != "<END>") //While we're not at the end of the file
                     {
                         line = stream.ReadLine();
-                        line = line.Trim();
                         if (line == "<Race>") //Check to see if we're looking at a <Race> tag
                         {
                             line = stream.ReadLine();
-                            line = line.Trim();
-                            if (line == "<RaceName>") //Check to see if we're looking at a <RaceName> tag
+                            if (line == "RName:" + raceNameIN)
                             {
-                                line = stream.ReadLine();
-                                line = line.Trim();
-                                if (line == raceNameIN) //Check to see if it's the race we're looking for
+                                while (line != "</Race>")
                                 {
-                                    //Good now we can grab data!
-                                    while (line != "</Race>") //Check to make sure we're still in the same race tag
+                                    line = stream.ReadLine();
+                                    int temp;
+                                    if ((temp = line.IndexOf(':')) != -1)
                                     {
-                                        line = stream.ReadLine();
-                                        line = line.Trim();
-                                        if (line == "<Towers>") //We're now grabbing all the towers for the race
+                                        switch (line.Substring(0, temp))
                                         {
-
-                                            while (line != "</Towers>") //Check to make sure we're still in the same towers tag
-                                            {
-                                                line = stream.ReadLine();
-                                                line = line.Trim();
-                                                if (line == "<TowerGroup>") //Check to see if we're looking at group info
-                                                {
-                                                    List<TowerData> groupTowerData = new List<TowerData>();
-                                                    Console.WriteLine("Group Created");
-                                                    string towerGroup;
-                                                    towerGroup = "Temp";
-                                                    while (line != "</TowerGroup>") //Check to make sure we're still in the same tower group
-                                                    {
-                                                        line = stream.ReadLine();
-                                                        line = line.Trim();
-                                                        if (line == "<GroupName>")
-                                                        {
-                                                            line = stream.ReadLine();
-                                                            line = line.Trim();
-                                                            towerGroup = line;
-                                                        }
-                                                        if (line == "<TowerData>")
-                                                        {
-                                                            TowerData currentCreep = new TowerData();
-                                                            Console.WriteLine("Tower Created");
-                                                            while (line != "</TowerData>")
-                                                            {
-                                                                line = stream.ReadLine();
-                                                                line = line.Trim();
-                                                                if (line == "<Name>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    Console.WriteLine(line);
-                                                                    currentCreep.name = line;
-                                                                }
-                                                                else if (line == "<slow>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    Console.WriteLine(line);
-                                                                    currentCreep.Slow = double.Parse(line);
-                                                                }
-                                                                else if (line == "<cost>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    Console.WriteLine(line);
-                                                                    currentCreep.cost = int.Parse(line);
-                                                                }
-                                                                else if (line == "<damage>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    Console.WriteLine(line);
-                                                                    currentCreep.Damage = int.Parse(line);
-                                                                }
-                                                                else if (line == "<mDamage>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    Console.WriteLine(line);
-                                                                    currentCreep.mDamage = int.Parse(line);
-                                                                }
-                                                                else if (line == "<rateOfFire>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    Console.WriteLine(line);
-                                                                    currentCreep.RateOfFire = int.Parse(line);
-                                                                }
-                                                                else if (line == "texture")
-                                                                {
-                                                                    //load in texture here
-                                                                }
-                                                            }
-                                                            currentCreep.group = towerGroup;
-                                                            groupTowerData.Add(currentCreep);
-                                                            Console.WriteLine("Tower Added to Group");
-                                                        }
-                                                    }
-                                                    Console.WriteLine("Group added to List of TowerData");
-                                                    totalTowerData.Add(groupTowerData);
-                                                }
-                                            }
-                                            stream.Close();
-                                            stream.Dispose();
-                                            Console.WriteLine("List of TowerData returned");
-                                            return totalTowerData;
+                                            case "Gold":
+                                                pData.startMoney = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                break;
+                                            case "Health":
+                                                pData.startHealth = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                break;
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                    stream.Close();
-                    stream.Dispose();
-                }
-                else
-                {
-                    //We're not in a proper raceData file...
-                    stream.Close();
-                    stream.Dispose();
                 }
             }
-            return totalTowerData;
+            return pData;
         }
 
-        public static List<TowerData> getGroupTowerData(string raceNameIN, string groupNameIN)
+        private static List<TowerData> getAllTowers(string raceNameIN)
         {
-            List<TowerData> groupTowerData = new List<TowerData>();
-            Console.WriteLine("List of TowerData created");
-
+            List<TowerData> allTD = new List<TowerData>();
             using (StreamReader stream = new StreamReader("RaceData.txt"))
             {
                 string line;
                 line = stream.ReadLine();
-                line = line.Trim();
                 if (line == "<BEGIN>") //If we see this -- we're DEFINETLY in the proper file
                 {
                     while (line != "<END>") //While we're not at the end of the file
                     {
-                        line = stream.ReadLine();
-                        line = line.Trim();
+                       line = stream.ReadLine();
                         if (line == "<Race>") //Check to see if we're looking at a <Race> tag
                         {
                             line = stream.ReadLine();
-                            line = line.Trim();
-                            if (line == "<RaceName>") //Check to see if we're looking at a <RaceName> tag
+                            if (line == "RName:" + raceNameIN)
                             {
-                                line = stream.ReadLine();
-                                line = line.Trim();
-                                if (line == raceNameIN) //Check to see if it's the race we're looking for
+                                while (line != "</Race>")
                                 {
-                                    //Good now we can grab data!
-                                    while (line != "</Race>") //Check to make sure we're still in the same race tag
+                                    line = stream.ReadLine();
+                                    if (line == "<Towers>")//Now we're in tower data
                                     {
-                                        line = stream.ReadLine();
-                                        line = line.Trim();
-                                        if (line == "<Towers>") //We're now grabbing all the towers for the race
+                                        while (line != "</Towers>")
                                         {
-                                            while (line != "</Towers>") //Check to make sure we're still in the same towers tag
+                                            line = stream.ReadLine();
+                                            int temp;
+                                            string group = "null";
+                                            if ((temp = line.IndexOf(':')) != -1)
                                             {
-                                                line = stream.ReadLine();
-                                                line = line.Trim();
-                                                if (line == "<TowerGroup>") //Check to see if we're looking at group info
+                                                switch (line.Substring(0, temp - 1))
+                                                {
+                                                    case "GROUP":
+                                                        group = (line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                        break;
+                                                }
+                                            }
+                                            if (line == "<TOWER>")//Now we're grabbing a tower
+                                            {
+                                                TowerData tempTower = new TowerData();
+                                                tempTower.group = group;
+                                                while (line != "</TOWER>")
                                                 {
                                                     line = stream.ReadLine();
-                                                    line = line.Trim();
-                                                    if (line == "<GroupName>")// We're now grabbing a tower group
+                                                    if ((temp = line.IndexOf(':')) != -1)
                                                     {
-                                                        line = stream.ReadLine();
-                                                        line = line.Trim();
-                                                        if (line == groupNameIN) //If it's the group we're looking for we're going to start grabbing all the towers for that group
+                                                        switch (line.Substring(0, temp - 1))
                                                         {
-                                                            while (line != "</TowerGroup>") //Check to make sure we're still in the same tower group
-                                                            {
-                                                                TowerData currentCreep = new TowerData();
-                                                                Console.WriteLine("Tower Created");
-                                                                while (line != "</TowerData>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    if (line == "<Name>")
-                                                                    {
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine(line);
-                                                                        currentCreep.name = line;
-                                                                    }
-                                                                    else if (line == "<slow>")
-                                                                    {
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine(line);
-                                                                        currentCreep.Slow = double.Parse(line);
-                                                                    }
-                                                                    else if (line == "<cost>")
-                                                                    {
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine(line);
-                                                                        currentCreep.cost = int.Parse(line);
-                                                                    }
-                                                                    else if (line == "<damage>")
-                                                                    {
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine(line);
-                                                                        currentCreep.Damage = int.Parse(line);
-                                                                    }
-                                                                    else if (line == "<mDamage>")
-                                                                    {
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine(line);
-                                                                        currentCreep.mDamage = int.Parse(line);
-                                                                    }
-                                                                    else if (line == "<rateOfFire>")
-                                                                    {
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine(line);
-                                                                        currentCreep.RateOfFire = int.Parse(line);
-                                                                    }
-                                                                    else if (line == "<texture>")
-                                                                    {
-                                                                        //load in texture here
-                                                                    }
-                                                                }
-                                                                currentCreep.group = groupNameIN;
-                                                                groupTowerData.Add(currentCreep);
-                                                                Console.WriteLine("Tower Added to Group");
-                                                                line = stream.ReadLine();
-                                                                line = line.Trim();
-                                                            }
+                                                            case "Name":
+                                                                tempTower.name = line.Substring(temp + 1, (line.Length - temp) - 1);
+                                                                break;
+                                                            case "Slow":
+                                                                tempTower.Slow = double.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
+                                                            case "Cost":
+                                                                tempTower.Value = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
+                                                            case "Damage":
+                                                                tempTower.Damage = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
+                                                            case "mDamage":
+                                                                tempTower.mDamage = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
+                                                            case "ROF":
+                                                                tempTower.RateOfFire = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
                                                         }
                                                     }
-                                                    //Console.WriteLine("Group added to List of TowerData");
-                                                    //groupTowerData.Add(groupTowerData);
                                                 }
+                                                allTD.Add(tempTower);
                                             }
-                                            stream.Close();
-                                            stream.Dispose();
-                                            Console.WriteLine("List of TowerData returned");
-                                            return groupTowerData;
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                    stream.Close();
-                    stream.Dispose();
-                }
-                else
-                {
-                    //We're not in a proper raceData file...
-                    stream.Close();
-                    stream.Dispose();
                 }
             }
-            return groupTowerData;
+            return allTD;
         }
 
-        public static TowerData getSingleTowerData(string raceNameIN, string groupNameIN, string towerNameIN)
+        private static List<CreepData> getAllMinions(string raceNameIN)
         {
-            TowerData singleTowerData = new TowerData();
-            Console.WriteLine("Tower Created");
-
+            List<CreepData> allMD = new List<CreepData>();
             using (StreamReader stream = new StreamReader("RaceData.txt"))
             {
                 string line;
                 line = stream.ReadLine();
-                line = line.Trim();
                 if (line == "<BEGIN>") //If we see this -- we're DEFINETLY in the proper file
                 {
                     while (line != "<END>") //While we're not at the end of the file
                     {
                         line = stream.ReadLine();
-                        line = line.Trim();
                         if (line == "<Race>") //Check to see if we're looking at a <Race> tag
                         {
                             line = stream.ReadLine();
-                            line = line.Trim();
-                            if (line == "<RaceName>") //Check to see if we're looking at a <RaceName> tag
+                            if (line == "RName:" + raceNameIN)
                             {
-                                line = stream.ReadLine();
-                                line = line.Trim();
-                                if (line == raceNameIN) //Check to see if it's the race we're looking for
+                                while (line != "</Race>")
                                 {
-                                    //Good now we can grab data!
-                                    while (line != "</Race>") //Check to make sure we're still in the same race tag
+                                    line = stream.ReadLine();
+                                    if (line == "<Minions>")//Now we're in tower data
                                     {
-                                        line = stream.ReadLine();
-                                        line = line.Trim();
-                                        if (line == "<Towers>") //We're now grabbing all the towers for the race
+                                        while (line != "</Minions>")
                                         {
-                                            while (line != "</Towers>") //Check to make sure we're still in the same towers tag
+                                            line = stream.ReadLine();
+                                            int temp;
+                                            string group = "null";
+                                            if ((temp = line.IndexOf(':')) != -1)
                                             {
-                                                line = stream.ReadLine();
-                                                line = line.Trim();
-                                                if (line == "<TowerGroup>") //Check to see if we're looking at group info
+                                                switch (line.Substring(0, temp - 1))
+                                                {
+                                                    case "GROUP":
+                                                        group = (line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                        break;
+                                                }
+                                            }
+                                            if (line == "<MINION>")//Now we're grabbing a tower
+                                            {
+                                                CreepData tempCreep = new CreepData();
+                                                tempCreep.group = group;
+                                                while (line != "</MINION>")
                                                 {
                                                     line = stream.ReadLine();
-                                                    line = line.Trim();
-                                                    if (line == "<GroupName>")// We're now grabbing a tower group
+                                                    if ((temp = line.IndexOf(':')) != -1)
                                                     {
-                                                        line = stream.ReadLine();
-                                                        line = line.Trim();
-                                                        if (line == groupNameIN) //If it's the group we're looking for we're going to start grabbing all the towers for that group
+                                                        switch (line.Substring(0, temp - 1))
                                                         {
-                                                            while (line != "</TowerGroup>") //Check to make sure we're still in the same tower group
-                                                            {
-                                                                line = stream.ReadLine();
-                                                                line = line.Trim();
-                                                                if (line == "<Name>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    if (line == towerNameIN) //If it's the name of the tower we're looking for we'll grab all the tower data for it
-                                                                    {
-                                                                        Console.WriteLine(line);
-                                                                        singleTowerData.name = line;
-                                                                        while (line != "</TowerData>")
-                                                                        {
-                                                                            line = stream.ReadLine();
-                                                                            line = line.Trim();
-                                                                            if (line == "<slow>")
-                                                                            {
-                                                                                line = stream.ReadLine();
-                                                                                line = line.Trim();
-                                                                                Console.WriteLine(line);
-                                                                                singleTowerData.Slow = double.Parse(line);
-                                                                            }
-                                                                            else if (line == "<cost>")
-                                                                            {
-                                                                                line = stream.ReadLine();
-                                                                                line = line.Trim();
-                                                                                Console.WriteLine(line);
-                                                                                singleTowerData.cost = int.Parse(line);
-                                                                            }
-                                                                            else if (line == "<damage>")
-                                                                            {
-                                                                                line = stream.ReadLine();
-                                                                                line = line.Trim();
-                                                                                Console.WriteLine(line);
-                                                                                singleTowerData.Damage = int.Parse(line);
-                                                                            }
-                                                                            else if (line == "<mDamage>")
-                                                                            {
-                                                                                line = stream.ReadLine();
-                                                                                line = line.Trim();
-                                                                                Console.WriteLine(line);
-                                                                                singleTowerData.mDamage = int.Parse(line);
-                                                                            }
-                                                                            else if (line == "<rateOfFire>")
-                                                                            {
-                                                                                line = stream.ReadLine();
-                                                                                line = line.Trim();
-                                                                                Console.WriteLine(line);
-                                                                                singleTowerData.RateOfFire = int.Parse(line);
-                                                                            }
-                                                                            else if (line == "<texture>")
-                                                                            {
-                                                                                //load in texture here
-                                                                            }
-                                                                        }
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine("Tower Returned");
-                                                                        return singleTowerData;
-                                                                    }
-                                                                }
-                                                            }
+                                                            case "Name":
+                                                                tempCreep.name = (line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
+                                                            case "Speed":
+                                                                tempCreep.Speed = double.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
+                                                            case "Cost":
+                                                                tempCreep.Value = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
+                                                            case "Damage":
+                                                                tempCreep.Damage = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
+                                                            case "mDamage":
+                                                                tempCreep.mDamage = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
                                                         }
                                                     }
                                                 }
+                                                allMD.Add(tempCreep);
                                             }
-                                            stream.Close();
-                                            stream.Dispose();
-
-                                            return singleTowerData;
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                    stream.Close();
-                    stream.Dispose();
-                }
-                else
-                {
-                    //We're not in a proper raceData file...
-                    stream.Close();
-                    stream.Dispose();
                 }
             }
-            return singleTowerData;
+            return allMD;
         }
 
-        public static List<List<CreepData>> getAllMinionData(string raceNameIN)
+        private static byte[,] getMapData(string raceNameIN)
         {
-            //^Are you fucking serious?
-            List<List<CreepData>> totalCreepData = new List<List<CreepData>>();
-            Console.WriteLine("List of CreepData created");
-
-            using (StreamReader stream = new StreamReader("RaceData.txt"))
-            {
-                string line;
-                line = stream.ReadLine();
-                line = line.Trim();
-                if (line == "<BEGIN>") //If we see this -- we're DEFINETLY in the proper file
-                {
-                    while (line != "<END>") //While we're not at the end of the file
-                    {
-                        line = stream.ReadLine();
-                        line = line.Trim();
-                        if (line == "<Race>") //Check to see if we're looking at a <Race> tag
-                        {
-                            line = stream.ReadLine();
-                            line = line.Trim();
-                            if (line == "<RaceName>") //Check to see if we're looking at a <RaceName> tag
-                            {
-                                line = stream.ReadLine();
-                                line = line.Trim();
-                                if (line == raceNameIN) //Check to see if it's the race we're looking for
-                                {
-                                    //Good now we can grab data!
-                                    while (line != "</Race>") //Check to make sure we're still in the same race tag
-                                    {
-                                        line = stream.ReadLine();
-                                        line = line.Trim();
-                                        if (line == "<Minions>") //We're now grabbing all the towers for the race
-                                        {
-
-                                            while (line != "</Minions>") //Check to make sure we're still in the same towers tag
-                                            {
-                                                line = stream.ReadLine();
-                                                line = line.Trim();
-                                                if (line == "<MinionGroup>") //Check to see if we're looking at group info
-                                                {
-                                                    List<CreepData> groupCreepData = new List<CreepData>();
-                                                    Console.WriteLine("Group Created");
-                                                    string creepGroup;
-                                                    creepGroup = "Temp";
-                                                    while (line != "</MinionGroup>") //Check to make sure we're still in the same tower group
-                                                    {
-                                                        line = stream.ReadLine();
-                                                        line = line.Trim();
-                                                        if (line == "<GroupName>")
-                                                        {
-                                                            line = stream.ReadLine();
-                                                            line = line.Trim();
-                                                            creepGroup = line;
-                                                        }
-                                                        if (line == "<MinionData>")
-                                                        {
-                                                            CreepData currentCreep = new CreepData();
-                                                            Console.WriteLine("Creep Created");
-                                                            while (line != "</MinionData>")
-                                                            {
-                                                                line = stream.ReadLine();
-                                                                line = line.Trim();
-                                                                if (line == "<Name>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    Console.WriteLine(line);
-                                                                    currentCreep.name = line;
-                                                                }
-                                                                else if (line == "<speed>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    Console.WriteLine(line);
-                                                                    currentCreep.Speed = double.Parse(line);
-                                                                }
-                                                                else if (line == "<cost>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    Console.WriteLine(line);
-                                                                    currentCreep.cost = int.Parse(line);
-                                                                }
-                                                                else if (line == "<damage>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    Console.WriteLine(line);
-                                                                    currentCreep.Damage = int.Parse(line);
-                                                                }
-                                                                else if (line == "<mDamage>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    Console.WriteLine(line);
-                                                                    currentCreep.mDamage = int.Parse(line);
-                                                                }
-                                                            }
-                                                            currentCreep.group = creepGroup;
-                                                            groupCreepData.Add(currentCreep);
-                                                            Console.WriteLine("Creep Added to Group");
-                                                        }
-                                                    }
-                                                    Console.WriteLine("Group added to List of CreepData");
-                                                    totalCreepData.Add(groupCreepData);
-                                                }
-                                            }
-                                            stream.Close();
-                                            stream.Dispose();
-                                            Console.WriteLine("List of CreepData returned");
-                                            return totalCreepData;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    stream.Close();
-                    stream.Dispose();
-                }
-                else
-                {
-                    //We're not in a proper raceData file...
-                    stream.Close();
-                    stream.Dispose();
-                }
-            }
-            return totalCreepData;
-        }
-
-
-        public static List<CreepData> getGroupMinionData(string raceNameIN, string groupNameIN)
-        {
-            List<CreepData> groupCreepData = new List<CreepData>();
-            Console.WriteLine("List of CreepData created");
-
-            using (StreamReader stream = new StreamReader("RaceData.txt"))
-            {
-                string line;
-                line = stream.ReadLine();
-                line = line.Trim();
-                if (line == "<BEGIN>") //If we see this -- we're DEFINETLY in the proper file
-                {
-                    while (line != "<END>") //While we're not at the end of the file
-                    {
-                        line = stream.ReadLine();
-                        line = line.Trim();
-                        if (line == "<Race>") //Check to see if we're looking at a <Race> tag
-                        {
-                            line = stream.ReadLine();
-                            line = line.Trim();
-                            if (line == "<RaceName>") //Check to see if we're looking at a <RaceName> tag
-                            {
-                                line = stream.ReadLine();
-                                line = line.Trim();
-                                if (line == raceNameIN) //Check to see if it's the race we're looking for
-                                {
-                                    //Good now we can grab data!
-                                    while (line != "</Race>") //Check to make sure we're still in the same race tag
-                                    {
-                                        line = stream.ReadLine();
-                                        line = line.Trim();
-                                        if (line == "<Minions>") //We're now grabbing all the towers for the race
-                                        {
-                                            while (line != "</Minions>") //Check to make sure we're still in the same towers tag
-                                            {
-                                                line = stream.ReadLine();
-                                                line = line.Trim();
-                                                if (line == "<MinionGroup>") //Check to see if we're looking at group info
-                                                {
-                                                    line = stream.ReadLine();
-                                                    line = line.Trim();
-                                                    if (line == "<GroupName>")// We're now grabbing a tower group
-                                                    {
-                                                        line = stream.ReadLine();
-                                                        line = line.Trim();
-                                                        if (line == groupNameIN) //If it's the group we're looking for we're going to start grabbing all the towers for that group
-                                                        {
-                                                            while (line != "</MinionGroup>") //Check to make sure we're still in the same tower group
-                                                            {
-                                                                CreepData currentCreep = new CreepData();
-                                                                Console.WriteLine("Creep Created");
-                                                                while (line != "</MinionData>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    if (line == "<Name>")
-                                                                    {
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine(line);
-                                                                        currentCreep.name = line;
-                                                                    }
-                                                                    else if (line == "<speed>")
-                                                                    {
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine(line);
-                                                                        currentCreep.Speed = double.Parse(line);
-                                                                    }
-                                                                    else if (line == "<cost>")
-                                                                    {
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine(line);
-                                                                        currentCreep.cost = int.Parse(line);
-                                                                    }
-                                                                    else if (line == "<damage>")
-                                                                    {
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine(line);
-                                                                        currentCreep.Damage = int.Parse(line);
-                                                                    }
-                                                                    else if (line == "<mDamage>")
-                                                                    {
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine(line);
-                                                                        currentCreep.mDamage = int.Parse(line);
-                                                                    }
-                                                                }
-                                                                currentCreep.group = groupNameIN;
-                                                                groupCreepData.Add(currentCreep);
-                                                                Console.WriteLine("Tower Added to Group");
-                                                                line = stream.ReadLine();
-                                                                line = line.Trim();
-                                                            }
-                                                        }
-                                                    }
-                                                    //Console.WriteLine("Group added to List of MinionData");
-                                                    //groupCreepData.Add(groupCreepData);
-                                                }
-                                            }
-                                            stream.Close();
-                                            stream.Dispose();
-                                            Console.WriteLine("List of MinionData returned");
-                                            return groupCreepData;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    stream.Close();
-                    stream.Dispose();
-                }
-                else
-                {
-                    //We're not in a proper raceData file...
-                    stream.Close();
-                    stream.Dispose();
-                }
-            }
-            return groupCreepData;
-        }
-
-        public static CreepData getSingleMinionData(string raceNameIN, string groupNameIN, string minionNameIN)
-        {
-            CreepData singleCreepData = new CreepData();
-            Console.WriteLine("Creep Created");
-
-            using (StreamReader stream = new StreamReader("RaceData.txt"))
-            {
-                string line;
-                line = stream.ReadLine();
-                line = line.Trim();
-                if (line == "<BEGIN>") //If we see this -- we're DEFINETLY in the proper file
-                {
-                    while (line != "<END>") //While we're not at the end of the file
-                    {
-                        line = stream.ReadLine();
-                        line = line.Trim();
-                        if (line == "<Race>") //Check to see if we're looking at a <Race> tag
-                        {
-                            line = stream.ReadLine();
-                            line = line.Trim();
-                            if (line == "<RaceName>") //Check to see if we're looking at a <RaceName> tag
-                            {
-                                line = stream.ReadLine();
-                                line = line.Trim();
-                                if (line == raceNameIN) //Check to see if it's the race we're looking for
-                                {
-                                    //Good now we can grab data!
-                                    while (line != "</Race>") //Check to make sure we're still in the same race tag
-                                    {
-                                        line = stream.ReadLine();
-                                        line = line.Trim();
-                                        if (line == "<Minions>") //We're now grabbing all the towers for the race
-                                        {
-                                            while (line != "</Minions>") //Check to make sure we're still in the same towers tag
-                                            {
-                                                line = stream.ReadLine();
-                                                line = line.Trim();
-                                                if (line == "<MinionGroup>") //Check to see if we're looking at group info
-                                                {
-                                                    line = stream.ReadLine();
-                                                    line = line.Trim();
-                                                    if (line == "<GroupName>")// We're now grabbing a tower group
-                                                    {
-                                                        line = stream.ReadLine();
-                                                        line = line.Trim();
-                                                        if (line == groupNameIN) //If it's the group we're looking for we're going to start grabbing all the towers for that group
-                                                        {
-                                                            while (line != "</MinionGroup>") //Check to make sure we're still in the same tower group
-                                                            {
-                                                                line = stream.ReadLine();
-                                                                line = line.Trim();
-                                                                if (line == "<Name>")
-                                                                {
-                                                                    line = stream.ReadLine();
-                                                                    line = line.Trim();
-                                                                    if (line == minionNameIN) //If it's the name of the tower we're looking for we'll grab all the tower data for it
-                                                                    {
-                                                                        Console.WriteLine(line);
-                                                                        singleCreepData.name = line;
-                                                                        while (line != "</MinionData>")
-                                                                        {
-                                                                            line = stream.ReadLine();
-                                                                            line = line.Trim();
-                                                                            if (line == "<speed>")
-                                                                            {
-                                                                                line = stream.ReadLine();
-                                                                                line = line.Trim();
-                                                                                Console.WriteLine(line);
-                                                                                singleCreepData.Speed = double.Parse(line);
-                                                                            }
-                                                                            else if (line == "<cost>")
-                                                                            {
-                                                                                line = stream.ReadLine();
-                                                                                line = line.Trim();
-                                                                                Console.WriteLine(line);
-                                                                                singleCreepData.cost = int.Parse(line);
-                                                                            }
-                                                                            else if (line == "<damage>")
-                                                                            {
-                                                                                line = stream.ReadLine();
-                                                                                line = line.Trim();
-                                                                                Console.WriteLine(line);
-                                                                                singleCreepData.Damage = int.Parse(line);
-                                                                            }
-                                                                            else if (line == "<mDamage>")
-                                                                            {
-                                                                                line = stream.ReadLine();
-                                                                                line = line.Trim();
-                                                                                Console.WriteLine(line);
-                                                                                singleCreepData.mDamage = int.Parse(line);
-                                                                            }
-                                                                        }
-                                                                        line = stream.ReadLine();
-                                                                        line = line.Trim();
-                                                                        Console.WriteLine("Creep Returned");
-                                                                        return singleCreepData;
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            stream.Close();
-                                            stream.Dispose();
-
-                                            return singleCreepData;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    stream.Close();
-                    stream.Dispose();
-                }
-                else
-                {
-                    //We're not in a proper raceData file...
-                    stream.Close();
-                    stream.Dispose();
-                }
-            }
-            return singleCreepData;
-        }
-
-        /* Get Spell Data Here */
-
-        public static byte[,] getMapData(string raceNameIN)
-        {
-            byte[,] mapData = { {0} };
+            byte[,] mapData = { { 0 } };
             //Schuyer was here, and he totaly fondeled this code >:D
             //He also noticed how it wasnt RaceData.CCD
             //But he forgives you for that.
-            Console.WriteLine("Map Created");
 
             using (StreamReader stream = new StreamReader("RaceData.txt"))
             {
                 string line;
                 line = stream.ReadLine();
-                line = line.Trim();
                 if (line == "<BEGIN>") //If we see this -- we're DEFINETLY in the proper file
                 {
                     while (line != "<END>") //While we're not at the end of the file
                     {
                         line = stream.ReadLine();
-                        line = line.Trim();
                         if (line == "<Race>") //Check to see if we're looking at a <Race> tag
                         {
                             line = stream.ReadLine();
-                            line = line.Trim();
-                            if (line == "<RaceName>") //Check to see if we're looking at a <RaceName> tag
+                            if (line == "RName:" + raceNameIN)
                             {
-                                line = stream.ReadLine();
-                                line = line.Trim();
-                                if (line == raceNameIN) //Check to see if it's the race we're looking for
+                                while (line != "</Race>")
                                 {
-                                    //Good now we can grab data!
-                                    while (line != "</Race>") //Check to make sure we're still in the same race tag
+                                    line = stream.ReadLine();
+                                    if (line == "<MapData>")
                                     {
-                                        line = stream.ReadLine();
-                                        line = line.Trim();
-                                        if (line == "<MapData>") //We're now grabbing all the towers for the race
+                                        while (line != "</MapData>")
                                         {
-                                            while (line != "</MapData>") //Check to make sure we're still in the same towers tag
+                                            line = stream.ReadLine();
+                                            if (line == "<ARRAY>") //Check to see if we're looking at an ARRAY group
                                             {
                                                 line = stream.ReadLine();
                                                 line = line.Trim();
-                                                if (line == "<ARRAY>") //Check to see if we're looking at an ARRAY group
+                                                int size = line.Length;
+                                                mapData = new byte[size, size];
+                                                while (line != "</ARRAY>")
                                                 {
-                                                    line = stream.ReadLine();
-                                                    line = line.Trim();
-                                                    int size = line.Length;
-                                                    mapData = new byte[size, size];
-                                                    while (line != "</ARRAY>")
+                                                    for (int y = 0; y < size; y++)
                                                     {
-                                                        int count = 0;
-                                                        for (int y = 0; y < size; y++)
+                                                        for (int x = 0; x < line.Length; x++)
                                                         {
-                                                            for (int x = 0; x < line.Length; x++)
-                                                            {
-                                                                byte temp = byte.Parse("" + line[x]);//Grab the line and make it a numbaaaahhhh
-                                                                mapData[y, x] = temp;
-                                                                Console.WriteLine(mapData[y, x]);
-                                                                count++;
-                                                            }
-                                                            line = stream.ReadLine();
-                                                            line = line.Trim();
+                                                            byte temp = byte.Parse("" + line[x]);//Grab the line and make it a numbaaaahhhh
+                                                            mapData[y, x] = temp;
                                                         }
+                                                        line = stream.ReadLine();
+                                                        line = line.Trim();
                                                     }
                                                 }
-                                                if (line == "<tileTexture>")
-                                                {
-                                                    //load in tile texture
-                                                }
-                                                if (line == "<background>")
-                                                {
-                                                    //load in background
-                                                }
+                                                return mapData;
                                             }
-                                            stream.Close();
-                                            stream.Dispose();
-                                            return mapData;
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                    stream.Close();
-                    stream.Dispose();
-                }
-                else
-                {
-                    //We're not in a proper raceData file...
-                    stream.Close();
-                    stream.Dispose();
                 }
             }
             return mapData;

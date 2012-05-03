@@ -212,6 +212,7 @@ namespace Engine
         void initMapPaths()
         {
             int[] myPos = { 0, 0 };
+            
             while (myMap[myPos[0], myPos[1]] != 5 || (myPos[0] == myPos[1] && myPos[0] == HEIGHT))
             {
                 if (++myPos[0] >= HEIGHT) { myPos[0] = 0; myPos[1]++; }

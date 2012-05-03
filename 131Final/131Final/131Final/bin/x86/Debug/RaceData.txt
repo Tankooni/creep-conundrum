@@ -1,517 +1,240 @@
 <BEGIN>
+
 <Race>
-	<RaceName>
-	MOOGLES
-	</RaceName>
-	<Towers>
-		<TowerGroup>
-		<GroupName>
-		Nins
-		</GroupName>
-			<TowerData>
-				<Name>
-				Moog
-				</Name>
+RName:MOOGLES
+Gold:50
+Health:100
 
-				<slow>
-				0
-				</slow>
+<Towers>
 
-				<cost>
-				10
-				</cost>
+GROUP:Nins
 
-				<damage>
-				10
-				</damage>
+<TOWER>
+Name:Moog
+Slow:0
+Cost:10
+Damage:10
+mDamage:0
+ROF:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name here -->
+</TOWER>
 
-				<mDamage>
-				0
-				</mDamage>
+<TOWER>
+Name:Goomba
+Slow:0
+Cost:10
+Damage:5
+mDamage:10
+ROF:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</TOWER>
 
-				<rateOfFire>
-				100
-				</rateOfFire>
+GROUP:Bothas
 
-				<texture> 
-				<!-- String of file name here --> 
-				</texture>
+<TOWER>
+Name:Rosh
+Slow:1
+Cost:20
+Damage:15
+mDamage:0
+ROF:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</TOWER>
 
-				<sound>
-				<!-- String of file nam here -->
-				</sound>
-			</TowerData>
-			<TowerData>
-				<Name>
-				Goomba
-				</Name>
+<TOWER>
+Name:Scalpal
+Slow:0
+Cost:10
+Damage:5
+mDamage:10
+ROF:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</TOWER>
 
-				<Slow>
-				0
-				</slow>
-				
-				<cost>
-				10
-				</cose>
+</Towers>
 
-				<damage>
-				5
-				</damage>
+<Minions>
 
-				<mDamage>
-				10
-				</mDamage>
+GROUP:Archnids
 
-				<rateOfFire>
-				100
-				</rateOfFire>
+<MINION>
+Name:Crawlies
+Speed:10
+Cost:10
+Damage:10
+mDamage:10
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
 
-				<texture> 
-				<!--String of file name here --> 
-				</texture>
+<MINION>
+Name:Creepies
+Speed:15
+Cost:10
+Damage:5
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
 
-				<sound>
-				<!--String of file name here -->
-				</sound>
-			</TowerData>
-		</TowerGroup>
-		<TowerGroup>
-		<GroupName>
-		Bothas
-		</GroupName>
-			<TowerData>
-				<Name>
-				Rosh
-				</Name>
+</Minions>
 
-				<slow>
-				1
-				</slow>
+<MapData>
 
-				<cost>
-				20
-				</cost>
+<ARRAY>
+0111111001000000
+0100001001000000
+0100001001000000
+0100001001000000
+0111001111000000
+0001000002010000
+0001000002000000
+0001111111111110
+0001000000000000
+1111111111111110
+0001000313000000
+0001000313000000
+0001003313300000
+0001033313330000
+0005033313330000
+0000333333333000
+</ARRAY>
+Texture:<!-- File Name Here -->
+Background:<!-- File Name Here -->
 
-				<damage>
-				0
-				</damage>
+</MapData>
 
-				<mDamage>
-				0
-				</mDamage>
-
-				<rateOfFire>
-				100
-				</rateOfFire>
-
-				<texture> 
-				<!-- String of file name here --> 
-				</texture>
-
-				<sound>
-				<!-- String of file name here -->
-				</sound>
-			</TowerData>
-			<TowerData>
-				<Name>
-				Scalpal
-				</Name>
-
-				<Slow>
-				0
-				</slow>
-				
-				<cost>
-				10
-				</cose>
-
-				<damage>
-				5
-				</damage>
-
-				<mDamage>
-				10
-				</mDamage>
-
-				<rateOfFire>
-				100
-				</rateOfFire>
-
-				<texture> 
-				<!--String of file name here --> 
-				</texture>
-
-				<sound>
-				<!--String of file name here -->
-				</sound>
-			</TowerData>
-		</TowerGroup>
-	</Towers>
-	<Minions>
-		<MinionGroup>
-		<GroupName>
-		Archnids
-		</GroupName>
-			<MinionData>
-				<Name>
-				crawlies
-				</Name>
-
-				<speed>
-				10
-				</speed>
-
-				<cost>
-				10
-				</cost>
-			
-				<damage>
-				10
-				</damage>
-			
-				<mDamage>
-				10
-				</mDamage>
-
-				<texture> 
-				<!-- String of file name here -->
-				</texture>
-			</MinionData>
-			<MinionData>
-				<Name>
-				creepies
-				</Name>
-				
-				<speed>
-				15
-				</speed>
-
-				<cost>
-				10
-				</cost>
-
-				<damage>
-				5
-				</damage>
-
-				<mDamage>
-				15
-				</mDamage>
-
-				<texture>
-				<!-- String of file name here -->
-				</texture>
-			</MinionData>
-		</MinionGroup>
-	</Minions>
-	<MapData>
-		<ARRAY>
-			0111111001000000
-			0100001001000000
-			0100001001000000
-			0100001001000000
-			0111001111000000
-			0001000002010000
-			0001000002000000
-			0001111111111110
-			0001000000000000
-			1111111111111110
-			0001000313000000
-			0001000313000000
-			1111111111111111
-			0001033313330000
-			0005033333330000
-			0000000000000000
-		</ARRAY>
-		<tileTexture> <!-- String of file name here --> </tileTexture>
-		<background> <!-- String of file name here --> </background>
-	</MapData>
 </Race>
 
+
 <Race>
-	<RaceName>
-	WALEK
-	</RaceName>
-	<Towers>
-		<TowerGroup>
-		<GroupName>
-		Students
-		</GroupName>
-			<TowerData>
-				<Name>
-				Michael
-				</Name>
+RName:WALEKS
+Gold:9001
+Health:9001
 
-				<slow>
-				0
-				</slow>
+<Towers>
 
-				<cost>
-				10
-				</cost>
+GROUP:Students
 
-				<damage>
-				10
-				</damage>
+<TOWER>
+Name:Michael
+Slow:0
+Cost:10
+Damage:10
+mDamage:0
+ROF:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name here -->
+</TOWER>
 
-				<mDamage>
-				0
-				</mDamage>
+<TOWER>
+Name:Schuyler
+Slow:0
+Cost:10
+Damage:5
+mDamage:10
+ROF:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</TOWER>
 
-				<rateOfFire>
-				100
-				</rateOfFire>
+<TOWER>
+Name:Zack
+Slow:0
+Cost:10
+Damage:5
+mDamage:10
+ROF:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</TOWER>
 
-				<texture> 
-				<!-- String of file name here --> 
-				</texture>
+GROUP:Teachers
 
-				<sound>
-				<!-- String of file nam here -->
-				</sound>
-			</TowerData>
-			<TowerData>
-				<Name>
-				Schuyler
-				</Name>
+<TOWER>
+Name:Simkin
+Slow:1
+Cost:20
+Damage:15
+mDamage:0
+ROF:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</TOWER>
 
-				<slow>
-				0
-				</slow>
+<TOWER>
+Name:Dellafeliece
+Slow:0
+Cost:10
+Damage:5
+mDamage:10
+ROF:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</TOWER>
 
-				<cost>
-				10
-				</cost>
+</Towers>
 
-				<damage>
-				10
-				</damage>
+<Minions>
 
-				<mDamage>
-				0
-				</mDamage>
+GROUP:Whatevers
 
-				<rateOfFire>
-				100
-				</rateOfFire>
+<MINION>
+Name:Derek
+Speed:10
+Cost:10
+Damage:10
+mDamage:10
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
 
-				<texture> 
-				<!-- String of file name here --> 
-				</texture>
+<MINION>
+Name:Chris
+Speed:15
+Cost:10
+Damage:5
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
 
-				<sound>
-				<!-- String of file nam here -->
-				</sound>
-			</TowerData>
-			<TowerData>
-				<Name>
-				Zack
-				</Name>
+<MINION>
+Name:Paul
+Speed:15
+Cost:10
+Damage:5
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
 
-				<slow>
-				0
-				</slow>
+</Minions>
 
-				<cost>
-				10
-				</cost>
+<MapData>
 
-				<damage>
-				10
-				</damage>
+<ARRAY>
+111111111111111
+000000000000001
+111111111111111
+100000000000000
+111111111111111
+000000000000001
+111111111111111
+100000000000000
+111111111111111
+000000000000001
+111111111111111
+100000000000000
+111111111111111
+000000000000001
+511111111111111
+</ARRAY>
+Texture:<!-- File Name Here -->
+Background:<!-- File Name Here -->
 
-				<mDamage>
-				0
-				</mDamage>
+</MapData>
 
-				<rateOfFire>
-				100
-				</rateOfFire>
-
-				<texture> 
-				<!-- String of file name here --> 
-				</texture>
-
-				<sound>
-				<!-- String of file nam here -->
-				</sound>
-			</TowerData>
-		</TowerGroup>
-		<TowerGroup>
-			<GroupName>
-			Teachers>
-			</GroupName>
-			<TowerData>
-				<Name>
-				Simkin
-				</Name>
-
-				<slow>
-				0
-				</slow>
-
-				<cost>
-				10
-				</cost>
-
-				<damage>
-				10
-				</damage>
-
-				<mDamage>
-				0
-				</mDamage>
-
-				<rateOfFire>
-				100
-				</rateOfFire>
-
-				<texture> 
-				<!-- String of file name here --> 
-				</texture>
-
-				<sound>
-				<!-- String of file nam here -->
-				</sound>
-			</TowerData>
-			<TowerData>
-				<Name>
-				Dellafeliece
-				</Name>
-
-				<slow>
-				0
-				</slow>
-
-				<cost>
-				10
-				</cost>
-
-				<damage>
-				10
-				</damage>
-
-				<mDamage>
-				0
-				</mDamage>
-
-				<rateOfFire>
-				100
-				</rateOfFire>
-
-				<texture> 
-				<!-- String of file name here --> 
-				</texture>
-
-				<sound>
-				<!-- String of file nam here -->
-				</sound>
-			</TowerData>
-		</TowerGroup>
-	</Towers>
-		<Minions>
-		<MinionGroup>
-		<GroupName>
-		Whatever
-		</GroupName>
-			<MinionData>
-				<Name>
-				Chris
-				</Name>
-
-				<speed>
-				10
-				</speed>
-
-				<cost>
-				10
-				</cost>
-			
-				<damage>
-				10
-				</damage>
-			
-				<mDamage>
-				10
-				</mDamage>
-
-				<texture> 
-				<!-- String of file name here -->
-				</texture>
-			</MinionData>
-			<MinionData>
-				<Name>
-				Derek
-				</Name>
-				
-				<speed>
-				15
-				</speed>
-
-				<cost>
-				10
-				</cost>
-
-				<damage>
-				5
-				</damage>
-
-				<mDamage>
-				15
-				</mDamage>
-
-				<texture>
-				<!-- String of file name here -->
-				</texture>
-			</MinionData>
-			<MinionData>
-				<Name>
-				Paul
-				</Name>
-				
-				<speed>
-				15
-				</speed>
-
-				<cost>
-				10
-				</cost>
-
-				<damage>
-				5
-				</damage>
-
-				<mDamage>
-				15
-				</mDamage>
-
-				<texture>
-				<!-- String of file name here -->
-				</texture>
-			</MinionData>
-		</MinionGroup>
-	</Minions>
-	<MapData>
-		<ARRAY>
-		1111111111111111
-		0000000000000011
-		1111111111111111
-		1000000000000001
-		1111111111111111
-		0000000000000011
-		1111111111111111
-		1000000000000001
-		1111111111111111
-		0000000000000011
-		1111111111111111
-		1000000000000001
-		1111111111111111
-		0000000000000011
-		5111111111111111
-		0000000000000000
-		</ARRAY>
-		<tileTexture> <!-- String of file name here --> </tileTexture>
-		<background> <!-- String of file name here --> </background>
-	</MapData>
 </Race>
 <END>
