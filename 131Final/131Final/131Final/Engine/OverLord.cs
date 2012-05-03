@@ -34,21 +34,11 @@ namespace Engine
             defaultFont = Content.Load<SpriteFont>("defaultFont");
             SoundManager.Init(Content);
             PlayerData pData1 = new PlayerData();
-            pData1.raceName = "WALEK";
-            pData1.startHealth = 100;
-            pData1.startMoney = 100;
-            pData1.playerMap = DataParser.getMapData(pData1.raceName);
-            pData1.creepList = DataParser.getGroupMinionData(pData1.raceName, "students");
-            pData1.towerList = DataParser.getGroupTowerData(pData1.raceName, "students");
+            pData1 = DataParser.getRaceData("WALEKS");
             pData1.spriteFont = defaultFont;
 
             PlayerData pData2 = new PlayerData();
-            pData2.raceName = "MOOGLES";
-            pData2.startHealth = 200;
-            pData2.startMoney = 50;
-            pData2.playerMap = DataParser.getMapData(pData2.raceName);
-            pData2.creepList = DataParser.getGroupMinionData(pData1.raceName, "Nins");
-            pData2.towerList = DataParser.getGroupTowerData(pData2.raceName, "Nins");
+            pData2 = DataParser.getRaceData("MOOGLES");
             pData2.spriteFont = defaultFont;
             for (int x = 0; x < 2; x++)
             {
