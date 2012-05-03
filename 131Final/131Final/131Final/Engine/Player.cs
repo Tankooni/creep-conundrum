@@ -252,7 +252,7 @@ namespace Engine
             KB = Keyboard.GetState();
             GP = GamePad.GetState(_playerInedx);
             //_playerInedx == PlayerIndex.One
-            if (false)
+            if (_playerInedx == PlayerIndex.One)
             {
                 if (KB.IsKeyDown(Keys.W))
                     current.y1 = 1;

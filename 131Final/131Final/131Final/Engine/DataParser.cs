@@ -91,14 +91,14 @@ namespace Engine
                                     line = stream.ReadLine();
                                     if (line == "<Towers>")//Now we're in tower data
                                     {
+                                        string group = "null";
                                         while (line != "</Towers>")
                                         {
                                             line = stream.ReadLine();
                                             int temp;
-                                            string group = "null";
                                             if ((temp = line.IndexOf(':')) != -1)
                                             {
-                                                switch (line.Substring(0, temp - 1))
+                                                switch (line.Substring(0, temp))
                                                 {
                                                     case "GROUP":
                                                         group = (line.Substring(temp + 1, (line.Length - temp) - 1));
@@ -108,13 +108,12 @@ namespace Engine
                                             if (line == "<TOWER>")//Now we're grabbing a tower
                                             {
                                                 TowerData tempTower = new TowerData();
-                                                tempTower.group = group;
                                                 while (line != "</TOWER>")
                                                 {
                                                     line = stream.ReadLine();
                                                     if ((temp = line.IndexOf(':')) != -1)
                                                     {
-                                                        switch (line.Substring(0, temp - 1))
+                                                        switch (line.Substring(0, temp))
                                                         {
                                                             case "Name":
                                                                 tempTower.name = line.Substring(temp + 1, (line.Length - temp) - 1);
@@ -134,9 +133,13 @@ namespace Engine
                                                             case "ROF":
                                                                 tempTower.RateOfFire = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
                                                                 break;
+                                                            case "Range":
+                                                                tempTower.Range = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
                                                         }
                                                     }
                                                 }
+                                                tempTower.group = group;
                                                 allTD.Add(tempTower);
                                             }
                                         }
@@ -172,14 +175,14 @@ namespace Engine
                                     line = stream.ReadLine();
                                     if (line == "<Minions>")//Now we're in tower data
                                     {
+                                        string group = "null";
                                         while (line != "</Minions>")
                                         {
                                             line = stream.ReadLine();
                                             int temp;
-                                            string group = "null";
                                             if ((temp = line.IndexOf(':')) != -1)
                                             {
-                                                switch (line.Substring(0, temp - 1))
+                                                switch (line.Substring(0, temp))
                                                 {
                                                     case "GROUP":
                                                         group = (line.Substring(temp + 1, (line.Length - temp) - 1));
@@ -189,13 +192,12 @@ namespace Engine
                                             if (line == "<MINION>")//Now we're grabbing a tower
                                             {
                                                 CreepData tempCreep = new CreepData();
-                                                tempCreep.group = group;
                                                 while (line != "</MINION>")
                                                 {
                                                     line = stream.ReadLine();
                                                     if ((temp = line.IndexOf(':')) != -1)
                                                     {
-                                                        switch (line.Substring(0, temp - 1))
+                                                        switch (line.Substring(0, temp))
                                                         {
                                                             case "Name":
                                                                 tempCreep.name = (line.Substring(temp + 1, (line.Length - temp) - 1));
@@ -212,9 +214,13 @@ namespace Engine
                                                             case "mDamage":
                                                                 tempCreep.mDamage = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
                                                                 break;
+                                                            case "Health":
+                                                                tempCreep.Health = int.Parse(line.Substring(temp + 1, (line.Length - temp) - 1));
+                                                                break;
                                                         }
                                                     }
                                                 }
+                                                tempCreep.group = group;
                                                 allMD.Add(tempCreep);
                                             }
                                         }

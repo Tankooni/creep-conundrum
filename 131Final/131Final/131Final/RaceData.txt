@@ -1,7 +1,7 @@
 <BEGIN>
 
 <Race>
-RName:MOOGLES
+RName:MOOGLE
 Gold:50
 Health:100
 
@@ -16,6 +16,7 @@ Cost:10
 Damage:10
 mDamage:0
 ROF:100
+Range:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name here -->
 </TOWER>
@@ -27,6 +28,7 @@ Cost:10
 Damage:5
 mDamage:10
 ROF:100
+Range:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </TOWER>
@@ -40,6 +42,7 @@ Cost:20
 Damage:15
 mDamage:0
 ROF:100
+Range:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </TOWER>
@@ -51,6 +54,7 @@ Cost:10
 Damage:5
 mDamage:10
 ROF:100
+Range:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </TOWER>
@@ -67,6 +71,7 @@ Speed:10
 Cost:10
 Damage:10
 mDamage:10
+Health:10
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </MINION>
@@ -76,6 +81,7 @@ Name:Creepies
 Speed:15
 Cost:10
 Damage:5
+Health:15
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </MINION>
@@ -111,7 +117,7 @@ Background:<!-- File Name Here -->
 
 
 <Race>
-RName:WALEKS
+RName:WALEK
 Gold:9001
 Health:9001
 
@@ -126,6 +132,7 @@ Cost:10
 Damage:10
 mDamage:0
 ROF:100
+Range:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name here -->
 </TOWER>
@@ -137,6 +144,7 @@ Cost:10
 Damage:5
 mDamage:10
 ROF:100
+Range:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </TOWER>
@@ -148,6 +156,7 @@ Cost:10
 Damage:5
 mDamage:10
 ROF:100
+Range:50
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </TOWER>
@@ -161,6 +170,7 @@ Cost:20
 Damage:15
 mDamage:0
 ROF:100
+Range:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </TOWER>
@@ -172,6 +182,7 @@ Cost:10
 Damage:5
 mDamage:10
 ROF:100
+Range:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </TOWER>
@@ -188,6 +199,7 @@ Speed:10
 Cost:10
 Damage:10
 mDamage:10
+Health:5
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </MINION>
@@ -197,6 +209,7 @@ Name:Chris
 Speed:15
 Cost:10
 Damage:5
+Health:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </MINION>
@@ -206,6 +219,7 @@ Name:Paul
 Speed:15
 Cost:10
 Damage:5
+Health:50
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
 </MINION>
@@ -237,4 +251,266 @@ Background:<!-- File Name Here -->
 </MapData>
 
 </Race>
+
+<Race>
+RName:GITLITZ
+Gold:250
+Health:250
+
+<Towers>
+
+GROUP:Mages
+
+<TOWER>
+Name:Fire
+Slow:0
+Cost:20
+Damage:10
+mDamage:10
+ROF:100
+Range:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name here -->
+</TOWER>
+
+<TOWER>
+Name:Blizzard
+Slow:0.5
+Cost:10
+Damage:10
+mDamage:5
+ROF:100
+Range:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name here -->
+</TOWER>
+
+<TOWER>
+Name:Lightning
+Slow:0
+Cost:20
+Damage:15
+mDamage:10
+ROF:100
+Range:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name here -->
+</TOWER>
+
+GROUP:Magician
+
+<TOWER>
+Name:Flash
+Slow:0
+Cost:30
+Damage:5
+mDamage:20
+ROF:50
+Range:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</TOWER>
+
+<TOWER>
+Name:Switchback
+Slow:1
+Cost:100
+Damage:0
+mDamage:0
+ROF:30000
+Range:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</TOWER>
+
+</Towers>
+
+<Minions>
+
+GROUP:Necromancers
+
+<MINION>
+Name:Dredge
+Speed:10
+Cost:20
+Damage:10
+Health:20
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
+
+<MINION>
+Name:Deathbloom
+Speed:1
+Cost:1000
+Damage:50
+Health:500
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
+
+GROUP:Warlocks
+
+<MINION>
+Name:Veinlash
+Speed:5
+Cost:50
+Health:10
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
+
+<MINION>
+Name:Deviant
+Speed:10
+Cost:10
+Health:50
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
+
+</Minions>
+
+<MapData>
+
+<ARRAY>
+100000033323330
+100000033323330
+111111033323330
+020001033323330
+020001111111111
+020001000000020
+020001000000020
+020001111111110
+020002000000010
+011111111111010
+010002000001010
+010511111111010
+010000000000010
+011111111111110
+000000000000000
+</ARRAY>
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+
+</MapData>
+
+</Race>
+
+<Race>
+RName:SIMKIN
+Gold:1000000
+Health:1000000
+
+<Towers>
+
+GROUP:Meme
+
+<TOWER>
+Name:Trollface
+Slow:1
+Cost:0
+Damage:9001
+mDamage:9001
+ROF:100
+Range:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name here -->
+</TOWER>
+
+</Towers>
+
+<Minions>
+
+GROUP:Cats
+
+<MINION>
+Name:Nyan
+Speed:50
+Cost:0
+Health:9001
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
+
+</Minions>
+
+<MapData>
+
+<ARRAY>
+000010000022222
+000010000022222
+000010000022222
+000010000022222
+000010000022222
+111151111111111
+000010000022222
+000010000022222
+000010000022222
+111111111111111
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+</ARRAY>
+
+Texture:<!-- File Name Here -->
+Background:<!-- File Name Here -->
+
+</MapData>
+
+</Race>
 <END>
+
+
+
+<Race>
+RName:<Name>
+Gold:<#>
+Health:<#>
+
+<Towers>
+
+GROUP:<Name>
+
+<TOWER>
+Name:<Name>
+Slow:<0.0 - 1.0>
+Cost:<#>
+Damage:<#>
+mDamage:<#>
+ROF:<#>
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name here -->
+</TOWER>
+
+</Towers>
+
+<Minions>
+
+GROUP:<Name>
+
+<MINION>
+Name:<Name>
+Speed:<#>
+Cost:<#>
+Health:<#>
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
+
+</Minions>
+
+<MapData>
+
+<ARRAY>
+byteArray (must be square)
+</ARRAY>
+
+Texture:<!-- File Name Here -->
+Background:<!-- File Name Here -->
+
+</MapData>
+
+</Race>
