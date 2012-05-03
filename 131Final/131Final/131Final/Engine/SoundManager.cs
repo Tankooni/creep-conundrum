@@ -11,10 +11,10 @@ namespace Engine
 {
     public enum Musics
     {
-        CATGROOVE,
-        Corncob,
-        FasterDoesIt,
-        GrooveGrove
+        One,
+        Two,
+        Three,
+        Four
     }
 
     public enum SFX
@@ -28,20 +28,27 @@ namespace Engine
         static List<SoundEffect> sfx = new List<SoundEffect>();
         public static SoundEffectInstance currentMusic, previousMusic;
         private static Thread fadeInThread, fadeOutThread, setListThread;
-        public static float volume = 1;
+        public static float Volume = .7f;
         private static bool loopd = false;
         private static double currentSongDuration, startTime;
         public static GameTime gameTime;
         
         static Musics[] setList;
 
+        public static void InitMain(ContentManager CM)
+        {
+            music.Add(CM.Load<SoundEffect>(@"Music\Spazzmatica Polka"));
+            music.Add(CM.Load<SoundEffect>(@"Music\Faceoff"));
+        }
+
         public static void Init(ContentManager CM)
         {
-            music.Add(CM.Load<SoundEffect>(@"Music\CATGROOVE"));
+            music.Clear();
             music.Add(CM.Load<SoundEffect>(@"Music\Corncob"));
             music.Add(CM.Load<SoundEffect>(@"Music\Faster Does It"));
             music.Add(CM.Load<SoundEffect>(@"Music\Groove Grove"));
-
+            music.Add(CM.Load<SoundEffect>(@"Music\CATGROOVE"));
+            
             //sfx.Add(CM.Load<SoundEffect>(@"Sounds\SFX\Hit"));
         }
 
@@ -122,12 +129,12 @@ namespace Engine
         private static void fadeIn()
         {
             //music.Volume = 0;
-            while (currentMusic.Volume < volume - 0.05f)
+            while (currentMusic.Volume < Volume - 0.05f)
             {
                 currentMusic.Volume += 0.05f;
                 Thread.Sleep(60);
             }
-            currentMusic.Volume = volume;
+            currentMusic.Volume = Volume;
         }
         private static void fadeOut()
         {
