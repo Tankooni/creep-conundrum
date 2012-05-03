@@ -44,10 +44,11 @@ namespace Engine
         public static void Init(ContentManager CM)
         {
             music.Clear();
+            music.Add(CM.Load<SoundEffect>(@"Music\CATGROOVE"));
             music.Add(CM.Load<SoundEffect>(@"Music\Corncob"));
             music.Add(CM.Load<SoundEffect>(@"Music\Faster Does It"));
             music.Add(CM.Load<SoundEffect>(@"Music\Groove Grove"));
-            music.Add(CM.Load<SoundEffect>(@"Music\CATGROOVE"));
+            
             
             //sfx.Add(CM.Load<SoundEffect>(@"Sounds\SFX\Hit"));
         }
