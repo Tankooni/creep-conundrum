@@ -1,8 +1,0 @@
-Content\defaultFont.xnb
-Content\Music\CATGROOVE.xnb
-Content\Music\Corncob.xnb
-Content\Music\Faster Does It.xnb
-Content\Music\Groove Grove.xnb
-Content\MainMenuFont.xnb
-Content\Music\Spazzmatica Polka.xnb
-Content\Music\Faceoff.xnb
