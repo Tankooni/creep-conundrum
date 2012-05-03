@@ -40,20 +40,25 @@ namespace Engine
 
             loadDisplay = "Loading Players";
             PlayerData pData1 = new PlayerData();
-            pData1 = DataParser.getRaceData("WALEKS");
+            pData1 = DataParser.getRaceData("SIMKIN");
             pData1.spriteFont = defaultFont;
 
             PlayerData pData2 = new PlayerData();
-            pData2 = DataParser.getRaceData("MOOGLES");
+            pData2 = DataParser.getRaceData("MOOGLE");
             pData2.spriteFont = defaultFont;
-            for (int x = 0; x < 2; x++)
-            {
-                player[x].Load(pData1);
-            }
-            for (int x = 2; x < 4; x++)
-            {
-                player[x].Load(pData2);
-            }
+
+            PlayerData pData3 = new PlayerData();
+            pData3 = DataParser.getRaceData("GITLITZ");
+            pData3.spriteFont = defaultFont;
+
+            PlayerData pData4 = new PlayerData();
+            pData4 = DataParser.getRaceData("WALEK");
+            pData4.spriteFont = defaultFont;
+
+            player[0].Load(pData1);
+            player[1].Load(pData2);
+            player[2].Load(pData3);
+            player[3].Load(pData4);
 
             //Load neccessary game content for session here
         }
