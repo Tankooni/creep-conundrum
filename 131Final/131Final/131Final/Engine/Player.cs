@@ -16,6 +16,9 @@ using System.Diagnostics;
 
 namespace Engine
 {
+    /// <summary>
+    /// All the data for player.
+    /// </summary>
     public struct PlayerData
     {
         public string raceName;
@@ -34,10 +37,7 @@ namespace Engine
     }
 
     /// <summary>
-    /// hold cursor + draw
-    /// update
-    /// handle current money
-    /// controller interface
+    /// THIS CLASS is the interfacing between the player and the game.
     /// </summary>
     public class Player
     {
@@ -49,6 +49,10 @@ namespace Engine
         Inputs input;
         double currentHealth;
         int currentMoney;
+        TowerData currentTower;
+        CreepData currentMinion;
+        OverLord myOverlord;
+        //spellData currentSpell
 
         //public Player(SpriteBatch SB, /*, OverLord OV*/PlayerIndex PI, int SN, SpriteFont SF)
         //{
@@ -73,7 +77,7 @@ namespace Engine
         {
             spriteBtach = SB;
             screen = PI;
-
+            myOverlord = OV;
             cursor = new Cursor();
             cursor.x = cursor.y = 0;
 
@@ -85,6 +89,8 @@ namespace Engine
             playerData = PD;
             currentHealth = playerData.startHealth;
             currentMoney = playerData.startMoney;
+            currentMinion = playerData.creepList[0];
+            currentTower = playerData.towerList[0];
             playerMap = new PlayerMap(this);
         }
 
@@ -144,14 +150,9 @@ namespace Engine
             #endregion
 
 
-            TowerData tempT = new TowerData();
-                tempT.Damage = 10;
-                tempT.Range = 100;
-                tempT.RateOfFire = 2000;
-                tempT.Value = 10;
                 if (input.Current.B && !input.Previous.B)
-                    if((currentMoney - tempT.Value) >= 0 && playerMap.addTower(tempT, 0, cursor.x, cursor.y, spriteBtach))
-                        currentMoney -= tempT.Value;
+                    if((currentMoney - currentTower.Value) >= 0 && playerMap.addTower(currentTower, 0, cursor.x, cursor.y, spriteBtach))
+                        currentMoney -= currentTower.Value;
 
             playerMap.Update(gameTime);
         }

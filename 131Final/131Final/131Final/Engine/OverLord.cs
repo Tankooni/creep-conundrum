@@ -18,6 +18,7 @@ namespace Engine
 {
     public class OverLord
     {
+        public string loadDisplay = "";
         Player[] player = new Player[4];
         SpriteFont defaultFont;
         double nextSpawnTime = 10;
@@ -32,7 +33,12 @@ namespace Engine
         public void LoadContent(ContentManager Content)
         {
             defaultFont = Content.Load<SpriteFont>("defaultFont");
+
+            loadDisplay = "Loading Sounds";
+
             SoundManager.Init(Content);
+
+            loadDisplay = "Loading Players";
             PlayerData pData1 = new PlayerData();
             pData1 = DataParser.getRaceData("WALEKS");
             pData1.spriteFont = defaultFont;
@@ -57,7 +63,7 @@ namespace Engine
             SoundManager.gameTime = gameTime;
             if (first)
             {
-                SoundManager.PlaySetList(new Musics[] { Musics.CATGROOVE, Musics.Corncob, Musics.FasterDoesIt, Musics.GrooveGrove });
+                SoundManager.PlaySetList(new Musics[] { Musics.One, Musics.Two, Musics.Three, Musics.Four });
                 first = false;
             }
             //This will be handled by a controller class later on

@@ -46,6 +46,33 @@
       <Output>C:\Documents and Settings\Quasar\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Groove Grove.xnb</Output>
       <Time>2012-05-02T17:48:03.296875-04:00</Time>
     </Item>
+    <Item>
+      <Source>MainMenuFont.spritefont</Source>
+      <Name>MainMenuFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\MainMenuFont.xnb</Output>
+      <Time>2012-05-02T22:36:37.640625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Music\Spazzmatica Polka.wav</Source>
+      <Name>Music\Spazzmatica Polka</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Spazzmatica Polka.xnb</Output>
+      <Time>2012-05-02T22:34:10.59375-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Music\Faceoff.wav</Source>
+      <Name>Music\Faceoff</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Documents and Settings\Moog\Desktop\creep\131Final\131Final\131Final\bin\x86\Debug\Content\Music\Faceoff.xnb</Output>
+      <Time>2012-05-02T22:52:35.75-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

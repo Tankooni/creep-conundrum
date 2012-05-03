@@ -116,6 +116,7 @@
     <Compile Include="Engine\DataParser.cs" />
     <Compile Include="Engine\GameVars\SystemVars.cs" />
     <Compile Include="Engine\GridManager.cs" />
+    <Compile Include="Engine\Menu.cs" />
     <Compile Include="Engine\OverLord.cs" />
     <Compile Include="Engine\Path.cs" />
     <Compile Include="Engine\Player.cs" />
