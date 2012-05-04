@@ -42,7 +42,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="defaultFont.spritefont">
+    <Compile Include="Fonts\defaultFont.spritefont">
       <Name>defaultFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
@@ -76,7 +76,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainMenuFont.spritefont">
+    <Compile Include="Fonts\MainMenuFont.spritefont">
       <Name>MainMenuFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>

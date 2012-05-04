@@ -32,35 +32,39 @@ namespace Engine
 
         public void LoadContent(ContentManager Content)
         {
-            defaultFont = Content.Load<SpriteFont>("defaultFont");
+            defaultFont = Content.Load<SpriteFont>(@"Fonts\MainMenuFont2");
 
             loadDisplay = "Loading Sounds";
 
             SoundManager.Init(Content);
 
-            loadDisplay = "Loading Players";
+            loadDisplay = "Loading Player 1 Data";
             PlayerData pData1 = new PlayerData();
             pData1 = DataParser.getRaceData("SIMKIN");
             pData1.spriteFont = defaultFont;
 
+            loadDisplay = "Loading Player 2 Data";
             PlayerData pData2 = new PlayerData();
             pData2 = DataParser.getRaceData("MOOGLE");
             pData2.spriteFont = defaultFont;
 
+            loadDisplay = "Loading Player 3 Data";
             PlayerData pData3 = new PlayerData();
             pData3 = DataParser.getRaceData("GITLITZ");
             pData3.spriteFont = defaultFont;
 
+            loadDisplay = "Loading Player 4 Data";
             PlayerData pData4 = new PlayerData();
             pData4 = DataParser.getRaceData("WALEK");
             pData4.spriteFont = defaultFont;
 
+            loadDisplay = "Creating Players";
             player[0].Load(pData1);
             player[1].Load(pData2);
             player[2].Load(pData3);
             player[3].Load(pData4);
 
-            //Load neccessary game content for session here
+            //Load necessary game content for session here
         }
 
         public void Update(GraphicsDeviceManager graphics, SpriteBatch spriteBatch, GameTime gameTime, GraphicsDevice gDevice)
@@ -127,7 +131,6 @@ namespace Engine
             data.Value = (SystemVars.totalWaves/10) + 1;
             data.Health = (SystemVars.totalWaves/1) + 10;
             SystemVars.totalWaves++;
-            Console.WriteLine("CurrentWave: " + SystemVars.totalWaves);
             return data;
         }
 
