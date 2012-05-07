@@ -81,6 +81,7 @@ Name:Creepies
 Speed:15
 Cost:10
 Damage:5
+mDamage:0
 Health:15
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
@@ -209,6 +210,7 @@ Name:Chris
 Speed:15
 Cost:10
 Damage:5
+mDamage:5
 Health:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
@@ -219,6 +221,7 @@ Name:Paul
 Speed:15
 Cost:10
 Damage:5
+mDamage:10
 Health:50
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
@@ -334,6 +337,7 @@ Name:Dredge
 Speed:10
 Cost:20
 Damage:10
+mDamage:10
 Health:20
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
@@ -344,6 +348,7 @@ Name:Deathbloom
 Speed:1
 Cost:1000
 Damage:50
+mDamage:100
 Health:500
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
@@ -355,6 +360,8 @@ GROUP:Warlocks
 Name:Veinlash
 Speed:5
 Cost:50
+Damage:10
+mDamage:50
 Health:10
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
@@ -364,6 +371,8 @@ Sound:<!-- File Name Here -->
 Name:Deviant
 Speed:10
 Cost:10
+Damage:10
+mDamage:15
 Health:50
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
@@ -428,6 +437,8 @@ GROUP:Cats
 Name:Nyan
 Speed:50
 Cost:0
+Damage:9001
+mDamage:9001
 Health:9001
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->
@@ -495,6 +506,8 @@ GROUP:<Name>
 Name:<Name>
 Speed:<#>
 Cost:<#>
+Damage:<#>
+mDamage:<#>
 Health:<#>
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name Here -->

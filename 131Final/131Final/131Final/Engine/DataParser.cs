@@ -221,6 +221,7 @@ namespace Engine
                                                     }
                                                 }
                                                 tempCreep.group = group;
+                                                Console.WriteLine(tempCreep.Damage);
                                                 allMD.Add(tempCreep);
                                             }
                                         }
