@@ -45,8 +45,8 @@ namespace Engine
            // if (Screen < 1 || Screen > 4) return Rectangle.Empty;
             Vector2 temp = splitConvert(Screen, new Vector2(myPoint.X, myPoint.Y), gRep);
             Vector2 temp2 = splitConvert(Screen, new Vector2(myPoint.Width + myPoint.X, myPoint.Height + myPoint.Y), gRep) - temp;
-            Rectangle point = new Rectangle((int)temp.X, (int)temp.Y, (int)temp2.X, (int)temp2.Y);
-            return point;
+            //Rectangle point = new Rectangle((int)temp.X, (int)temp.Y, (int)temp2.X, (int)temp2.Y);
+            return new Rectangle((int)temp.X, (int)temp.Y, (int)temp2.X, (int)temp2.Y);
         }
     }
 }

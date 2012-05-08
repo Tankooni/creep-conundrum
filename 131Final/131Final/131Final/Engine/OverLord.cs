@@ -28,11 +28,14 @@ namespace Engine
         {
             for (int i = 0; i < 4; i++)
                 player[i] = new Player(spriteBatch, this, i + 1);
+
+            loadDisplay = "Creating Circle Texture";
+            Menu.Init(spriteBatch);
         }
 
         public void LoadContent(ContentManager Content)
         {
-            defaultFont = Content.Load<SpriteFont>(@"Fonts\MainMenuFont2");
+            defaultFont = Content.Load<SpriteFont>(@"Fonts\defaultFont");
 
             loadDisplay = "Loading Sounds";
 
@@ -79,11 +82,11 @@ namespace Engine
             /*Fullscreenness of awesome!*/
             if (Keyboard.GetState().IsKeyDown(Keys.F11))
             {
-                graphics.PreferredBackBufferHeight = gDevice.DisplayMode.Height;
-                graphics.PreferredBackBufferWidth = gDevice.DisplayMode.Width;
+                //graphics.PreferredBackBufferHeight = gDevice.DisplayMode.Height;
+                //graphics.PreferredBackBufferWidth = gDevice.DisplayMode.Width;
                 graphics.IsFullScreen = !graphics.IsFullScreen;
                 graphics.ApplyChanges();
-                GridManager.InitLineDrawer(spriteBatch.GraphicsDevice);
+                //GridManager.InitLineDrawer(spriteBatch.GraphicsDevice);
             }
             /*teh space case is me ~ Zack*/
             /*Imma take yer space case and use it for interval spawnzzz ~Elser */
@@ -124,6 +127,11 @@ namespace Engine
             }
         }
 
+        public void spawnMinionWave(CreepData data, int Screen, GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            player[Screen].addCreepWave(data, gameTime.TotalGameTime.TotalMilliseconds + 1000, 4, spriteBatch);
+        }
+
         public CreepData getRandomCreepData(CreepData data)
         {
             data.Speed = new Random().NextDouble() * 1.5 + 0.5;
@@ -136,10 +144,11 @@ namespace Engine
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
+            
             SplitScreenAdapter.drawLines(spriteBatch);
             for (int i = 0; i < 4; i++)
                 player[i].Draw(graphics, gameTime);
-
+            Menu.Draw(gameTime);
             //Vector2 tempV = defaultFont.MeasureString(wavesSpawned.ToString());
             //tempV.Y = 0;
         }

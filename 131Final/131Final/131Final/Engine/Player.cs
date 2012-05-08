@@ -54,6 +54,12 @@ namespace Engine
         OverLord myOverlord;
         //spellData currentSpell
 
+
+        public int Screen
+        {
+            get { return screen; }
+        }
+
         //public Player(SpriteBatch SB, /*, OverLord OV*/PlayerIndex PI, int SN, SpriteFont SF)
         //{
         //    playerData = new PlayerData();
@@ -80,7 +86,6 @@ namespace Engine
             myOverlord = OV;
             cursor = new Cursor();
             cursor.x = cursor.y = 0;
-
             input = new Inputs(PI);
         }
 
@@ -105,9 +110,9 @@ namespace Engine
             currentMoney += money;
         }
 
-        public void addCreepWave(CreepData CD, double spawnTime, int cpw, SpriteBatch SB)
+        public void addCreepWave(CreepData CD, double spawnTime, int creepCount, SpriteBatch SB)
         {
-            playerMap.addCreepWave(CD, spawnTime, cpw, SB);
+            playerMap.addCreepWave(CD, spawnTime, creepCount, SB);
         }
 
         public void Update(GameTime gameTime)
@@ -150,9 +155,19 @@ namespace Engine
             #endregion
 
 
-                if (input.Current.B && !input.Previous.B)
-                    if((currentMoney - currentTower.Value) >= 0 && playerMap.addTower(currentTower, 0, cursor.x, cursor.y, spriteBtach))
-                        currentMoney -= currentTower.Value;
+            if (input.Current.B && !input.Previous.B)
+                if((currentMoney - currentTower.Value) >= 0 && playerMap.addTower(currentTower, 0, cursor.x, cursor.y, spriteBtach))
+                    currentMoney -= currentTower.Value;
+            if (input.Current.A && !input.Previous.A)
+                if ((currentMoney - currentMinion.Value) >= 0)
+                {
+                    myOverlord.spawnMinionWave(currentMinion, 1, gameTime, spriteBtach);
+                    currentMoney -= currentMinion.Value;
+                }
+            if (input.Current.Start && !input.Previous.Start)
+            {
+                new Menu(screen, "Minion", this);
+            }
 
             playerMap.Update(gameTime);
         }
@@ -192,6 +207,7 @@ namespace Engine
         public bool dDown;
         public bool dLeft;
         public bool dRight;
+        public bool Start;
     }
 
     /// <summary>
@@ -301,6 +317,11 @@ namespace Engine
                     current.x2 = -1;
                 else
                     current.x2 = 0;
+
+                if (KB.IsKeyDown(Keys.Enter))
+                    current.Start = true;
+                else
+                    current.Start = false;
             }
             else
             {
@@ -351,6 +372,9 @@ namespace Engine
                     current.dRight = true;
                 else
                     current.dRight = false;
+
+                if(GP.Buttons.Start == ButtonState.Pressed)
+                    current.Start = true;
             }
         }
     }

@@ -28,7 +28,8 @@ namespace Engine
         static List<SoundEffect> sfx = new List<SoundEffect>();
         public static SoundEffectInstance currentMusic, previousMusic;
         private static Thread fadeInThread, fadeOutThread, setListThread;
-        public static float Volume = .7f;
+        public static float Volume = 0;
+        //public static float Volume = .7f;
         private static bool loopd = false;
         private static double currentSongDuration, startTime;
         public static GameTime gameTime;

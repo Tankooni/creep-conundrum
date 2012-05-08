@@ -22,7 +22,7 @@ namespace Engine
             int width = GraphicsDevice.Viewport.Height / (mapHeight+1) / 2;
             Color[] temp = new Color[width*width];
             baseGrid = new Texture2D(GraphicsDevice, width, width, false, SurfaceFormat.Color);
-            baseTexture = new Texture2D(GraphicsDevice,width, width,false,SurfaceFormat.Color);
+            baseTexture = new Texture2D(GraphicsDevice, width, width, false, SurfaceFormat.Color);
             Random RNG = new Random();
             for (int x = 0; x < width; x++)
             {
