@@ -164,7 +164,7 @@ namespace Engine
                 double myProgress = 1 - ((_PathOn.PathLength - (offset / 1000 * _cData.Speed)) - mySquare);
                 if (mySquare < 1)
                 {
-                    myWave.mapReference.damageHero(_cData, Health);   
+                    myWave.mapReference.damageHero(_cData, Health);
                     myWave.creepDie(this);
                     mySquare = 1;
                     myProgress = 1.0;
