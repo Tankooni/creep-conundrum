@@ -174,7 +174,7 @@ namespace Engine
             }
             if (input.Current.Start && !input.Previous.Start)
             {
-                new Menu(screen, "Minion", this);
+                new Menu(screen, MenuType.Player, this);
             }
 
             playerMap.Update(gameTime);
@@ -276,7 +276,7 @@ namespace Engine
             KB = Keyboard.GetState();
             GP = GamePad.GetState(_playerInedx);
             //_playerInedx == PlayerIndex.One
-            if (_playerInedx == PlayerIndex.One)
+            if (_playerInedx == PlayerIndex.Two)
             {
                 if (KB.IsKeyDown(Keys.W))
                     current.y1 = 1;
@@ -381,8 +381,10 @@ namespace Engine
                 else
                     current.dRight = false;
 
-                if(GP.Buttons.Start == ButtonState.Pressed)
+                if (GP.Buttons.Start == ButtonState.Pressed)
                     current.Start = true;
+                else
+                    current.Start = false;
             }
         }
     }
