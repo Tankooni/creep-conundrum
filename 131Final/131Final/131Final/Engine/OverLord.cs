@@ -116,6 +116,7 @@ namespace Engine
 
             for (int i = 0; i < 4; i++)
                 player[i].Update(gameTime);
+            Menu.Update(gameTime);
         }
 
         //Were we going to have a creepOverlord too? .... I forgot ~Elser */

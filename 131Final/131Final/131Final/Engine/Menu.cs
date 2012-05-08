@@ -16,6 +16,8 @@ namespace Engine
         private string myData;
         private static Texture2D myTexture;
         static SpriteBatch spriteBtach;
+        public Vector2 centerVec = Vector2.Zero;
+        public float cursorAngle = 0;
 
         public int Screen
         {
@@ -40,19 +42,20 @@ namespace Engine
             myPlayer = PD;
 
             myData = Data;
-
+            
             for (int i = instances.Count - 1; i >= 0; i--)
             {
                 Console.WriteLine(Data + " " + instances[i].Data);
                 if(Data == instances[i].Data)
                 {
-                    Console.WriteLine("Killing Menu");
+                    myPlayer.menuOpen = false;
                     instances.Remove(instances[i]);
                     return;
                 }
             }
-            Console.WriteLine("Creating Menu");
             instances.Add(this);
+            myPlayer.menuOpen = true;
+            centerVec = new Vector2(spriteBtach.GraphicsDevice.Viewport.Width / 2 - myTexture.Width, spriteBtach.GraphicsDevice.Viewport.Height / 2 - myTexture.Height);
         }
 
         public static void Init(SpriteBatch SB)
@@ -82,15 +85,27 @@ namespace Engine
             return new Menu();
         }
 
+        public static void Update(GameTime gameTime)
+        {
+            for (int i = instances.Count - 1; i >= 0; i--)
+            {
+                instances[i].cursorAngle = (float)Math.Atan2(instances[i].myPlayer.Input.Current.y1, instances[i].myPlayer.Input.Current.x1);
+            }
+        }
+        /// <summary>
+        /// WTF MATH
+        /// </summary>
+        /// <param name="gameTime"></param>
         public static void Draw(GameTime gameTime)
         {
             //Console.WriteLine(instances.IndexOf(this));
             for (int i = instances.Count - 1; i >= 0; i--)
             {
-
-
-                spriteBtach.Draw(myTexture, SplitScreenAdapter.splitConvert(instances[i].myPlayer.Screen, new Vector2(spriteBtach.GraphicsDevice.Viewport.Width / 2 - myTexture.Width, spriteBtach.GraphicsDevice.Viewport.Height / 2 - myTexture.Height), spriteBtach), Color.FromNonPremultiplied(100,100,100,200));
-                Console.WriteLine(i);
+                spriteBtach.Draw(myTexture, SplitScreenAdapter.splitConvert(instances[i].myPlayer.Screen, instances[i].centerVec, spriteBtach), Color.FromNonPremultiplied(100,100,100,200));
+                GridManager.DrawLine(spriteBtach, 1, Color.Red, 
+                    (SplitScreenAdapter.splitConvert(instances[i].myPlayer.Screen, instances[i].centerVec, spriteBtach) + new Vector2(myTexture.Width/2, myTexture.Height/2)), 
+                    (SplitScreenAdapter.splitConvert(instances[i].myPlayer.Screen, new Vector2((float)(myTexture.Width * Math.Cos(instances[i].cursorAngle)), (float)(myTexture.Width * Math.Sin(instances[i].cursorAngle))), spriteBtach))
+                    );
             }
 
         }
