@@ -31,11 +31,12 @@ namespace Engine
             this.angle1 = Angle1;
             this.angle2 = Angle2;
         }
+
+        public override string ToString() { return "Choice: " + choice + ", Angle1: " + angle1 + ", Angle2: " + angle2; }
     }
 
     class Menu
     {
-        private int myScreen;
         private static List<Menu> instances = new List<Menu>();
         private Player myPlayer;
         private MenuType myData;
@@ -45,11 +46,6 @@ namespace Engine
         public float cursorAngle = 0;
         List<Choice> choices = new List<Choice>();
 
-
-        public int Screen
-        {
-            get { return myScreen; }
-        }
         public MenuType Data
         {
             get { return myData; }
@@ -105,7 +101,9 @@ namespace Engine
 
             for (int i = 0; i < choices.Count - 1; i++)
             {
-                //choices[i].angle1 = 
+                Choice temp = choices[i];
+                temp.angle1 = (float)MathHelper.TwoPi / choices.Count;
+                choices[i] = temp;
             }
         }
 

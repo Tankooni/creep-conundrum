@@ -15,7 +15,7 @@ Slow:0
 Cost:10
 Damage:10
 mDamage:0
-ROF:100
+ROF:1000
 Range:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name here -->
