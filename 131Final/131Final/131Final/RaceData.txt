@@ -15,7 +15,7 @@ Slow:0
 Cost:10
 Damage:10
 mDamage:0
-ROF:1000
+ROF:100
 Range:100
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name here -->
@@ -472,10 +472,280 @@ Background:<!-- File Name Here -->
 </MapData>
 
 </Race>
+
+<Race>
+RName:Gorn
+Gold:100
+Health:100
+
+<Towers>
+
+GROUP:Wreathers
+
+<TOWER>
+Name:
+Slow:0
+Cost:10
+Damage:1
+mDamage:0
+ROF:1500
+Range:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name here -->
+</TOWER>
+
+</Towers>
+
+<Minions>
+
+GROUP:<Name>
+
+<MINION>
+Name:Vandolas
+Speed:5
+Cost:20
+Damage:5
+mDamage:0
+Health:10
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
+
+</Minions>
+
+<MapData>
+
+<ARRAY>
+001111111111115
+001000000000000
+001000000000000
+001331111111111
+001331000000000
+001331000000000
+001331111111110
+001000000000010
+001000000000010
+001000000000010
+001000000000010
+001111111111110
+000000000000000
+000000000000000
+000000000000000
+</ARRAY>
+
+Texture:<!-- File Name Here -->
+Background:<!-- File Name Here -->
+
+</MapData>
+
+</Race>
+
+<Race>
+RName:Yugo
+Gold:80
+Health:100
+
+<Towers>
+
+GROUP:Yuorans
+
+<TOWER>
+Name:Bothan
+Slow:0.3
+Cost:20
+Damage:5
+mDamage:0
+ROF:2000
+Range:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name here -->
+</TOWER>
+
+</Towers>
+
+<Minions>
+
+GROUP:Rotons
+
+<MINION>
+Name:Gallaran
+Speed:1
+Cost:50
+Damage:10
+mDamage:0
+Health:50
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
+
+</Minions>
+
+<MapData>
+
+<ARRAY>
+000000000000000
+111111000000000
+333331000000000
+000001111111000
+333331000001000
+111111000001000
+100000000001000
+100000111001000
+100000101001000
+100000101001000
+100000501111111
+100000000010000
+100000111110000
+111111100000000
+000000000000000
+</ARRAY>
+
+Texture:<!-- File Name Here -->
+Background:<!-- File Name Here -->
+
+</MapData>
+
+</Race>
+
+<Race>
+RName:Phalo
+Gold:100
+Health:150
+
+<Towers>
+
+GROUP:Pheers
+
+<TOWER>
+Name:Rocknz
+Slow:0
+Cost:10
+Damage:2
+mDamage:1
+ROF:1200
+Range:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name here -->
+</TOWER>
+
+</Towers>
+
+<Minions>
+
+GROUP:Roans
+
+<MINION>
+Name:Quins
+Speed:3
+Cost:10
+Damage:5
+mDamage:3
+Health:20
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
+
+</Minions>
+
+<MapData>
+
+<ARRAY>
+000000000000000
+005111111111000
+000000000001000
+000000000001000
+000000000001000
+111111111111111
+000000000000001
+000000000000001
+000000000000001
+111111110000001
+000000010000001
+000000010000001
+000000010000001
+011111111111111
+010000000000010
+</ARRAY>
+
+Texture:<!-- File Name Here -->
+Background:<!-- File Name Here -->
+
+</MapData>
+
+</Race>
+
+<Race>
+RName:Itski
+Gold:100
+Health:100
+
+<Towers>
+
+GROUP:Iterators
+
+<TOWER>
+Name:Joracks
+Slow:0
+Cost:20
+Damage:10
+mDamage:2
+ROF:1500
+Range:100
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name here -->
+</TOWER>
+
+</Towers>
+
+<Minions>
+
+GROUP:Lons
+
+<MINION>
+Name:Rooks
+Speed:3
+Cost:5
+Damage:1
+mDamage:1
+Health:5
+Texture:<!-- File Name Here -->
+Sound:<!-- File Name Here -->
+</MINION>
+
+</Minions>
+
+<MapData>
+
+<ARRAY>
+000000010000000
+000000010000000
+000000010000000
+000000010000000
+000000011111000
+000000010001000
+000000010001000
+001111150001111
+001000000000010
+001000000000010
+001000000000010
+111111111111110
+000000000000010
+000000000000010
+000000000000010
+</ARRAY>
+
+Texture:<!-- File Name Here -->
+Background:<!-- File Name Here -->
+
+</MapData>
+
+</Race>
+
 <END>
 
-
-
+*************************************************************************************************************************************************************
+*******************************TEMPLATE**********************************************************************************************************************
+*************************************************************************************************************************************************************
 <Race>
 RName:<Name>
 Gold:<#>
@@ -492,6 +762,7 @@ Cost:<#>
 Damage:<#>
 mDamage:<#>
 ROF:<#>
+Range:<#>
 Texture:<!-- File Name Here -->
 Sound:<!-- File Name here -->
 </TOWER>
@@ -518,7 +789,21 @@ Sound:<!-- File Name Here -->
 <MapData>
 
 <ARRAY>
-byteArray (must be square)
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
+000000000000000
 </ARRAY>
 
 Texture:<!-- File Name Here -->

@@ -44,7 +44,7 @@ namespace Engine
                             line = stream.ReadLine();
                             if (line == "RName:" + raceNameIN)
                             {
-                                while (line != "</Race>")
+                                while (line != "<Towers>")
                                 {
                                     line = stream.ReadLine();
                                     int temp;

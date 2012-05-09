@@ -48,12 +48,13 @@ namespace Engine
         int screen;
         Inputs input;
         double currentHealth;
-        int currentMoney;
-        TowerData currentTower;
-        CreepData currentMinion;
-        OverLord myOverlord;
+        public int currentMoney;
+        public TowerData currentTower;
+        public CreepData currentMinion;
+        public OverLord myOverlord;
         //spellData currentSpell
         public bool menuOpen = false;
+        bool isActive = true;
 
         public int Screen
         {
@@ -106,7 +107,10 @@ namespace Engine
         public void damagePlayer(int damage)
         {
             if ((currentHealth -= damage) < 0)
+            {
+                isActive = false;
                 currentHealth = 0;
+            }
         }
 
         public void addMoney(int money)
@@ -121,75 +125,84 @@ namespace Engine
 
         public void Update(GameTime gameTime)
         {
-            input.Update();
-            //Console.WriteLine(menuOpen);
-            if (!menuOpen)
+            if (isActive)
             {
-                #region Cursor Input
-                if (input.Current.x1 != 0 && input.Previous.x1 == 0)
-                    if (input.Current.x1 > 0)
-                    {
-                        if ((cursor.y += (int)Math.Ceiling(input.Current.x1)) >= playerMap.HEIGHT)
-                            cursor.y = 0;
-                        else if (cursor.y < 0)
-                            cursor.y = playerMap.HEIGHT - 1;
-                    }
-                    else
-                    {
-                        if ((cursor.y += (int)Math.Floor(input.Current.x1)) >= playerMap.HEIGHT)
-                            cursor.y = 0;
-                        else if (cursor.y < 0)
-                            cursor.y = playerMap.HEIGHT - 1;
-                    }
-
-                if (input.Current.y1 != 0 && input.Previous.y1 == 0)
+                input.Update();
+                //Console.WriteLine(menuOpen);
+                if (!menuOpen)
                 {
-                    if (input.Current.y1 > 0)
+                    #region Cursor Input
+                    if (input.Current.x1 != 0 && input.Previous.x1 == 0)
+                        if (input.Current.x1 > 0)
+                        {
+                            if ((cursor.y += (int)Math.Ceiling(input.Current.x1)) >= playerMap.HEIGHT)
+                                cursor.y = 0;
+                            else if (cursor.y < 0)
+                                cursor.y = playerMap.HEIGHT - 1;
+                        }
+                        else
+                        {
+                            if ((cursor.y += (int)Math.Floor(input.Current.x1)) >= playerMap.HEIGHT)
+                                cursor.y = 0;
+                            else if (cursor.y < 0)
+                                cursor.y = playerMap.HEIGHT - 1;
+                        }
+
+                    if (input.Current.y1 != 0 && input.Previous.y1 == 0)
                     {
-                        if ((cursor.x -= (int)Math.Ceiling(input.Current.y1)) >= playerMap.HEIGHT)
-                            cursor.x = 0;
-                        else if (cursor.x < 0)
-                            cursor.x = playerMap.HEIGHT - 1;
+                        if (input.Current.y1 > 0)
+                        {
+                            if ((cursor.x -= (int)Math.Ceiling(input.Current.y1)) >= playerMap.HEIGHT)
+                                cursor.x = 0;
+                            else if (cursor.x < 0)
+                                cursor.x = playerMap.HEIGHT - 1;
+                        }
+                        else
+                        {
+                            if ((cursor.x -= (int)Math.Floor(input.Current.y1)) >= playerMap.HEIGHT)
+                                cursor.x = 0;
+                            else if (cursor.x < 0)
+                                cursor.x = playerMap.HEIGHT - 1;
+                        }
                     }
-                    else
-                    {
-                        if ((cursor.x -= (int)Math.Floor(input.Current.y1)) >= playerMap.HEIGHT)
-                            cursor.x = 0;
-                        else if (cursor.x < 0)
-                            cursor.x = playerMap.HEIGHT - 1;
-                    }
+                    #endregion
+
+
+                    if (input.Current.B && !input.Previous.B)
+                        if ((currentMoney - currentTower.Value) >= 0 && playerMap.addTower(currentTower, 0, cursor.x, cursor.y, spriteBtach))
+                            currentMoney -= currentTower.Value;
+                    if (input.Current.A && !input.Previous.A)
+                        if ((currentMoney - currentMinion.Value) >= 0)
+                        {
+                            new Menu(screen, MenuType.Player, this);
+                        }
                 }
-                #endregion
-
-
                 if (input.Current.B && !input.Previous.B)
-                    if ((currentMoney - currentTower.Value) >= 0 && playerMap.addTower(currentTower, 0, cursor.x, cursor.y, spriteBtach))
-                        currentMoney -= currentTower.Value;
-                if (input.Current.A && !input.Previous.A)
-                    if ((currentMoney - currentMinion.Value) >= 0)
-                    {
-                        myOverlord.spawnMinionWave(currentMinion, 1, gameTime, spriteBtach);
-                        currentMoney -= currentMinion.Value;
-                    }
-            }
-            if (input.Current.Start && !input.Previous.Start)
-            {
-                new Menu(screen, MenuType.Player, this);
-            }
+                {
+                    menuOpen = false;
+                }
 
-            playerMap.Update(gameTime);
+                playerMap.Update(gameTime);
+            }
         }
 
         public void Draw(GraphicsDeviceManager graphics, GameTime gameTime)
         {
-            playerMap.Draw(screen, spriteBtach, graphics, false, gameTime);
-            int myH = spriteBtach.GraphicsDevice.Viewport.Height / (playerMap.HEIGHT + 1);
-            Vector2 myPos = SplitScreenAdapter.splitConvert(screen, new Vector2(myH*cursor.y, myH*cursor.x), spriteBtach);
-            GridManager.DrawRectangle(spriteBtach, new Rectangle((int)myPos.X - 1, (int)myPos.Y - 1, (myH+2)/2, (myH+2)/2), Color.FromNonPremultiplied(0,255,0,100));
-            myPos = SplitScreenAdapter.splitConvert(screen, new Vector2(myH * playerMap.HEIGHT, 0), spriteBtach);
-            spriteBtach.DrawString(playerData.spriteFont, "Race Name: " + playerData.raceName, myPos, Color.Black);
-            spriteBtach.DrawString(playerData.spriteFont, "$$: " + currentMoney.ToString(), new Vector2(myPos.X, myPos.Y + playerData.spriteFont.MeasureString(currentMoney.ToString()).Y), Color.Black);
-            spriteBtach.DrawString(playerData.spriteFont, "<3: " + currentHealth.ToString(), new Vector2(myPos.X, myPos.Y + playerData.spriteFont.MeasureString(currentMoney.ToString()).Y*2), Color.Black);
+            if (isActive)
+            {
+                playerMap.Draw(screen, spriteBtach, graphics, false, gameTime);
+                int myH = spriteBtach.GraphicsDevice.Viewport.Height / (playerMap.HEIGHT + 1);
+                Vector2 myPos = SplitScreenAdapter.splitConvert(screen, new Vector2(myH * cursor.y, myH * cursor.x), spriteBtach);
+                GridManager.DrawRectangle(spriteBtach, new Rectangle((int)myPos.X - 1, (int)myPos.Y - 1, (myH + 2) / 2, (myH + 2) / 2), Color.FromNonPremultiplied(0, 255, 0, 100));
+                myPos = SplitScreenAdapter.splitConvert(screen, new Vector2(myH * playerMap.HEIGHT, 0), spriteBtach);
+                spriteBtach.DrawString(playerData.spriteFont, "Race Name: " + playerData.raceName, myPos, Color.Black);
+                spriteBtach.DrawString(playerData.spriteFont, "$$: " + currentMoney.ToString(), new Vector2(myPos.X, myPos.Y + playerData.spriteFont.MeasureString(currentMoney.ToString()).Y), Color.Black);
+                spriteBtach.DrawString(playerData.spriteFont, "<3: " + currentHealth.ToString(), new Vector2(myPos.X, myPos.Y + playerData.spriteFont.MeasureString(currentMoney.ToString()).Y * 2), Color.Black);
+            }
+            else
+            {
+
+            }
         }
     }
 
@@ -276,6 +289,7 @@ namespace Engine
             KB = Keyboard.GetState();
             GP = GamePad.GetState(_playerInedx);
             //_playerInedx == PlayerIndex.One
+            //if(false)
             if (_playerInedx == PlayerIndex.Two)
             {
                 if (KB.IsKeyDown(Keys.W))

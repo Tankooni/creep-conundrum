@@ -68,7 +68,6 @@ namespace Engine
             
             for (int i = instances.Count - 1; i >= 0; i--)
             {
-                Console.WriteLine(Data + " " + instances[i].Data);
                 if(Data == instances[i].Data && myPlayer.Screen == instances[i].myPlayer.Screen)
                 {
                     myPlayer.menuOpen = false;
@@ -87,9 +86,9 @@ namespace Engine
                 case MenuType.MinionGroup:
                     break;
                 case MenuType.Player:
-                    for (int i = 1; i < 5; i++)
+                    for (int i = 0; i < 4; i++)
                     {
-                        if (i != Screen)
+                        if (i != (Screen-1))
                             choices.Add(new Choice(""+i ,0 , 0));
                     }
                     break;
@@ -98,11 +97,13 @@ namespace Engine
                 case MenuType.TowerGroup:
                     break;
             }
+            float tempAng = (float)MathHelper.TwoPi / choices.Count;
 
-            for (int i = 0; i < choices.Count - 1; i++)
+            for (int i = 0; i < choices.Count; i++)
             {
                 Choice temp = choices[i];
-                temp.angle1 = (float)MathHelper.TwoPi / choices.Count;
+                temp.angle1 = tempAng*i;
+                temp.angle2 = tempAng * (i+1);
                 choices[i] = temp;
             }
         }
@@ -151,6 +152,7 @@ namespace Engine
                         break;
                 }
             }
+            myPlayer.menuOpen = false;
             instances.Remove(this);
         }
 
@@ -159,6 +161,39 @@ namespace Engine
             for (int i = instances.Count - 1; i >= 0; i--)
             {
                 instances[i].cursorAngle = (float)Math.Atan2(instances[i].myPlayer.Input.Current.y1, instances[i].myPlayer.Input.Current.x1);
+                if (instances[i].cursorAngle < 0) instances[i].cursorAngle = (float)MathHelper.TwoPi + instances[i].cursorAngle;
+
+                
+
+                if (instances[i].myPlayer.Input.Current.A)
+                {
+                    for(int j = instances[i].choices.Count-1; j >= 0; j--)
+                    {
+                        if (instances[i].cursorAngle > instances[i].choices[j].angle1 && instances[i].cursorAngle < instances[i].choices[j].angle2)
+                        {
+                            Console.WriteLine(instances[i].choices[j].choice);
+                            if ((instances[i].myPlayer.currentMoney -= instances[i].myPlayer.currentMinion.Value) >= 0)
+                            {
+                                instances[i].myPlayer.myOverlord.spawnMinionWave(instances[i].myPlayer.currentMinion, int.Parse(instances[i].choices[j].choice), gameTime, spriteBtach);
+                                
+                            }
+                            else
+                            {
+                                instances[i].myPlayer.currentMoney += instances[i].myPlayer.currentMinion.Value;
+                            }
+                            instances[i].closeMenu(true);
+                            break;
+                            //Console.WriteLine(MathHelper.ToDegrees(instances[i].choices[j].angle1) + " " + MathHelper.ToDegrees(instances[i].choices[j].angle2));
+                        }
+                        //Console.WriteLine(instances[i].choices[j].choice + " " + MathHelper.ToDegrees(instances[i].cursorAngle));
+                        //Console.WriteLine(MathHelper.ToDegrees(instances[i].choices[j].angle1) + " " + MathHelper.ToDegrees(instances[i].choices[j].angle2));
+                    }
+                }
+
+                if (instances[i].myPlayer.Input.Current.B)
+                {
+                    instances[i].closeMenu(true);
+                }
                 //Console.WriteLine(Math.Cos(instances[i].cursorAngle) + " " + Math.Sin(instances[i].cursorAngle));
             }
         }
@@ -175,6 +210,11 @@ namespace Engine
                 Vector2 temp = SplitScreenAdapter.splitConvert(instances[i].myPlayer.Screen, instances[i].centerVec, spriteBtach) + new Vector2(myTexture.Width / 2, myTexture.Height / 2);
                 if (instances[i].myPlayer.Input.Current.x1 != 0 || instances[i].myPlayer.Input.Current.y1 != 0)
                     GridManager.DrawLine(spriteBtach, 1, Color.Red, temp, temp + new Vector2((float)Math.Cos(instances[i].cursorAngle) * myTexture.Width/2, -(float)Math.Sin(instances[i].cursorAngle) * myTexture.Height/2));
+                for (int j = 0; j < instances[i].choices.Count; j++)
+                {
+                    GridManager.DrawLine(spriteBtach, 1, Color.Purple, temp, temp + new Vector2((float)Math.Cos(instances[i].choices[j].angle1) * myTexture.Width / 2, -(float)Math.Sin(instances[i].choices[j].angle1) * myTexture.Height / 2));
+                    spriteBtach.DrawString(instances[i].myPlayer.playerData.spriteFont, "P" + (int.Parse(instances[i].choices[j].choice)+1), temp + new Vector2((float)Math.Cos((instances[i].choices[j].angle2 - MathHelper.PiOver4)) * myTexture.Width / 4, -(float)Math.Sin((instances[i].choices[j].angle2 - MathHelper.PiOver4)) * myTexture.Height / 4), Color.PowderBlue);
+                }
             }
 
         }
