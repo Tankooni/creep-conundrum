@@ -37,7 +37,12 @@ namespace VeryRealTournament
         }
         protected override void LoadContent()
         {
-            this.IsMouseVisible = true;
+            //this.IsMouseVisible = true;
+            //graphics.PreferredBackBufferHeight = 1280;
+            //graphics.PreferredBackBufferWidth = 1024;
+            //graphics.IsFullScreen = !graphics.IsFullScreen;
+            //graphics.ApplyChanges();
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mainMenuFonts[0] = Content.Load<SpriteFont>(@"Fonts\MainMenuFont1");
             mainMenuFonts[1] = Content.Load<SpriteFont>(@"Fonts\MainMenuFont2");
@@ -53,6 +58,15 @@ namespace VeryRealTournament
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+            //if (Keyboard.GetState().IsKeyDown(Keys.F11))
+            //{
+            //    graphics.PreferredBackBufferHeight = 1280;
+            //    graphics.PreferredBackBufferWidth = 1024;
+            //    graphics.IsFullScreen = !graphics.IsFullScreen;
+            //    graphics.ApplyChanges();
+            //    //GridManager.InitLineDrawer(spriteBatch.GraphicsDevice);
+            //}
+
             if (gameState == 2)
                 theOverLord.Update(graphics, spriteBatch, gameTime, GraphicsDevice);
             else if ((GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter)) && gameState == 0)

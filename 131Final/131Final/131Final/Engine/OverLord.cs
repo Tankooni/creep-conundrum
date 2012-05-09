@@ -43,22 +43,22 @@ namespace Engine
 
             loadDisplay = "Loading Player 1 Data";
             PlayerData pData1 = new PlayerData();
-            pData1 = DataParser.getRaceData("SIMKIN");
+            pData1 = DataParser.getRaceData("Itski");
             pData1.spriteFont = defaultFont;
 
             loadDisplay = "Loading Player 2 Data";
             PlayerData pData2 = new PlayerData();
-            pData2 = DataParser.getRaceData("MOOGLE");
+            pData2 = DataParser.getRaceData("Gorn");
             pData2.spriteFont = defaultFont;
 
             loadDisplay = "Loading Player 3 Data";
             PlayerData pData3 = new PlayerData();
-            pData3 = DataParser.getRaceData("GITLITZ");
+            pData3 = DataParser.getRaceData("Yugo");
             pData3.spriteFont = defaultFont;
 
             loadDisplay = "Loading Player 4 Data";
             PlayerData pData4 = new PlayerData();
-            pData4 = DataParser.getRaceData("WALEK");
+            pData4 = DataParser.getRaceData("Phalo");
             pData4.spriteFont = defaultFont;
 
             loadDisplay = "Creating Players";
@@ -80,14 +80,7 @@ namespace Engine
             }
             //This will be handled by a controller class later on
             /*Fullscreenness of awesome!*/
-            if (Keyboard.GetState().IsKeyDown(Keys.F11))
-            {
-                //graphics.PreferredBackBufferHeight = gDevice.DisplayMode.Height;
-                //graphics.PreferredBackBufferWidth = gDevice.DisplayMode.Width;
-                graphics.IsFullScreen = !graphics.IsFullScreen;
-                graphics.ApplyChanges();
-                //GridManager.InitLineDrawer(spriteBatch.GraphicsDevice);
-            }
+            
             /*teh space case is me ~ Zack*/
             /*Imma take yer space case and use it for interval spawnzzz ~Elser */
             
