@@ -38,10 +38,10 @@ namespace VeryRealTournament
         protected override void LoadContent()
         {
             //this.IsMouseVisible = true;
-            //graphics.PreferredBackBufferHeight = 1280;
-            //graphics.PreferredBackBufferWidth = 1024;
-            //graphics.IsFullScreen = !graphics.IsFullScreen;
-            //graphics.ApplyChanges();
+            graphics.PreferredBackBufferHeight = 1280;
+            graphics.PreferredBackBufferWidth = 1024;
+            graphics.IsFullScreen = !graphics.IsFullScreen;
+            graphics.ApplyChanges();
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mainMenuFonts[0] = Content.Load<SpriteFont>(@"Fonts\MainMenuFont1");
