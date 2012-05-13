@@ -163,7 +163,11 @@ namespace Engine
                 instances[i].cursorAngle = (float)Math.Atan2(instances[i].myPlayer.Input.Current.y1, instances[i].myPlayer.Input.Current.x1);
                 if (instances[i].cursorAngle < 0) instances[i].cursorAngle = (float)MathHelper.TwoPi + instances[i].cursorAngle;
 
-                
+                if (instances[i].myPlayer.Input.Current.B)
+                {
+                    instances[i].closeMenu(true);
+                    continue;
+                }
 
                 if (instances[i].myPlayer.Input.Current.A)
                 {
@@ -171,7 +175,6 @@ namespace Engine
                     {
                         if (instances[i].cursorAngle > instances[i].choices[j].angle1 && instances[i].cursorAngle < instances[i].choices[j].angle2)
                         {
-                            Console.WriteLine(instances[i].choices[j].choice);
                             if ((instances[i].myPlayer.currentMoney -= instances[i].myPlayer.currentMinion.Value) >= 0)
                             {
                                 instances[i].myPlayer.myOverlord.spawnMinionWave(instances[i].myPlayer.currentMinion, int.Parse(instances[i].choices[j].choice), gameTime, spriteBtach);
@@ -190,10 +193,10 @@ namespace Engine
                     }
                 }
 
-                if (instances[i].myPlayer.Input.Current.B)
-                {
-                    instances[i].closeMenu(true);
-                }
+                //if (instances[i].myPlayer.Input.Current.B)
+                //{
+                //    instances[i].closeMenu(true);
+                //}
                 //Console.WriteLine(Math.Cos(instances[i].cursorAngle) + " " + Math.Sin(instances[i].cursorAngle));
             }
         }
