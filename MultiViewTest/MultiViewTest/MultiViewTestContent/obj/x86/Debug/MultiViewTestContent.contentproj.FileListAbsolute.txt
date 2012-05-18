@@ -1,0 +1,1 @@
+C:\Working\XNA\MultiViewTest\MultiViewTest\MultiViewTestContent\obj\x86\Debug\ResolveAssemblyReference.cache

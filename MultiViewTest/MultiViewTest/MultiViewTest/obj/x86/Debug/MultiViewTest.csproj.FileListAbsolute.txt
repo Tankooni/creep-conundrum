@@ -1,0 +1,9 @@
+C:\Working\XNA\MultiViewTest\MultiViewTest\MultiViewTest\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Working\XNA\MultiViewTest\MultiViewTest\MultiViewTest\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Working\XNA\MultiViewTest\MultiViewTest\MultiViewTest\bin\x86\Debug\Content\redtexture.xnb
+C:\Working\XNA\MultiViewTest\MultiViewTest\MultiViewTest\bin\x86\Debug\Content\redtorus.xnb
+C:\Working\XNA\MultiViewTest\MultiViewTest\MultiViewTest\bin\x86\Debug\Content\FBX\C77A1FE1\redtorus.fbm\redtexture_0.xnb
+C:\Working\XNA\MultiViewTest\MultiViewTest\MultiViewTest\bin\x86\Debug\MultiViewTest.exe
+C:\Working\XNA\MultiViewTest\MultiViewTest\MultiViewTest\bin\x86\Debug\MultiViewTest.pdb
+C:\Working\XNA\MultiViewTest\MultiViewTest\MultiViewTest\obj\x86\Debug\MultiViewTest.exe
+C:\Working\XNA\MultiViewTest\MultiViewTest\MultiViewTest\obj\x86\Debug\MultiViewTest.pdb
