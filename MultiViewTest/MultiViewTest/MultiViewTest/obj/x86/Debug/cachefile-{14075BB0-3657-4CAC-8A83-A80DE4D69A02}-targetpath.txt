@@ -1,0 +1,3 @@
+Content\redtexture.xnb
+Content\redtorus.xnb
+Content\FBX\C77A1FE1\redtorus.fbm\redtexture_0.xnb
